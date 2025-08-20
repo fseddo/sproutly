@@ -10,7 +10,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Margot_MainImage_PDP_bc77aebd-b79c-45c4-8c5f-28a4b3dd8fa7.jpg?v=1729624620&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Margot_SupportingImage_1_PDP.jpg?v=1727916898&width=350",
     "badge_text": "Best Seller",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.3,
     "reviews_count": 365,
@@ -21,31 +21,19 @@
     "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Margot_Lifestyle_2_690d36b4-2fc9-45a7-a9c4-acbd0b1f8a89.jpg?v=1748882561&width=768",
     "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Margot_Lifestyle_3_5811ae31-6727-47d6-aec6-ca640656411a.jpg?v=1748882561&width=768",
     "collections": [
-      "the fall collection",
-      "the classics collection",
-      "sale",
       "shop all",
       "today",
       "tomorrow"
     ],
     "occasions": [
       "birthday",
-      "sympathy",
-      "thank you",
       "friendship",
       "just because",
-      "congratulations",
-      "miss you",
-      "entertaining",
-      "self send",
       "wedding",
       "new baby"
     ],
     "categories": [
-      "flowers",
-      "plants",
-      "gifts",
-      "peonies"
+      "flowers"
     ]
   },
   {
@@ -59,10 +47,10 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Nantucket_MainImage_PDP.jpg?v=1746470181&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Nantucket_SupportingImage_PDP_2.jpg?v=1746470181&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
-    "reviews_rating": 4.6,
-    "reviews_count": 17,
+    "reviews_rating": 4.4,
+    "reviews_count": 18,
     "description": "<p>As cool, breezy, and effortlessly laid-back as the Nantucket island for which it’s named, The Nantucket spectacularly celebrates the very best of the warmest days of the year. It’s bright and uplifting, with notes of purple and blue mingling with white and green. The effect is completely relaxed and serene, much like a day spent on the charming island.</p>",
     "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
     "main_detail_src": "https://urbanstems.com/cdn/shop/files/Nantucket_Lifestyle_1.jpg?v=1747076409&width=768",
@@ -70,194 +58,33 @@
     "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Nantucket_Lifestyle_2.jpg?v=1747076409&width=768",
     "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Nantucket_Lifestyle_3.jpg?v=1747076408&width=768",
     "collections": [
-      "the fall collection",
-      "the classics collection",
-      "sale",
       "shop all",
       "today",
       "tomorrow"
     ],
     "occasions": [
-      "birthday",
       "sympathy",
       "thank you",
-      "friendship",
       "just because",
-      "congratulations",
-      "miss you",
-      "entertaining",
-      "self send",
       "wedding",
       "new baby"
     ],
     "categories": [
-      "flowers",
-      "plants",
-      "gifts",
-      "peonies"
+      "flowers"
     ]
   },
   {
-    "id": "flowers_the-mariposa_2",
-    "name": "The Mariposa",
-    "variant_type": "single",
-    "base_name": "The Mariposa",
-    "url": "https://urbanstems.com/products/the-mariposa",
-    "price": 6800,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Sorbet_MainImage_PDP_9a10d550-774a-4207-878c-1c0e645f6eba.jpg?v=1729624788&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Sorbet_SupportingImage_1_PDP.jpg?v=1727919472&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 4.5,
-    "reviews_count": 308,
-    "description": "<p data-pm-slice=\"1 1 [&quot;list&quot;,{},&quot;list_item&quot;,{&quot;indent&quot;:2,&quot;type&quot;:&quot;bulleted&quot;}]\"><span data-sheets-root=\"1\">Discover the art of understated affection with this blend of delicate pink and creamy white roses. We like to think it offers a beautifully subtle way to send your love. Perfect for conveying deep emotions with a soft, elegant touch. We're committed to delivering bouquets that match our photos. Occasionally, we might replace certain flowers due to seasonal availability, but your bouquet's overall appearance will remain unchanged.</span></p><p><span data-sheets-root=\"1\"><br></span><br></p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/102256faab384e7696c783b324af17e4/102256faab384e7696c783b324af17e4.HD-1080p-2.5Mbps-36399669.mp4?v=0",
-    "is_main_detail_video": true,
-    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Sorbet_Lifestyle_1.jpg?v=1744731169&width=768",
-    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Sorbet_Lifestyle_2_b5433000-3ef5-4330-a933-8779080e7662.jpg?v=1729106311&width=768",
-    "collections": [
-      "the fall collection",
-      "the classics collection",
-      "sale",
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "birthday",
-      "sympathy",
-      "thank you",
-      "friendship",
-      "just because",
-      "congratulations",
-      "miss you",
-      "entertaining",
-      "self send",
-      "wedding",
-      "new baby"
-    ],
-    "categories": [
-      "flowers",
-      "plants",
-      "gifts",
-      "peonies"
-    ],
-    "double_variation": "flowers_double-the-mariposa_61"
-  },
-  {
-    "id": "flowers_the-alaskan-peony_3",
-    "name": "The Alaskan Peony",
-    "variant_type": "single",
-    "base_name": "The Alaskan Peony",
-    "url": "https://urbanstems.com/products/the-alaskan-peony",
-    "price": 9400,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/AlaskanPeony_MainImage_PDP.jpg?v=1746470821&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/AlaskanPeony_SupportingImage_PDP.jpg?v=1746470821&width=350",
-    "badge_text": "Limited Edition!",
-    "delivery_lead_time": 6,
-    "stock": 100,
-    "reviews_rating": 4.2,
-    "reviews_count": 53,
-    "description": "<p><span data-sheets-root=\"1\">From bud to bloom, there’s something magnificent about peonies. The Alaskan Peony features hand-chosen peony stems in a variety of colors chosen for their freshness. Choose from three bouquet sizes of lush peonies: a 10-stem Single, a 20-stem Double, or a 30-stem Triple.<br><br>Please note: Your peonies may arrive in bud form but will open in 1-2 days, meaning you can enjoy your blooms longer! Flower color may vary slightly from the pictured bouquet and may gradually change as your flowers bloom.<br>If your foliage looks slightly dehydrated upon arrival, place the stems in some water to revive them. (Pro tip: remove any foliage near or below the waterline for a longer-lasting bouquet!)</span></p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/91d54f33d2aa4f13a07bb23de0463bdc/91d54f33d2aa4f13a07bb23de0463bdc.HD-1080p-2.5Mbps-47925598.mp4?v=0",
-    "is_main_detail_video": true,
-    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/AlaskanPeony_Lifestyle_2.jpg?v=1747767679&width=768",
-    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/AlaskanPeony_Lifestyle_3.jpg?v=1747767679&width=768",
-    "collections": [
-      "the fall collection",
-      "the classics collection",
-      "sale",
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "birthday",
-      "sympathy",
-      "thank you",
-      "friendship",
-      "just because",
-      "congratulations",
-      "miss you",
-      "entertaining",
-      "self send",
-      "wedding",
-      "new baby"
-    ],
-    "categories": [
-      "flowers",
-      "plants",
-      "gifts",
-      "peonies"
-    ],
-    "double_variation": "flowers_double-the-alaskan-peony_53"
-  },
-  {
-    "id": "flowers_the-sweet-birthday_4",
-    "name": "The Sweet Birthday",
-    "variant_type": null,
-    "base_name": "The Sweet Birthday",
-    "url": "https://urbanstems.com/products/the-sweet-birthday",
-    "price": 15000,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Levain_SupportingImage_3_PDP.jpg?v=1752590344&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Levain__SupportingImage_PDP.jpg?v=1752590344&width=350",
-    "badge_text": "New!",
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 4.6,
-    "reviews_count": 17,
-    "description": "<p dir=\"ltr\"><span>Looking for a birthday gift that goes beyond the usual? The Sweet Birthday brings the celebration with a breezy, coastal-inspired bouquet and a box of eight legendary Levain Bakery cookies. With four classic flavors and that iconic crispy-gooey bite, these cookies are a party in every box. Paired with bright, joyful florals, this gift set feels personal, elevated, and ready to make their day (and week). It’s gifting made easy and delicious.</span></p><p><strong>Allergens</strong>: Contains dairy, eggs, soy, wheat, peanuts, tree nuts (walnuts)</p><p data-pm-slice=\"1 1 []\"><em>Levain Bakery cookies are made by hand using shared equipment, which processes dairy, eggs, peanuts, soy, tree nuts and wheat. If you have a severe allergy, please know that while we do our best to prevent cross-contamination, we are not an allergen-free bakery.</em></p><p data-pm-slice=\"1 1 []\"><strong>Cookie Care:</strong></p><p>Cookies may be stored in an airtight container for up to one week or frozen if not enjoyed immediately. For maximum enjoyment, warm the cookie in a 350-degree oven for a few minutes or until gooey. Of course, if you simply can’t wait, then 20 seconds in the microwave should do it. If frozen, they’ll take roughly 5-10 minutes in the oven — but trust us, it’s worth it.</p><p><i data-stringify-type=\"italic\">To ensure everything arrives at its best, your flowers and cookies will be delivered in two separate packages, but both should land on your doorstep soon! Please note, your cookies will be arriving directly from Levain's bakery and so if your order is placed after 1 PM EST they will be shipped to you the following day and could arrive after your floral delivery. This product does not qualify for free shipping.</i></p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/files/Levain_lifestyle_1.gif?v=1750796589&width=768",
-    "is_main_detail_video": false,
-    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Levain_Lifestyle_2.jpg?v=1750796589&width=768",
-    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Levain_Lifestyle_3.jpg?v=1750796589&width=768",
-    "collections": [
-      "the fall collection",
-      "the classics collection",
-      "sale",
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "birthday",
-      "sympathy",
-      "thank you",
-      "friendship",
-      "just because",
-      "congratulations",
-      "miss you",
-      "entertaining",
-      "self send",
-      "wedding",
-      "new baby"
-    ],
-    "categories": [
-      "flowers",
-      "plants",
-      "gifts",
-      "peonies"
-    ]
-  },
-  {
-    "id": "flowers_the-neon-lights_5",
+    "id": "flowers_the-neon-lights_2",
     "name": "The Neon Lights",
     "variant_type": "single",
     "base_name": "The Neon Lights",
     "url": "https://urbanstems.com/products/the-neon-lights",
     "price": 8500,
     "discounted_price": null,
-    "main_image": "https://cdn.shopify.com/s/files/1/0693/4016/8440/files/NeonLights_MainImage_Lifestyle_PDP.jpg?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1747772659&width=350",
-    "hover_image": "https://cdn.shopify.com/s/files/1/0693/4016/8440/files/NeonLights_MainImage_Lifestyle_PDP.jpg?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1747772659&width=350",
+    "main_image": "https://urbanstems.com/cdn/shop/files/NeonLights_MainImage_PDP_1.jpg?v=1747772659&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/dw61d21e00_Summer_2022_Neon_Lights_NeonLights_Top.jpg?v=1747772659&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.7,
     "reviews_count": 51,
@@ -268,33 +95,139 @@
     "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/NeonLights_Lifestyle_2.jpg?v=1747076332&width=768",
     "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/NeonLights_Lifestyle_3.jpg?v=1747076332&width=768",
     "collections": [
-      "the fall collection",
-      "the classics collection",
-      "sale",
       "shop all",
       "today",
       "tomorrow"
     ],
     "occasions": [
       "birthday",
-      "sympathy",
       "thank you",
       "friendship",
       "just because",
       "congratulations",
       "miss you",
-      "entertaining",
-      "self send",
+      "self send"
+    ],
+    "categories": [
+      "flowers"
+    ],
+    "double_variation": "flowers_double-the-neon-lights_57"
+  },
+  {
+    "id": "flowers_the-mariposa_3",
+    "name": "The Mariposa",
+    "variant_type": "single",
+    "base_name": "The Mariposa",
+    "url": "https://urbanstems.com/products/the-mariposa",
+    "price": 6800,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Sorbet_MainImage_PDP_9a10d550-774a-4207-878c-1c0e645f6eba.jpg?v=1729624788&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Sorbet_SupportingImage_1_PDP.jpg?v=1727919472&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 4.5,
+    "reviews_count": 308,
+    "description": "<p data-pm-slice=\"1 1 [&quot;list&quot;,{},&quot;list_item&quot;,{&quot;indent&quot;:2,&quot;type&quot;:&quot;bulleted&quot;}]\"><span data-sheets-root=\"1\">Discover the art of understated affection with this blend of delicate pink and creamy white roses. We like to think it offers a beautifully subtle way to send your love. Perfect for conveying deep emotions with a soft, elegant touch. We're committed to delivering bouquets that match our photos. Occasionally, we might replace certain flowers due to seasonal availability, but your bouquet's overall appearance will remain unchanged.</span></p><p><span data-sheets-root=\"1\"><br></span><br></p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/102256faab384e7696c783b324af17e4/102256faab384e7696c783b324af17e4.HD-1080p-2.5Mbps-36399669.mp4?v=0",
+    "is_main_detail_video": true,
+    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Sorbet_Lifestyle_1.jpg?v=1744731169&width=768",
+    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Sorbet_Lifestyle_2_b5433000-3ef5-4330-a933-8779080e7662.jpg?v=1729106311&width=768",
+    "collections": [
+      "the classics collection",
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "birthday",
+      "thank you",
+      "friendship",
+      "just because",
+      "congratulations",
+      "anniversary",
+      "miss you",
       "wedding",
       "new baby"
     ],
     "categories": [
+      "flowers"
+    ],
+    "double_variation": "flowers_double-the-mariposa_60"
+  },
+  {
+    "id": "flowers_the-alaskan-peony_4",
+    "name": "The Alaskan Peony",
+    "variant_type": "single",
+    "base_name": "The Alaskan Peony",
+    "url": "https://urbanstems.com/products/the-alaskan-peony",
+    "price": 9400,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/AlaskanPeony_MainImage_PDP.jpg?v=1746470821&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/AlaskanPeony_SupportingImage_PDP.jpg?v=1746470821&width=350",
+    "badge_text": "Limited Edition!",
+    "delivery_lead_time": null,
+    "stock": 0,
+    "reviews_rating": 4.2,
+    "reviews_count": 53,
+    "description": "<p><span data-sheets-root=\"1\">From bud to bloom, there’s something magnificent about peonies. The Alaskan Peony features hand-chosen peony stems in a variety of colors chosen for their freshness. Choose from three bouquet sizes of lush peonies: a 10-stem Single, a 20-stem Double, or a 30-stem Triple.<br><br>Please note: Your peonies may arrive in bud form but will open in 1-2 days, meaning you can enjoy your blooms longer! Flower color may vary slightly from the pictured bouquet and may gradually change as your flowers bloom.<br>If your foliage looks slightly dehydrated upon arrival, place the stems in some water to revive them. (Pro tip: remove any foliage near or below the waterline for a longer-lasting bouquet!)</span></p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/91d54f33d2aa4f13a07bb23de0463bdc/91d54f33d2aa4f13a07bb23de0463bdc.HD-1080p-2.5Mbps-47925598.mp4?v=0",
+    "is_main_detail_video": true,
+    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/AlaskanPeony_Lifestyle_2.jpg?v=1747767679&width=768",
+    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/AlaskanPeony_Lifestyle_3.jpg?v=1747767679&width=768",
+    "collections": [
+      "the classics collection",
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "just because",
+      "congratulations"
+    ],
+    "categories": [
       "flowers",
-      "plants",
-      "gifts",
       "peonies"
     ],
-    "double_variation": "flowers_double-the-neon-lights_58"
+    "double_variation": "flowers_double-the-alaskan-peony_52"
+  },
+  {
+    "id": "flowers_the-sweet-birthday_5",
+    "name": "The Sweet Birthday",
+    "variant_type": null,
+    "base_name": "The Sweet Birthday",
+    "url": "https://urbanstems.com/products/the-sweet-birthday",
+    "price": 15000,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Levain_SupportingImage_3_PDP.jpg?v=1752590344&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Levain__SupportingImage_PDP.jpg?v=1752590344&width=350",
+    "badge_text": "New!",
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 4.4,
+    "reviews_count": 18,
+    "description": "<p dir=\"ltr\"><span>Looking for a birthday gift that goes beyond the usual? The Sweet Birthday brings the celebration with a breezy, coastal-inspired bouquet and a box of eight legendary Levain Bakery cookies. With four classic flavors and that iconic crispy-gooey bite, these cookies are a party in every box. Paired with bright, joyful florals, this gift set feels personal, elevated, and ready to make their day (and week). It’s gifting made easy and delicious.</span></p><p><strong>Allergens</strong>: Contains dairy, eggs, soy, wheat, peanuts, tree nuts (walnuts)</p><p data-pm-slice=\"1 1 []\"><em>Levain Bakery cookies are made by hand using shared equipment, which processes dairy, eggs, peanuts, soy, tree nuts and wheat. If you have a severe allergy, please know that while we do our best to prevent cross-contamination, we are not an allergen-free bakery.</em></p><p data-pm-slice=\"1 1 []\"><strong>Cookie Care:</strong></p><p>Cookies may be stored in an airtight container for up to one week or frozen if not enjoyed immediately. For maximum enjoyment, warm the cookie in a 350-degree oven for a few minutes or until gooey. Of course, if you simply can’t wait, then 20 seconds in the microwave should do it. If frozen, they’ll take roughly 5-10 minutes in the oven — but trust us, it’s worth it.</p><p><i data-stringify-type=\"italic\">To ensure everything arrives at its best, your flowers and cookies will be delivered in two separate packages, but both should land on your doorstep soon! Please note, your cookies will be arriving directly from Levain's bakery and so if your order is placed after 1 PM EST they will be shipped to you the following day and could arrive after your floral delivery. This product does not qualify for free shipping.</i></p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/files/Levain_lifestyle_1.gif?v=1750796589&width=768",
+    "is_main_detail_video": false,
+    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Levain_Lifestyle_2.jpg?v=1750796589&width=768",
+    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Levain_Lifestyle_3.jpg?v=1750796589&width=768",
+    "collections": [
+      "the fall collection",
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "birthday",
+      "friendship"
+    ],
+    "categories": [
+      "flowers",
+      "gifts"
+    ]
   },
   {
     "id": "flowers_the-bikini_6",
@@ -307,7 +240,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Bikini_MainImage_PDP_1.jpg?v=1747873787&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Bikini_SupportingImage_PDP_a144f743-dd9c-4f06-b0ae-b9874261867e.jpg?v=1748004545&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.4,
     "reviews_count": 11,
@@ -318,125 +251,25 @@
     "detail_image_1_src": null,
     "detail_image_2_src": null,
     "collections": [
-      "the fall collection",
-      "the classics collection",
-      "sale",
       "shop all",
       "today",
       "tomorrow"
     ],
     "occasions": [
       "birthday",
-      "sympathy",
       "thank you",
       "friendship",
-      "just because",
       "congratulations",
       "miss you",
-      "entertaining",
-      "self send",
-      "wedding",
       "new baby"
     ],
     "categories": [
-      "flowers",
-      "plants",
-      "gifts",
-      "peonies"
+      "flowers"
     ],
-    "double_variation": "flowers_double-the-bikini_70"
+    "double_variation": "flowers_double-the-bikini_69"
   },
   {
-    "id": "flowers_the-dove_7",
-    "name": "The Dove",
-    "variant_type": null,
-    "base_name": "The Dove",
-    "url": "https://urbanstems.com/products/the-dove",
-    "price": 7400,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Peace_MainImage_PDP_dcb04153-6187-45df-af46-222f861c32cd.jpg?v=1729627763&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Peace_SupportingImage_1_PDP.jpg?v=1727920080&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 4.6,
-    "reviews_count": 138,
-    "description": "<p><span data-sheets-root=\"1\">When words fall short, there are always flowers. This tranquil all-white bouquet embodies serenity and grace in the form of pure white blooms. Its elegant simplicity makes it a perfect gift for moments that call for quiet reflection, heartfelt sympathies, or a gesture of pure, unspoken kindness. </span></p><p><span data-sheets-root=\"1\">We’re committed to delivering bouquets that match our photos. Occasionally, we might replace certain flowers due to seasonal availability, but your bouquet’s overall appearance will remain unchanged.</span><br></p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/b598f5145dd54bb8a9fd4efcb2cf683a/b598f5145dd54bb8a9fd4efcb2cf683a.HD-1080p-7.2Mbps-48674812.mp4?v=0",
-    "is_main_detail_video": true,
-    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Peace_Lifestyle_2_8a36cc97-e4be-45ad-adf3-9db29b8b00fb.jpg?v=1748881273&width=768",
-    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Peace_Lifestyle_3.jpg?v=1748881272&width=768",
-    "collections": [
-      "the fall collection",
-      "the classics collection",
-      "sale",
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "birthday",
-      "sympathy",
-      "thank you",
-      "friendship",
-      "just because",
-      "congratulations",
-      "miss you",
-      "entertaining",
-      "self send",
-      "wedding",
-      "new baby"
-    ],
-    "categories": [
-      "flowers",
-      "plants",
-      "gifts",
-      "peonies"
-    ]
-  },
-  {
-    "id": "flowers_the-peony_8",
-    "name": "The Peony",
-    "variant_type": null,
-    "base_name": "The Peony",
-    "url": "https://urbanstems.com/products/the-peony",
-    "price": 9000,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Peony_V2_MainImage_PDP.jpg?v=1737972145&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Peony__SupportingImage_Lifestyle_PDP.jpg?v=1753278501&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 4.2,
-    "reviews_count": 420,
-    "description": "<p><span data-sheets-root=\"1\">Lush and full of life, it's not every day that you'll come across these pillowy stems. This striking blush-toned bouquet is a welcome addition to any room. Peonies symbolize prosperity, making this a fitting gift for anything from congratulations to housewarmings. This peony arrangement may arrive in bud form but will unfurl into the pillowy stem we all love. <a href=\"https://urbanstems.com/blogs/news/peony-color-meaning?srsltid=AfmBOop77v2B1SU1nWqqliLqJb4a6-1OaSy-EqAw1WbIOLCsf8yZ4Cic\">Read more</a> about the meaning of the pale pink peony. Choose from three bouquet sizes of lush peonies, a 10-stem Single, a 20-stem Double, or a 30-stem Triple.<br><br><strong>Please note:</strong> Your peonies may arrive in bud form but will open in 1-2 days, meaning you can enjoy your blooms longer! Flower color may vary slightly from the pictured bouquet and gradually change as your flowers bloom.</span></p><p><span data-sheets-root=\"1\"><br>If your foliage looks slightly dehydrated upon arrival, place the stems in some water to revive them. (Pro tip: remove any foliage near or below the waterline for a longer-lasting bouquet!)</span><br></p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/0801fa1bb5064e25ba89669ec609db4c/0801fa1bb5064e25ba89669ec609db4c.HD-1080p-4.8Mbps-48675975.mp4?v=0",
-    "is_main_detail_video": true,
-    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Peony_Lifestyle_2_ec8e7fdd-85a5-452f-8f39-75e0d503305a.jpg?v=1748882731&width=768",
-    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Peony_Lifestyle_3_c9155fb8-fdfc-4e8b-9424-6e71c862cf44.jpg?v=1748882731&width=768",
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "birthday",
-      "thank you",
-      "just because",
-      "congratulations",
-      "self send",
-      "wedding",
-      "new baby"
-    ],
-    "categories": [
-      "flowers",
-      "peonies"
-    ]
-  },
-  {
-    "id": "flowers_the-lover-girl_9",
+    "id": "flowers_the-lover-girl_7",
     "name": "The Lover Girl",
     "variant_type": null,
     "base_name": "The Lover Girl",
@@ -446,7 +279,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Unicorn_MainImage_PDP_fd0824ee-0b14-48e0-9610-e004a7120c3a.jpg?v=1751896604&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/LoverGirl_SupportingImage_PDP.jpg?v=1754312434&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.5,
     "reviews_count": 248,
@@ -475,51 +308,17 @@
     ]
   },
   {
-    "id": "flowers_the-peony-sunrise_10",
-    "name": "The Peony Sunrise",
-    "variant_type": null,
-    "base_name": "The Peony Sunrise",
-    "url": "https://urbanstems.com/products/the-peony-sunrise",
-    "price": 13000,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/PeonySunrise_MainImage_PDP_f2974615-b976-4cd1-9d89-1911e81242c6.jpg?v=1742221353&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/PeonySunrise_SupportingImage_PDP_82910e2a-cddb-433f-a31d-c3de9286badd.jpg?v=1742221363&width=350",
-    "badge_text": "Limited Quantities",
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 4.2,
-    "reviews_count": 21,
-    "description": "<p data-pm-slice=\"1 1 []\">Like catching the first light of day, The Peony Sunrise is a fleeting moment worth savoring. This limited-edition bouquet features rare Alaskan peonies, grown in near-constant summer daylight and only available for a short window each year. Layered with peach and blush ranunculus, white roses, and garden roses in soft sunrise tones, this mix is as fleeting (and special) as peak peony season itself. It's a bouquet made for self-gifting, summer birthdays, or anyone who deserves something that won’t be around for long.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/38a75185b40e4f429cdf9d6b8469ff72/38a75185b40e4f429cdf9d6b8469ff72.HD-1080p-3.3Mbps-45882616.mp4?v=0",
-    "is_main_detail_video": true,
-    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/PeonySunrise_Lifestyle_2.jpg?v=1744559265&width=768",
-    "detail_image_2_src": null,
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "birthday"
-    ],
-    "categories": [
-      "flowers",
-      "peonies"
-    ]
-  },
-  {
-    "id": "flowers_the-salt-spray_11",
+    "id": "flowers_the-salt-spray_8",
     "name": "The Salt Spray",
     "variant_type": "single",
     "base_name": "The Salt Spray",
     "url": "https://urbanstems.com/products/the-salt-spray",
     "price": 7800,
     "discounted_price": null,
-    "main_image": "https://cdn.shopify.com/s/files/1/0693/4016/8440/files/SaltSpray_MainImage_Lifestyle_PDP.jpg?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1746469236&width=350",
-    "hover_image": "https://cdn.shopify.com/s/files/1/0693/4016/8440/files/SaltSpray_MainImage_Lifestyle_PDP.jpg?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1746469267&width=350",
+    "main_image": "https://urbanstems.com/cdn/shop/files/SaltSpray_MainImage_PDP.jpg?v=1746469236&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/SaltSpray_SupportingImage_PDP.jpg?v=1746469267&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.6,
     "reviews_count": 14,
@@ -542,30 +341,71 @@
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-salt-spray_62"
+    "double_variation": "flowers_double-the-salt-spray_61"
   },
   {
-    "id": "flowers_the-pearl_12",
-    "name": "The Pearl",
-    "variant_type": null,
-    "base_name": "The Pearl",
-    "url": "https://urbanstems.com/products/the-pearl",
-    "price": 9000,
+    "id": "flowers_the-juliet_9",
+    "name": "The Juliet",
+    "variant_type": "single",
+    "base_name": "The Juliet",
+    "url": "https://urbanstems.com/products/the-juliet",
+    "price": 6800,
     "discounted_price": null,
-    "main_image": "https://cdn.shopify.com/s/files/1/0693/4016/8440/files/Pearl_MainImage_lifestyle_PDP.jpg?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1729717666&width=350",
-    "hover_image": "https://cdn.shopify.com/s/files/1/0693/4016/8440/files/Pearl_MainImage_lifestyle_PDP.jpg?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1754320321?v=1729198666&width=350",
+    "main_image": "https://urbanstems.com/cdn/shop/files/GoodVibes_MainImage_PDP_dae333bb-2232-4b7d-945f-8373fdfe0e9c.jpg?v=1729624248&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/GoodVibes_SupportingImage_1_PDP.jpg?v=1727916702&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
-    "reviews_rating": 3.7,
-    "reviews_count": 131,
-    "description": "<p><span style=\"font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 0.875rem;\"><span data-sheets-root=\"1\">Add warmth and purity to any space courtesy of the blissful and aptly named Pearl bouquet. Featuring lush white peonies, each with a delicate pink center, the arrangement is a special treat for the warmer months. They arrive in compact bulb form, eventually thriving and developing into the pillow-like blooms. Read more about the meaning of the white peony. Choose from three bouquet sizes of lush peonies, a 10-stem Single, a 20-stem Double, or a 30-stem Triple.<br><br>Please Note: Your peonies may arrive in bud form but will open in 1-2 days, meaning you can enjoy your blooms longer! Flower color may vary slightly from the pictured bouquet and may gradually change as your flowers bloom.<br>If your foliage looks slightly dehydrated upon arrival, place the stems in some water to revive them. (Pro tip: remove any foliage near or below the waterline for a longer-lasting bouquet!)</span>looms.&nbsp;</span><span style=\"font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 0.875rem;\"> If the foliage looks a bit parched upon arrival, simply place the stems in water to refresh them.</span></p>",
+    "reviews_rating": 3.9,
+    "reviews_count": 392,
+    "description": "<p data-pm-slice=\"1 1 []\">Have you felt The Good Vibes lately? This bouquet feels like a gentle nudge to embrace life's highs and lows with grace. Featuring a delightful mix of Delphinium, Lisianthus, Roses, Veronica, Aster, and Ruscus, this arrangement is a reminder that life's too short to be serious all the time. Because every moment, whether soaring or stumbling, deserves a sprinkle of happiness.</p>",
     "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/files/PeonyClouds_Lifestyle_1.jpg?v=1728948120&width=768",
+    "main_detail_src": null,
     "is_main_detail_video": false,
-    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/PeonyClouds_Lifestyle_2.jpg?v=1728948120&width=768",
-    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/PeonyClouds_Lifestyle_3.jpg?v=1728948119&width=768",
+    "detail_image_1_src": null,
+    "detail_image_2_src": null,
     "collections": [
+      "the fall collection",
+      "the classics collection",
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "birthday",
+      "friendship",
+      "just because",
+      "congratulations",
+      "miss you"
+    ],
+    "categories": [
+      "flowers"
+    ],
+    "double_variation": "flowers_double-the-juliet_67"
+  },
+  {
+    "id": "flowers_the-dove_10",
+    "name": "The Dove",
+    "variant_type": null,
+    "base_name": "The Dove",
+    "url": "https://urbanstems.com/products/the-dove",
+    "price": 7400,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Peace_MainImage_PDP_dcb04153-6187-45df-af46-222f861c32cd.jpg?v=1729627763&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Peace_SupportingImage_1_PDP.jpg?v=1727920080&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 4.6,
+    "reviews_count": 138,
+    "description": "<p><span data-sheets-root=\"1\">When words fall short, there are always flowers. This tranquil all-white bouquet embodies serenity and grace in the form of pure white blooms. Its elegant simplicity makes it a perfect gift for moments that call for quiet reflection, heartfelt sympathies, or a gesture of pure, unspoken kindness. </span></p><p><span data-sheets-root=\"1\">We’re committed to delivering bouquets that match our photos. Occasionally, we might replace certain flowers due to seasonal availability, but your bouquet’s overall appearance will remain unchanged.</span><br></p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/b598f5145dd54bb8a9fd4efcb2cf683a/b598f5145dd54bb8a9fd4efcb2cf683a.HD-1080p-7.2Mbps-48674812.mp4?v=0",
+    "is_main_detail_video": true,
+    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Peace_Lifestyle_2_8a36cc97-e4be-45ad-adf3-9db29b8b00fb.jpg?v=1748881273&width=768",
+    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Peace_Lifestyle_3.jpg?v=1748881272&width=768",
+    "collections": [
+      "the classics collection",
       "shop all",
       "today",
       "tomorrow"
@@ -573,7 +413,86 @@
     "occasions": [
       "sympathy",
       "thank you",
+      "congratulations",
+      "wedding",
+      "new baby"
+    ],
+    "categories": [
+      "flowers"
+    ]
+  },
+  {
+    "id": "flowers_the-summer-glow_11",
+    "name": "The Summer Glow",
+    "variant_type": "single",
+    "base_name": "The Summer Glow",
+    "url": "https://urbanstems.com/products/the-summer-glow",
+    "price": 6800,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/SummerGlow_MainImage_PDP_1.jpg?v=1747858411&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/SummerGlow_SupportingImage_PDP_1.jpg?v=1748004243&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 4.8,
+    "reviews_count": 10,
+    "description": "<p data-pm-slice=\"1 1 []\"><span data-sheets-root=\"1\">Bursting with golden sunflowers and fiery orange spray roses, The Summer Glow is basically a party in bouquet form. Bright, bold, and impossible to ignore—it’s made for birthdays, big moments, or just bringing the vibe. Think sunshine with a side of confetti. Instant mood boost included.</span></p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": null,
+    "is_main_detail_video": false,
+    "detail_image_1_src": null,
+    "detail_image_2_src": null,
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "birthday",
+      "friendship",
       "just because",
+      "miss you",
+      "self send"
+    ],
+    "categories": [
+      "flowers"
+    ],
+    "double_variation": "flowers_double-the-summer-glow_77"
+  },
+  {
+    "id": "flowers_the-peony_12",
+    "name": "The Peony",
+    "variant_type": null,
+    "base_name": "The Peony",
+    "url": "https://urbanstems.com/products/the-peony",
+    "price": 9000,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Peony_V2_MainImage_PDP.jpg?v=1737972145&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Peony__SupportingImage_Lifestyle_PDP.jpg?v=1753278501&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 4.2,
+    "reviews_count": 420,
+    "description": "<p><span data-sheets-root=\"1\">Lush and full of life, it's not every day that you'll come across these pillowy stems. This striking blush-toned bouquet is a welcome addition to any room. Peonies symbolize prosperity, making this a fitting gift for anything from congratulations to housewarmings. This peony arrangement may arrive in bud form but will unfurl into the pillowy stem we all love. <a href=\"https://urbanstems.com/blogs/news/peony-color-meaning?srsltid=AfmBOop77v2B1SU1nWqqliLqJb4a6-1OaSy-EqAw1WbIOLCsf8yZ4Cic\">Read more</a> about the meaning of the pale pink peony. Choose from three bouquet sizes of lush peonies, a 10-stem Single, a 20-stem Double, or a 30-stem Triple.<br><br><strong>Please note:</strong> Your peonies may arrive in bud form but will open in 1-2 days, meaning you can enjoy your blooms longer! Flower color may vary slightly from the pictured bouquet and gradually change as your flowers bloom.</span></p><p><span data-sheets-root=\"1\"><br>If your foliage looks slightly dehydrated upon arrival, place the stems in some water to revive them. (Pro tip: remove any foliage near or below the waterline for a longer-lasting bouquet!)</span><br></p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/0801fa1bb5064e25ba89669ec609db4c/0801fa1bb5064e25ba89669ec609db4c.HD-1080p-4.8Mbps-48675975.mp4?v=0",
+    "is_main_detail_video": true,
+    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Peony_Lifestyle_2_ec8e7fdd-85a5-452f-8f39-75e0d503305a.jpg?v=1748882731&width=768",
+    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Peony_Lifestyle_3_c9155fb8-fdfc-4e8b-9424-6e71c862cf44.jpg?v=1748882731&width=768",
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "birthday",
+      "thank you",
+      "just because",
+      "congratulations",
+      "anniversary",
+      "self send",
+      "wedding",
       "new baby"
     ],
     "categories": [
@@ -582,164 +501,25 @@
     ]
   },
   {
-    "id": "flowers_the-birdsong_13",
-    "name": "The Birdsong",
-    "variant_type": "single",
-    "base_name": "The Birdsong",
-    "url": "https://urbanstems.com/products/the-birdsong",
-    "price": 7800,
+    "id": "flowers_the-peony-sunrise_13",
+    "name": "The Peony Sunrise",
+    "variant_type": null,
+    "base_name": "The Peony Sunrise",
+    "url": "https://urbanstems.com/products/the-peony-sunrise",
+    "price": 13000,
     "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Birdsong_MainImage_PDP_33c6c41c-04b7-4793-b47d-fdd56ab32ba8.jpg?v=1741808387&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Birdsong_SupportingImage_PDP_f5bff97d-ddf8-4b31-94f6-5f56c1eb3395.jpg?v=1741808432&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
+    "main_image": "https://urbanstems.com/cdn/shop/files/PeonySunrise_MainImage_PDP_f2974615-b976-4cd1-9d89-1911e81242c6.jpg?v=1742221353&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/PeonySunrise_SupportingImage_PDP_82910e2a-cddb-433f-a31d-c3de9286badd.jpg?v=1742221363&width=350",
+    "badge_text": "Limited Quantities",
+    "delivery_lead_time": 2,
     "stock": 100,
-    "reviews_rating": 4.8,
-    "reviews_count": 24,
-    "description": "<p>Inspired by the harmonious melody of a spring mornings, this bouquet that brings the sweet serenade of nature indoors. Light pink roses and spray roses blend effortlessly with cheerful yellow carnations, while lavender aster and blush-toned hypericum add subtle, clean touches. The green lily grass gives a nod to the season's vitality, creating an arrangement that feels as inspiring as the chirping of birds at dawn. Celebrate the renewed freshness and beauty of spring’s unique colors.</p><p>While we strive to deliver all our bouquets as seen online, weather does occasionally impact the growing season for some of our specialty stems. To ensure the freshness and fullness of your bouquet we may make some substitutions, however, our designers take care to ensure the overall look and feel of your delivery will remain the same.</p>",
+    "reviews_rating": 3.9,
+    "reviews_count": 27,
+    "description": "<p data-pm-slice=\"1 1 []\">Like catching the first light of day, The Peony Sunrise is a fleeting moment worth savoring. This limited-edition bouquet features rare Alaskan peonies, grown in near-constant summer daylight and only available for a short window each year. Layered with peach and blush ranunculus, white roses, and garden roses in soft sunrise tones, this mix is as fleeting (and special) as peak peony season itself. It's a bouquet made for self-gifting, summer birthdays, or anyone who deserves something that won’t be around for long.</p>",
     "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/c2b57e4d5de4444c94d5ac1fb6dbb899/c2b57e4d5de4444c94d5ac1fb6dbb899.HD-1080p-2.5Mbps-46006050.mp4?v=0",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/38a75185b40e4f429cdf9d6b8469ff72/38a75185b40e4f429cdf9d6b8469ff72.HD-1080p-3.3Mbps-45882616.mp4?v=0",
     "is_main_detail_video": true,
-    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Birdsong_Lifestyle_2.jpg?v=1744724688&width=768",
-    "detail_image_2_src": null,
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "friendship",
-      "just because"
-    ],
-    "categories": [
-      "flowers"
-    ],
-    "double_variation": "flowers_double-the-birdsong_64"
-  },
-  {
-    "id": "flowers_the-cotton-candy_14",
-    "name": "The Cotton Candy",
-    "variant_type": "single",
-    "base_name": "The Cotton Candy",
-    "url": "https://urbanstems.com/products/the-cotton-candy",
-    "price": 7000,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/SpringFling_MainImage_PDP_47982f24-5e9e-4193-8a1f-850f6e8b332c.jpg?v=1740157087&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/SpringFling_SupportingImage_PDP.jpg?v=1740157087&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 4.7,
-    "reviews_count": 102,
-    "description": "<p><span>This bouquet is what it would look like if summer spun itself into sugar. Fluffy, flirty, and just a little bit nostalgic, The Cotton Candy brings together pillowy roses, cloud-like mini carnations, and soft, airy greenery in a swirl of pastel perfection. It’s the floral version of that first bite of cotton candy at the fair—light, joyful, and totally irresistible. A little sweet meets little dreamy.</span></p><p>While we strive to deliver all our bouquets as seen online, weather does occasionally impact the growing season for some of our specialty stems. To ensure the freshness and fullness of your bouquet we may make some substitutions, however, our designers take care to ensure the overall look and feel of your delivery will remain the same.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/files/SpringFling_Lifestyle_1.jpg?v=1739887607&width=768",
-    "is_main_detail_video": false,
-    "detail_image_1_src": null,
-    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/SpringFling_Lifestyle_3.jpg?v=1739887613&width=768",
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "friendship",
-      "miss you",
-      "self send"
-    ],
-    "categories": [
-      "flowers"
-    ],
-    "double_variation": "flowers_double-the-cotton-candy_57"
-  },
-  {
-    "id": "flowers_the-citrine_15",
-    "name": "The Citrine",
-    "variant_type": "single",
-    "base_name": "The Citrine",
-    "url": "https://urbanstems.com/products/the-citrine",
-    "price": 7400,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Citrine_MainImage_PDP.jpg?v=1746219641&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Citrine_SupportingImage_PDP_1.jpg?v=1746219647&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 5.0,
-    "reviews_count": 8,
-    "description": "<p>Designed by our in-house floral designer (and unofficial sangria sommelier), The Citrine is inspired by the vibrant, juicy summer drink. With bold reds and vibrant oranges, this bouquet is bursting with energy— it’s citrusy, sunny, and a little bit wild. Drink up.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": null,
-    "is_main_detail_video": false,
-    "detail_image_1_src": null,
-    "detail_image_2_src": null,
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "thank you",
-      "self send"
-    ],
-    "categories": [
-      "flowers"
-    ],
-    "double_variation": "flowers_double-the-citrine_80"
-  },
-  {
-    "id": "flowers_the-al-fresco_16",
-    "name": "The Al Fresco",
-    "variant_type": null,
-    "base_name": "The Al Fresco",
-    "url": "https://urbanstems.com/products/the-al-fresco",
-    "price": 10000,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/AlFresco_MainImage_PDP.jpg?v=1746219399&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/AlFresco_SupportingImage_PDP.jpg?v=1746219399&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 5,
-    "stock": 100,
-    "reviews_rating": 5.0,
-    "reviews_count": 1,
-    "description": "<p>Made for long tables, golden hour, and second pours. The Al Fresco mixes two shades of purple with soft yellow blooms for a look that’s sun-drenched, relaxed, and just the right amount of polished. It feels like clinking glasses under string lights, linen napkins fluttering in the breeze, and conversations that stretch well into the evening. Basically: your ideal outdoor gathering, in bouquet form.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": null,
-    "is_main_detail_video": false,
-    "detail_image_1_src": null,
-    "detail_image_2_src": null,
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "congratulations"
-    ],
-    "categories": [
-      "flowers"
-    ]
-  },
-  {
-    "id": "flowers_the-bombshell_17",
-    "name": "The Bombshell",
-    "variant_type": null,
-    "base_name": "The Bombshell",
-    "url": "https://urbanstems.com/products/the-bombshell",
-    "price": 12000,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Bombshell_MainImage_Updated_PDP.jpg?v=1748003933&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Bombshell_SupportingImage_Updated_PDP.jpg?v=1748003933&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 5.0,
-    "reviews_count": 2,
-    "description": "<p>All eyes on her. The Bombshell is a showstopping mix of pink roses, hydrangeas, calla lilies, and dramatic swoops of lily grass. With lush texture and layers of pink—from soft blush to full-on fuchsia—it’s bold, confident, and unapologetically glam. Like a perfect red lip or a head-turning entrance, this bouquet knows exactly what it’s doing. Maximum impact, zero effort.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": null,
-    "is_main_detail_video": false,
-    "detail_image_1_src": null,
+    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/PeonySunrise_Lifestyle_2.jpg?v=1744559265&width=768",
     "detail_image_2_src": null,
     "collections": [
       "shop all",
@@ -748,189 +528,15 @@
     ],
     "occasions": [
       "birthday",
-      "congratulations",
-      "new baby"
+      "anniversary"
     ],
     "categories": [
-      "flowers"
+      "flowers",
+      "peonies"
     ]
   },
   {
-    "id": "flowers_the-ruby_18",
-    "name": "The Ruby",
-    "variant_type": null,
-    "base_name": "The Ruby",
-    "url": "https://urbanstems.com/products/the-ruby",
-    "price": 9500,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Ruby_MainImage_PDP.jpg?v=1746477802&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Ruby_Centerpiece_SupportingImage_PDP_1.jpg?v=1746477802&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 5.0,
-    "reviews_count": 2,
-    "description": "<p>Elegant. Dramatic. Unapologetically luxe. The Ruby is a striking mix of deep reds and soft whites, designed to turn heads in the most tasteful way. It’s the floral equivalent of a velvet evening gown or a perfectly poured glass of red—refined, rich, and quietly powerful. A bouquet for grand gestures, intimate dinners, or simply making a statement without saying a word.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": null,
-    "is_main_detail_video": false,
-    "detail_image_1_src": null,
-    "detail_image_2_src": null,
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "entertaining"
-    ],
-    "categories": [
-      "flowers"
-    ]
-  },
-  {
-    "id": "flowers_the-cottage-core_19",
-    "name": "The Cottage-Core",
-    "variant_type": "single",
-    "base_name": "The Cottage-Core",
-    "url": "https://urbanstems.com/products/the-cottage-core",
-    "price": 6000,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Cottage-Core_MainImage_PDP_44b10c13-0b54-44c8-808f-fae17a26b277.jpg?v=1746471200&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Cottage-Core_SupportingImage_PDP_455120ff-5a86-48b4-a0a0-9cdd07549602.jpg?v=1746471200&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 5.0,
-    "reviews_count": 2,
-    "description": "<p>Like a sun-dappled morning in the countryside, this bouquet is all about slow moments and sweet simplicity. Soft white blooms meet cheerful yellow spray roses for a look that’s equal parts effortless and enchanting. It’s giving linen dresses and windows wide open to let the breeze in. Perfect for gifting, hosting, or just bringing a little pastoral peace to your everyday.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": null,
-    "is_main_detail_video": false,
-    "detail_image_1_src": null,
-    "detail_image_2_src": null,
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "sympathy",
-      "friendship",
-      "just because"
-    ],
-    "categories": [
-      "flowers"
-    ],
-    "double_variation": "flowers_double-the-cottage-core_73"
-  },
-  {
-    "id": "flowers_the-royal_20",
-    "name": "The Royal",
-    "variant_type": null,
-    "base_name": "The Royal",
-    "url": "https://urbanstems.com/products/the-royal",
-    "price": 9500,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Royal_MainImage_PDP_79633cdd-0e2e-4714-a590-ed86a4837e04.jpg?v=1729698444&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Royal_SupportingImage_1_PDP.jpg?v=1727922360&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 4.2,
-    "reviews_count": 43,
-    "description": "<p><span data-sheets-root=\"1\">This swirling storm of purple with pops of sunny peach bouquet includes some of our most regal flowers. We'd like to think this eye-catching arrangement is fit for a king or queen. Deliver this arrangement to someone in your high court, and they'll be dazzled by this display of blooms.</span></p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/files/Royal_Lifestyle_1.jpg?v=1740500311&width=768",
-    "is_main_detail_video": false,
-    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Royal_Lifestyle_2.jpg?v=1740500315&width=768",
-    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Royal_Lifestyle_3.jpg?v=1740500319&width=768",
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "birthday",
-      "just because",
-      "congratulations",
-      "new baby"
-    ],
-    "categories": [
-      "flowers"
-    ]
-  },
-  {
-    "id": "flowers_the-pink-lady_21",
-    "name": "The Pink Lady",
-    "variant_type": "single",
-    "base_name": "The Pink Lady",
-    "url": "https://urbanstems.com/products/the-pink-lady",
-    "price": 9000,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Palazzo_MainImage_PDP.jpg?v=1738864337&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Palazzo_SupportingImage_PDP_94f01942-2bc2-4afd-8624-cbef8100d6a9.jpg?v=1738864340&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 4.5,
-    "reviews_count": 37,
-    "description": "<p data-pm-slice=\"1 1 [&quot;list&quot;,{},&quot;list_item&quot;,{&quot;indent&quot;:3,&quot;type&quot;:&quot;bulleted&quot;}]\">Timeless elegance is the hallmark of this classic bouquet of roses and ranunculus. It boasts pastel shades of pink, accents of yellow and cream, and highlighted by spiral eucalyptus with green sprigs. The Pink Lady is a perfect centerpiece for a spring brunch al fresco or to liven up a kitchen or dining room. This arrangement makes a gracious thank-you gift, but it’s just as delightful as a gift for yourself because you deserve it.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": "https://urbanstems.com/cdn/shop/files/Palazzo_Lifestyle_1.jpg?v=1748881535&width=768",
-    "is_main_detail_video": false,
-    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Palazzo_Lifestyle_2.jpg?v=1748881535&width=768",
-    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Palazzo_Lifestyle_3.jpg?v=1748881536&width=768",
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "birthday",
-      "congratulations"
-    ],
-    "categories": [
-      "flowers"
-    ],
-    "double_variation": "flowers_double-the-pink-lady_69"
-  },
-  {
-    "id": "flowers_the-sunset_22",
-    "name": "The Sunset",
-    "variant_type": "single",
-    "base_name": "The Sunset",
-    "url": "https://urbanstems.com/products/the-sunset",
-    "price": 6800,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Sunset_MainImage_PDP_1.jpg?v=1747860080&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Sunset_SupportingImage_PDP_1.jpg?v=1747860080&width=350",
-    "badge_text": null,
-    "delivery_lead_time": null,
-    "stock": 0,
-    "reviews_rating": 4.8,
-    "reviews_count": 4,
-    "description": "<p data-pm-slice=\"1 1 []\">Soft peach roses meet golden marigolds in this moody, magical moment of a bouquet. The Sunset is all warmth and glow, like the sky right before it melts into gold and fire. It’s calm, a little sultry, and totally unforgettable. Perfect for golden hour gatherings, slow summer evenings, or anyone who deserves a little extra light.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": null,
-    "is_main_detail_video": false,
-    "detail_image_1_src": null,
-    "detail_image_2_src": null,
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "thank you"
-    ],
-    "categories": [
-      "flowers"
-    ],
-    "double_variation": "flowers_double-the-sunset_79"
-  },
-  {
-    "id": "flowers_the-firecracker_23",
+    "id": "flowers_the-firecracker_14",
     "name": "The Firecracker",
     "variant_type": null,
     "base_name": "The Firecracker",
@@ -940,7 +546,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Firecracker_MainImage_PDP_3d3fee8b-1e15-4a05-9957-67cfdf0a5c5b.jpg?v=1731601910&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Firecracker_SupportingImage_1_PDP_ac774926-bf5f-452a-ba81-b0061e2f1cff.jpg?v=1731601910&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.4,
     "reviews_count": 814,
@@ -970,7 +576,364 @@
     ]
   },
   {
-    "id": "flowers_the-flamenco_24",
+    "id": "flowers_the-pearl_15",
+    "name": "The Pearl",
+    "variant_type": null,
+    "base_name": "The Pearl",
+    "url": "https://urbanstems.com/products/the-pearl",
+    "price": 9000,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/SnowPeony_MainImage_PDP.jpg?v=1729717666&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/PeonyClouds_SupportingImage_1_PDP.jpg?v=1729198666&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 3.7,
+    "reviews_count": 131,
+    "description": "<p><span style=\"font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 0.875rem;\"><span data-sheets-root=\"1\">Add warmth and purity to any space courtesy of the blissful and aptly named Pearl bouquet. Featuring lush white peonies, each with a delicate pink center, the arrangement is a special treat for the warmer months. They arrive in compact bulb form, eventually thriving and developing into the pillow-like blooms. Read more about the meaning of the white peony. Choose from three bouquet sizes of lush peonies, a 10-stem Single, a 20-stem Double, or a 30-stem Triple.<br><br>Please Note: Your peonies may arrive in bud form but will open in 1-2 days, meaning you can enjoy your blooms longer! Flower color may vary slightly from the pictured bouquet and may gradually change as your flowers bloom.<br>If your foliage looks slightly dehydrated upon arrival, place the stems in some water to revive them. (Pro tip: remove any foliage near or below the waterline for a longer-lasting bouquet!)</span>looms.&nbsp;</span><span style=\"font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif; font-size: 0.875rem;\"> If the foliage looks a bit parched upon arrival, simply place the stems in water to refresh them.</span></p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/files/PeonyClouds_Lifestyle_1.jpg?v=1728948120&width=768",
+    "is_main_detail_video": false,
+    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/PeonyClouds_Lifestyle_2.jpg?v=1728948120&width=768",
+    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/PeonyClouds_Lifestyle_3.jpg?v=1728948119&width=768",
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "sympathy",
+      "thank you",
+      "just because",
+      "anniversary",
+      "new baby"
+    ],
+    "categories": [
+      "flowers",
+      "peonies"
+    ]
+  },
+  {
+    "id": "flowers_the-birdsong_16",
+    "name": "The Birdsong",
+    "variant_type": "single",
+    "base_name": "The Birdsong",
+    "url": "https://urbanstems.com/products/the-birdsong",
+    "price": 7800,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Birdsong_MainImage_PDP_33c6c41c-04b7-4793-b47d-fdd56ab32ba8.jpg?v=1741808387&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Birdsong_SupportingImage_PDP_f5bff97d-ddf8-4b31-94f6-5f56c1eb3395.jpg?v=1741808432&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 4.8,
+    "reviews_count": 24,
+    "description": "<p>Inspired by the harmonious melody of a spring mornings, this bouquet that brings the sweet serenade of nature indoors. Light pink roses and spray roses blend effortlessly with cheerful yellow carnations, while lavender aster and blush-toned hypericum add subtle, clean touches. The green lily grass gives a nod to the season's vitality, creating an arrangement that feels as inspiring as the chirping of birds at dawn. Celebrate the renewed freshness and beauty of spring’s unique colors.</p><p>While we strive to deliver all our bouquets as seen online, weather does occasionally impact the growing season for some of our specialty stems. To ensure the freshness and fullness of your bouquet we may make some substitutions, however, our designers take care to ensure the overall look and feel of your delivery will remain the same.</p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/c2b57e4d5de4444c94d5ac1fb6dbb899/c2b57e4d5de4444c94d5ac1fb6dbb899.HD-1080p-2.5Mbps-46006050.mp4?v=0",
+    "is_main_detail_video": true,
+    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Birdsong_Lifestyle_2.jpg?v=1744724688&width=768",
+    "detail_image_2_src": null,
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "friendship",
+      "just because"
+    ],
+    "categories": [
+      "flowers"
+    ],
+    "double_variation": "flowers_double-the-birdsong_63"
+  },
+  {
+    "id": "flowers_the-cotton-candy_17",
+    "name": "The Cotton Candy",
+    "variant_type": "single",
+    "base_name": "The Cotton Candy",
+    "url": "https://urbanstems.com/products/the-cotton-candy",
+    "price": 7000,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/SpringFling_MainImage_PDP_47982f24-5e9e-4193-8a1f-850f6e8b332c.jpg?v=1740157087&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/SpringFling_SupportingImage_PDP.jpg?v=1740157087&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 4.7,
+    "reviews_count": 102,
+    "description": "<p><span>This bouquet is what it would look like if summer spun itself into sugar. Fluffy, flirty, and just a little bit nostalgic, The Cotton Candy brings together pillowy roses, cloud-like mini carnations, and soft, airy greenery in a swirl of pastel perfection. It’s the floral version of that first bite of cotton candy at the fair—light, joyful, and totally irresistible. A little sweet meets little dreamy.</span></p><p>While we strive to deliver all our bouquets as seen online, weather does occasionally impact the growing season for some of our specialty stems. To ensure the freshness and fullness of your bouquet we may make some substitutions, however, our designers take care to ensure the overall look and feel of your delivery will remain the same.</p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/files/SpringFling_Lifestyle_1.jpg?v=1739887607&width=768",
+    "is_main_detail_video": false,
+    "detail_image_1_src": null,
+    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/SpringFling_Lifestyle_3.jpg?v=1739887613&width=768",
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "friendship",
+      "miss you",
+      "self send"
+    ],
+    "categories": [
+      "flowers"
+    ],
+    "double_variation": "flowers_double-the-cotton-candy_56"
+  },
+  {
+    "id": "flowers_the-citrine_18",
+    "name": "The Citrine",
+    "variant_type": "single",
+    "base_name": "The Citrine",
+    "url": "https://urbanstems.com/products/the-citrine",
+    "price": 7400,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Citrine_MainImage_PDP.jpg?v=1746219641&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Citrine_SupportingImage_PDP_1.jpg?v=1746219647&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 5.0,
+    "reviews_count": 8,
+    "description": "<p>Designed by our in-house floral designer (and unofficial sangria sommelier), The Citrine is inspired by the vibrant, juicy summer drink. With bold reds and vibrant oranges, this bouquet is bursting with energy— it’s citrusy, sunny, and a little bit wild. Drink up.</p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": null,
+    "is_main_detail_video": false,
+    "detail_image_1_src": null,
+    "detail_image_2_src": null,
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "thank you",
+      "anniversary",
+      "self send"
+    ],
+    "categories": [
+      "flowers"
+    ],
+    "double_variation": "flowers_double-the-citrine_78"
+  },
+  {
+    "id": "flowers_the-al-fresco_19",
+    "name": "The Al Fresco",
+    "variant_type": null,
+    "base_name": "The Al Fresco",
+    "url": "https://urbanstems.com/products/the-al-fresco",
+    "price": 10000,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/AlFresco_MainImage_PDP.jpg?v=1746219399&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/AlFresco_SupportingImage_PDP.jpg?v=1746219399&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 5,
+    "stock": 100,
+    "reviews_rating": 5.0,
+    "reviews_count": 1,
+    "description": "<p>Made for long tables, golden hour, and second pours. The Al Fresco mixes two shades of purple with soft yellow blooms for a look that’s sun-drenched, relaxed, and just the right amount of polished. It feels like clinking glasses under string lights, linen napkins fluttering in the breeze, and conversations that stretch well into the evening. Basically: your ideal outdoor gathering, in bouquet form.</p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": null,
+    "is_main_detail_video": false,
+    "detail_image_1_src": null,
+    "detail_image_2_src": null,
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "congratulations",
+      "anniversary"
+    ],
+    "categories": [
+      "flowers"
+    ]
+  },
+  {
+    "id": "flowers_the-bombshell_20",
+    "name": "The Bombshell",
+    "variant_type": null,
+    "base_name": "The Bombshell",
+    "url": "https://urbanstems.com/products/the-bombshell",
+    "price": 12000,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Bombshell_MainImage_Updated_PDP.jpg?v=1748003933&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Bombshell_SupportingImage_Updated_PDP.jpg?v=1748003933&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 6,
+    "stock": 100,
+    "reviews_rating": 5.0,
+    "reviews_count": 2,
+    "description": "<p>All eyes on her. The Bombshell is a showstopping mix of pink roses, hydrangeas, calla lilies, and dramatic swoops of lily grass. With lush texture and layers of pink—from soft blush to full-on fuchsia—it’s bold, confident, and unapologetically glam. Like a perfect red lip or a head-turning entrance, this bouquet knows exactly what it’s doing. Maximum impact, zero effort.</p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": null,
+    "is_main_detail_video": false,
+    "detail_image_1_src": null,
+    "detail_image_2_src": null,
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "birthday",
+      "congratulations",
+      "anniversary",
+      "new baby"
+    ],
+    "categories": [
+      "flowers"
+    ]
+  },
+  {
+    "id": "flowers_the-ruby_21",
+    "name": "The Ruby",
+    "variant_type": null,
+    "base_name": "The Ruby",
+    "url": "https://urbanstems.com/products/the-ruby",
+    "price": 9500,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Ruby_MainImage_PDP.jpg?v=1746477802&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Ruby_Centerpiece_SupportingImage_PDP_1.jpg?v=1746477802&width=350",
+    "badge_text": null,
+    "delivery_lead_time": null,
+    "stock": 0,
+    "reviews_rating": 5.0,
+    "reviews_count": 2,
+    "description": "<p>Elegant. Dramatic. Unapologetically luxe. The Ruby is a striking mix of deep reds and soft whites, designed to turn heads in the most tasteful way. It’s the floral equivalent of a velvet evening gown or a perfectly poured glass of red—refined, rich, and quietly powerful. A bouquet for grand gestures, intimate dinners, or simply making a statement without saying a word.</p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": null,
+    "is_main_detail_video": false,
+    "detail_image_1_src": null,
+    "detail_image_2_src": null,
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "anniversary",
+      "entertaining"
+    ],
+    "categories": [
+      "flowers"
+    ]
+  },
+  {
+    "id": "flowers_the-cottage-core_22",
+    "name": "The Cottage-Core",
+    "variant_type": "single",
+    "base_name": "The Cottage-Core",
+    "url": "https://urbanstems.com/products/the-cottage-core",
+    "price": 6000,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Cottage-Core_MainImage_PDP_44b10c13-0b54-44c8-808f-fae17a26b277.jpg?v=1746471200&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Cottage-Core_SupportingImage_PDP_455120ff-5a86-48b4-a0a0-9cdd07549602.jpg?v=1746471200&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 5.0,
+    "reviews_count": 2,
+    "description": "<p>Like a sun-dappled morning in the countryside, this bouquet is all about slow moments and sweet simplicity. Soft white blooms meet cheerful yellow spray roses for a look that’s equal parts effortless and enchanting. It’s giving linen dresses and windows wide open to let the breeze in. Perfect for gifting, hosting, or just bringing a little pastoral peace to your everyday.</p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": null,
+    "is_main_detail_video": false,
+    "detail_image_1_src": null,
+    "detail_image_2_src": null,
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "sympathy",
+      "friendship",
+      "just because"
+    ],
+    "categories": [
+      "flowers"
+    ],
+    "double_variation": "flowers_double-the-cottage-core_72"
+  },
+  {
+    "id": "flowers_the-royal_23",
+    "name": "The Royal",
+    "variant_type": null,
+    "base_name": "The Royal",
+    "url": "https://urbanstems.com/products/the-royal",
+    "price": 9500,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Royal_MainImage_PDP_79633cdd-0e2e-4714-a590-ed86a4837e04.jpg?v=1729698444&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Royal_SupportingImage_1_PDP.jpg?v=1727922360&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 4.2,
+    "reviews_count": 43,
+    "description": "<p><span data-sheets-root=\"1\">This swirling storm of purple with pops of sunny peach bouquet includes some of our most regal flowers. We'd like to think this eye-catching arrangement is fit for a king or queen. Deliver this arrangement to someone in your high court, and they'll be dazzled by this display of blooms.</span></p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/files/Royal_Lifestyle_1.jpg?v=1740500311&width=768",
+    "is_main_detail_video": false,
+    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Royal_Lifestyle_2.jpg?v=1740500315&width=768",
+    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Royal_Lifestyle_3.jpg?v=1740500319&width=768",
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "birthday",
+      "just because",
+      "congratulations",
+      "anniversary",
+      "new baby"
+    ],
+    "categories": [
+      "flowers"
+    ]
+  },
+  {
+    "id": "flowers_the-pink-lady_24",
+    "name": "The Pink Lady",
+    "variant_type": "single",
+    "base_name": "The Pink Lady",
+    "url": "https://urbanstems.com/products/the-pink-lady",
+    "price": 9000,
+    "discounted_price": null,
+    "main_image": "https://urbanstems.com/cdn/shop/files/Palazzo_MainImage_PDP.jpg?v=1738864337&width=350",
+    "hover_image": "https://urbanstems.com/cdn/shop/files/Palazzo_SupportingImage_PDP_94f01942-2bc2-4afd-8624-cbef8100d6a9.jpg?v=1738864340&width=350",
+    "badge_text": null,
+    "delivery_lead_time": 2,
+    "stock": 100,
+    "reviews_rating": 4.5,
+    "reviews_count": 37,
+    "description": "<p data-pm-slice=\"1 1 [&quot;list&quot;,{},&quot;list_item&quot;,{&quot;indent&quot;:3,&quot;type&quot;:&quot;bulleted&quot;}]\">Timeless elegance is the hallmark of this classic bouquet of roses and ranunculus. It boasts pastel shades of pink, accents of yellow and cream, and highlighted by spiral eucalyptus with green sprigs. The Pink Lady is a perfect centerpiece for a spring brunch al fresco or to liven up a kitchen or dining room. This arrangement makes a gracious thank-you gift, but it’s just as delightful as a gift for yourself because you deserve it.</p>",
+    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
+    "main_detail_src": "https://urbanstems.com/cdn/shop/files/Palazzo_Lifestyle_1.jpg?v=1748881535&width=768",
+    "is_main_detail_video": false,
+    "detail_image_1_src": "https://urbanstems.com/cdn/shop/files/Palazzo_Lifestyle_2.jpg?v=1748881535&width=768",
+    "detail_image_2_src": "https://urbanstems.com/cdn/shop/files/Palazzo_Lifestyle_3.jpg?v=1748881536&width=768",
+    "collections": [
+      "shop all",
+      "today",
+      "tomorrow"
+    ],
+    "occasions": [
+      "birthday",
+      "congratulations"
+    ],
+    "categories": [
+      "flowers"
+    ],
+    "double_variation": "flowers_double-the-pink-lady_68"
+  },
+  {
+    "id": "flowers_the-flamenco_25",
     "name": "The Flamenco",
     "variant_type": "single",
     "base_name": "The Flamenco",
@@ -980,7 +943,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Flamenco_MainImage_PDP_2e8f032c-9be4-4abd-b5b5-f4f593ca8105.jpg?v=1746470396&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Flamenco_SupportingImage_PDP_dc0f07ff-40a0-449f-b6c4-372a6ece706e.jpg?v=1746470396&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.4,
     "reviews_count": 16,
@@ -1003,10 +966,10 @@
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-flamenco_74"
+    "double_variation": "flowers_double-the-flamenco_73"
   },
   {
-    "id": "flowers_the-verona_25",
+    "id": "flowers_the-verona_26",
     "name": "The Verona",
     "variant_type": "single",
     "base_name": "The Verona",
@@ -1016,10 +979,10 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Verona_MainImage_PDP_26ca8e8e-a3c4-4587-9ccf-3e5b945289af.jpg?v=1729623910&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Verona_SupportingImage_1_PDP.jpg?v=1727919082&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.3,
-    "reviews_count": 461,
+    "reviews_count": 462,
     "description": "<p><span data-sheets-root=\"1\">A dance of delicate pinks and blushes, The Verona whispers tales of enchantment. Spray roses twirl beside blushing hypericum berries, inviting admiration. Roses reign in this romantic symphony, captivating the senses, while Cocculus foliage and emerald ruscus add a playful sway to this composition.</span><br></p>",
     "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
     "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/4f680a6cd7ee4d02b2a7c3300c936e61/4f680a6cd7ee4d02b2a7c3300c936e61.HD-1080p-2.5Mbps-36443436.mp4?v=0",
@@ -1036,94 +999,17 @@
       "birthday",
       "just because",
       "congratulations",
+      "anniversary",
       "wedding",
       "new baby"
     ],
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-verona_63"
+    "double_variation": "flowers_double-the-verona_62"
   },
   {
-    "id": "flowers_the-summer-glow_26",
-    "name": "The Summer Glow",
-    "variant_type": "single",
-    "base_name": "The Summer Glow",
-    "url": "https://urbanstems.com/products/the-summer-glow",
-    "price": 6800,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/SummerGlow_MainImage_PDP_1.jpg?v=1747858411&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/SummerGlow_SupportingImage_PDP_1.jpg?v=1748004243&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 4.8,
-    "reviews_count": 10,
-    "description": "<p data-pm-slice=\"1 1 []\"><span data-sheets-root=\"1\">Bursting with golden sunflowers and fiery orange spray roses, The Summer Glow is basically a party in bouquet form. Bright, bold, and impossible to ignore—it’s made for birthdays, big moments, or just bringing the vibe. Think sunshine with a side of confetti. Instant mood boost included.</span></p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": null,
-    "is_main_detail_video": false,
-    "detail_image_1_src": null,
-    "detail_image_2_src": null,
-    "collections": [
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "birthday",
-      "friendship",
-      "just because",
-      "miss you",
-      "self send"
-    ],
-    "categories": [
-      "flowers"
-    ],
-    "double_variation": "flowers_double-the-summer-glow_78"
-  },
-  {
-    "id": "flowers_the-juliet_27",
-    "name": "The Juliet",
-    "variant_type": "single",
-    "base_name": "The Juliet",
-    "url": "https://urbanstems.com/products/the-juliet",
-    "price": 6800,
-    "discounted_price": null,
-    "main_image": "https://urbanstems.com/cdn/shop/files/GoodVibes_MainImage_PDP_dae333bb-2232-4b7d-945f-8373fdfe0e9c.jpg?v=1729624248&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/GoodVibes_SupportingImage_1_PDP.jpg?v=1727916702&width=350",
-    "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
-    "reviews_rating": 3.9,
-    "reviews_count": 392,
-    "description": "<p data-pm-slice=\"1 1 []\">Have you felt The Good Vibes lately? This bouquet feels like a gentle nudge to embrace life's highs and lows with grace. Featuring a delightful mix of Delphinium, Lisianthus, Roses, Veronica, Aster, and Ruscus, this arrangement is a reminder that life's too short to be serious all the time. Because every moment, whether soaring or stumbling, deserves a sprinkle of happiness.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": null,
-    "is_main_detail_video": false,
-    "detail_image_1_src": null,
-    "detail_image_2_src": null,
-    "collections": [
-      "the fall collection",
-      "the classics collection",
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "birthday",
-      "friendship",
-      "just because",
-      "congratulations",
-      "miss you"
-    ],
-    "categories": [
-      "flowers"
-    ],
-    "double_variation": "flowers_double-the-juliet_68"
-  },
-  {
-    "id": "flowers_the-honeycrisp_28",
+    "id": "flowers_the-honeycrisp_27",
     "name": "The Honeycrisp",
     "variant_type": "single",
     "base_name": "The Honeycrisp",
@@ -1158,10 +1044,10 @@
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-honeycrisp_65"
+    "double_variation": "flowers_double-the-honeycrisp_64"
   },
   {
-    "id": "flowers_the-zucca_29",
+    "id": "flowers_the-zucca_28",
     "name": "The Zucca",
     "variant_type": "single",
     "base_name": "The Zucca",
@@ -1196,10 +1082,10 @@
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-zucca_66"
+    "double_variation": "flowers_double-the-zucca_65"
   },
   {
-    "id": "flowers_the-spice_30",
+    "id": "flowers_the-spice_29",
     "name": "The Spice",
     "variant_type": null,
     "base_name": "The Spice",
@@ -1235,7 +1121,7 @@
     ]
   },
   {
-    "id": "flowers_the-sunflower-field_31",
+    "id": "flowers_the-sunflower-field_30",
     "name": "The Sunflower Field",
     "variant_type": "single",
     "base_name": "The Sunflower Field",
@@ -1270,10 +1156,10 @@
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-sunflower-field_67"
+    "double_variation": "flowers_double-the-sunflower-field_66"
   },
   {
-    "id": "flowers_the-golden-moment_32",
+    "id": "flowers_the-golden-moment_31",
     "name": "The Golden Moment",
     "variant_type": "single",
     "base_name": "The Golden Moment",
@@ -1307,10 +1193,10 @@
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-golden-moment_77"
+    "double_variation": "flowers_double-the-golden-moment_76"
   },
   {
-    "id": "flowers_the-autumn-sun_33",
+    "id": "flowers_the-autumn-sun_32",
     "name": "The Autumn Sun",
     "variant_type": "single",
     "base_name": "The Autumn Sun",
@@ -1343,10 +1229,10 @@
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-autumn-sun_76"
+    "double_variation": "flowers_double-the-autumn-sun_75"
   },
   {
-    "id": "flowers_the-autumn-sky_34",
+    "id": "flowers_the-autumn-sky_33",
     "name": "The Autumn Sky",
     "variant_type": null,
     "base_name": "The Autumn Sky",
@@ -1381,11 +1267,11 @@
     ]
   },
   {
-    "id": "flowers_the-front-row_35",
-    "name": "The Front Row",
+    "id": "flowers_the-fall-edit_34",
+    "name": "The Fall Edit",
     "variant_type": null,
-    "base_name": "The Front Row",
-    "url": "https://urbanstems.com/products/the-front-row",
+    "base_name": "The Fall Edit",
+    "url": "https://urbanstems.com/products/the-fall-edit",
     "price": 14000,
     "discounted_price": null,
     "main_image": "https://urbanstems.com/cdn/shop/files/FrontRow_Color_MainImage.jpg?v=1753882827&width=350",
@@ -1408,6 +1294,7 @@
       "tomorrow"
     ],
     "occasions": [
+      "anniversary",
       "entertaining"
     ],
     "categories": [
@@ -1416,7 +1303,7 @@
     ]
   },
   {
-    "id": "flowers_the-mulberry_36",
+    "id": "flowers_the-mulberry_35",
     "name": "The Mulberry",
     "variant_type": "single",
     "base_name": "The Mulberry",
@@ -1443,15 +1330,16 @@
       "tomorrow"
     ],
     "occasions": [
-      "birthday"
+      "birthday",
+      "anniversary"
     ],
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-mulberry_82"
+    "double_variation": "flowers_double-the-mulberry_80"
   },
   {
-    "id": "flowers_the-warm-embrace_37",
+    "id": "flowers_the-warm-embrace_36",
     "name": "The Warm Embrace",
     "variant_type": null,
     "base_name": "The Warm Embrace",
@@ -1487,7 +1375,7 @@
     ]
   },
   {
-    "id": "flowers_the-crisp-breeze_38",
+    "id": "flowers_the-crisp-breeze_37",
     "name": "The Crisp Breeze",
     "variant_type": "single",
     "base_name": "The Crisp Breeze",
@@ -1520,10 +1408,10 @@
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-crisp-breeze_75"
+    "double_variation": "flowers_double-the-crisp-breeze_74"
   },
   {
-    "id": "flowers_the-selene_39",
+    "id": "flowers_the-selene_38",
     "name": "The Selene",
     "variant_type": "single",
     "base_name": "The Selene",
@@ -1550,15 +1438,16 @@
       "tomorrow"
     ],
     "occasions": [
-      "birthday"
+      "birthday",
+      "anniversary"
     ],
     "categories": [
       "flowers"
     ],
-    "double_variation": "flowers_double-the-selene_83"
+    "double_variation": "flowers_double-the-selene_81"
   },
   {
-    "id": "flowers_the-tranquility_40",
+    "id": "flowers_the-tranquility_39",
     "name": "The Tranquility",
     "variant_type": null,
     "base_name": "The Tranquility",
@@ -1594,7 +1483,7 @@
     ]
   },
   {
-    "id": "flowers_the-hearth_41",
+    "id": "flowers_the-hearth_40",
     "name": "The Hearth",
     "variant_type": null,
     "base_name": "The Hearth",
@@ -1629,7 +1518,7 @@
     ]
   },
   {
-    "id": "flowers_the-autumnal-palette_42",
+    "id": "flowers_the-autumnal-palette_41",
     "name": "The Autumnal Palette",
     "variant_type": null,
     "base_name": "The Autumnal Palette",
@@ -1664,7 +1553,7 @@
     ]
   },
   {
-    "id": "flowers_the-evening-ember_43",
+    "id": "flowers_the-evening-ember_42",
     "name": "The Evening Ember",
     "variant_type": null,
     "base_name": "The Evening Ember",
@@ -1700,7 +1589,7 @@
     ]
   },
   {
-    "id": "flowers_the-nantucket-with-moroccan-glass-pitcher_44",
+    "id": "flowers_the-nantucket-with-moroccan-glass-pitcher_43",
     "name": "The Nantucket with Moroccan Glass Pitcher",
     "variant_type": null,
     "base_name": "The Nantucket with Moroccan Glass Pitcher",
@@ -1710,7 +1599,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Nantucket_GlassPitcher_MainImage_PDP.jpg?v=1746469717&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Nantucket_SupportingImage_PDP.jpg?v=1746469718&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -1738,7 +1627,7 @@
     ]
   },
   {
-    "id": "flowers_the-summer-sunrise_45",
+    "id": "flowers_the-summer-sunrise_44",
     "name": "The Summer Sunrise",
     "variant_type": null,
     "base_name": "The Summer Sunrise",
@@ -1748,7 +1637,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/SummerSunrise_MainImage_PDP.jpg?v=1746471089&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/SummerSunrise_SupportingImage_PDP.jpg?v=1746471090&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -1765,6 +1654,7 @@
     ],
     "occasions": [
       "thank you",
+      "anniversary",
       "entertaining"
     ],
     "categories": [
@@ -1773,7 +1663,7 @@
     ]
   },
   {
-    "id": "flowers_the-leo_46",
+    "id": "flowers_the-leo_45",
     "name": "The Leo",
     "variant_type": null,
     "base_name": "The Leo",
@@ -1783,7 +1673,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/SummerAstrology_MainImage_PDP_f281ffbd-70a0-4d65-8b8e-70117c66f1bc.jpg?v=1748004243&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/SummerGlow_SupportingImage_PDP_1.jpg?v=1748004243&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -1808,7 +1698,7 @@
     ]
   },
   {
-    "id": "flowers_the-sun-kissed_47",
+    "id": "flowers_the-sun-kissed_46",
     "name": "The Sun Kissed",
     "variant_type": null,
     "base_name": "The Sun Kissed",
@@ -1818,7 +1708,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Sunkissed_MainImage_PDP.jpg?v=1746219217&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Sunkissed_SupportingImage_PDP.jpg?v=1746219217&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -1835,7 +1725,8 @@
     ],
     "occasions": [
       "birthday",
-      "friendship"
+      "friendship",
+      "anniversary"
     ],
     "categories": [
       "flowers",
@@ -1843,7 +1734,7 @@
     ]
   },
   {
-    "id": "flowers_the-spill-the-tea_48",
+    "id": "flowers_the-spill-the-tea_47",
     "name": "The Spill The Tea",
     "variant_type": null,
     "base_name": "The Spill The Tea",
@@ -1853,7 +1744,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/SpillTheTea_MainImage_PDP_5f0b995b-baea-4d4f-9270-61704e4b0995.jpg?v=1748004545&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Bikini_SupportingImage_PDP_a144f743-dd9c-4f06-b0ae-b9874261867e.jpg?v=1748004545&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -1877,7 +1768,7 @@
     ]
   },
   {
-    "id": "flowers_the-friendship-bundle_49",
+    "id": "flowers_the-friendship-bundle_48",
     "name": "The Friendship Bundle",
     "variant_type": null,
     "base_name": "The Friendship Bundle",
@@ -1887,7 +1778,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/FriendshipBundle_MainImage_PDP_1.jpg?v=1753387264&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/FriendshipBundle__SupportingImage_PDP.jpg?v=1753387264&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.5,
     "reviews_count": 306,
@@ -1911,7 +1802,7 @@
     ]
   },
   {
-    "id": "flowers_the-summer-by-design_50",
+    "id": "flowers_the-summer-by-design_49",
     "name": "The Summer by Design",
     "variant_type": null,
     "base_name": "The Summer by Design",
@@ -1921,7 +1812,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/SummerbyDesign_MainImage_PDP.jpg?v=1748005358&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/SummerbyDesign_SupportingImage_PDP_1.jpg?v=1748005358&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -1939,6 +1830,7 @@
     "occasions": [
       "thank you",
       "congratulations",
+      "anniversary",
       "entertaining",
       "new baby"
     ],
@@ -1948,7 +1840,7 @@
     ]
   },
   {
-    "id": "flowers_the-ruby-centerpiece_51",
+    "id": "flowers_the-ruby-centerpiece_50",
     "name": "The Ruby Centerpiece",
     "variant_type": null,
     "base_name": "The Ruby Centerpiece",
@@ -1958,8 +1850,8 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Ruby_Centerpiece_MainImage_PDP.jpg?v=1746219051&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Ruby_Centerpiece_SupportingImage_PDP.jpg?v=1746219051&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
-    "stock": 100,
+    "delivery_lead_time": null,
+    "stock": 0,
     "reviews_rating": null,
     "reviews_count": null,
     "description": "<p>Deep reds. Soft whites. Serious impact. This low-profile centerpiece, arranged in a sleek glass vase, is ready to grace any table with its refined, romantic presence. Designed for dinners, gatherings, or any moment that calls for something a little more elevated, this arrangement is bold without being loud—just the right balance of richness and restraint.</p>",
@@ -1982,7 +1874,7 @@
     ]
   },
   {
-    "id": "flowers_the-flamenco-with-peridot-vase_52",
+    "id": "flowers_the-flamenco-with-peridot-vase_51",
     "name": "The Flamenco with Peridot Vase",
     "variant_type": null,
     "base_name": "The Flamenco with Peridot Vase",
@@ -1992,7 +1884,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Flamenco_PeridotVase_MainImage_PDP.jpg?v=1746470343&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Flamenco_SupportingImage_PDP.jpg?v=1746470343&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -2009,14 +1901,15 @@
     ],
     "occasions": [
       "thank you",
-      "congratulations"
+      "congratulations",
+      "anniversary"
     ],
     "categories": [
       "flowers"
     ]
   },
   {
-    "id": "flowers_double-the-alaskan-peony_53",
+    "id": "flowers_double-the-alaskan-peony_52",
     "name": "Double The Alaskan Peony",
     "variant_type": "double",
     "base_name": "The Alaskan Peony",
@@ -2026,8 +1919,8 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_AlaskanPeony_MainImage_PDP.jpg?v=1746470779&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_AlaskanPeony_SupportingImage_PDP.jpg?v=1746470778&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 6,
-    "stock": 100,
+    "delivery_lead_time": null,
+    "stock": 0,
     "reviews_rating": 4.2,
     "reviews_count": 53,
     "description": "<p><span data-sheets-root=\"1\">From bud to bloom, there’s something magnificent about peonies. The Alaskan Peony features hand-chosen peony stems in a variety of colors chosen for their freshness. Choose from three bouquet sizes of lush peonies: a 10-stem Single, a 20-stem Double, or a 30-stem Triple.</span></p><p>Please note:&nbsp;Your peonies may arrive in bud form but will open in 1-2 days, meaning you can enjoy your blooms longer! Flower color may vary slightly from the pictured bouquet and may gradually change as your flowers bloom.<br>If your foliage looks slightly dehydrated upon arrival, place the stems in some water to revive them. (Pro tip: remove any foliage near or below the waterline for a longer-lasting bouquet!)</p>",
@@ -2043,17 +1936,18 @@
       "tomorrow"
     ],
     "occasions": [
+      "anniversary",
       "new baby"
     ],
     "categories": [
       "flowers",
       "peonies"
     ],
-    "single_variation": "flowers_the-alaskan-peony_3",
-    "double_variation": "flowers_double-the-alaskan-peony_53"
+    "single_variation": "flowers_the-alaskan-peony_4",
+    "double_variation": "flowers_double-the-alaskan-peony_52"
   },
   {
-    "id": "flowers_double-the-peony_54",
+    "id": "flowers_double-the-peony_53",
     "name": "Double the Peony",
     "variant_type": "double",
     "base_name": "the Peony",
@@ -2063,7 +1957,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Peony_v2_MainImage_PDP.jpg?v=1737972187&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Peony_v2_SupportingImage_PDP.jpg?v=1737972187&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.2,
     "reviews_count": 420,
@@ -2093,7 +1987,7 @@
     ]
   },
   {
-    "id": "flowers_double-the-firecracker_55",
+    "id": "flowers_double-the-firecracker_54",
     "name": "Double the Firecracker",
     "variant_type": "double",
     "base_name": "the Firecracker",
@@ -2103,7 +1997,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/DoubleFirecracker_MainImage_PDP.jpg?v=1731601883&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/DoubleFirecracker_SupportingImage_1_PDP.jpg?v=1731601883&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.4,
     "reviews_count": 815,
@@ -2132,7 +2026,7 @@
     ]
   },
   {
-    "id": "flowers_double-the-lover-girl_56",
+    "id": "flowers_double-the-lover-girl_55",
     "name": "Double the Lover Girl",
     "variant_type": "double",
     "base_name": "the Lover Girl",
@@ -2142,7 +2036,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Unicorn_MainImage_PDP_9443884c-ef17-4e58-9552-d982a14f783b.jpg?v=1729697164&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/LoverGirl_SupportingImage_PDP.jpg?v=1754312434&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.5,
     "reviews_count": 248,
@@ -2169,7 +2063,7 @@
     ]
   },
   {
-    "id": "flowers_double-the-cotton-candy_57",
+    "id": "flowers_double-the-cotton-candy_56",
     "name": "Double The Cotton Candy",
     "variant_type": "double",
     "base_name": "The Cotton Candy",
@@ -2179,7 +2073,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_SpringFling_MainImage_PDP.jpg?v=1738834778&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_SpringFling_SupportingImage_PDP.jpg?v=1738834778&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.7,
     "reviews_count": 102,
@@ -2197,16 +2091,17 @@
     ],
     "occasions": [
       "birthday",
+      "anniversary",
       "entertaining"
     ],
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-cotton-candy_14",
-    "double_variation": "flowers_double-the-cotton-candy_57"
+    "single_variation": "flowers_the-cotton-candy_17",
+    "double_variation": "flowers_double-the-cotton-candy_56"
   },
   {
-    "id": "flowers_double-the-neon-lights_58",
+    "id": "flowers_double-the-neon-lights_57",
     "name": "Double The Neon Lights",
     "variant_type": "double",
     "base_name": "The Neon Lights",
@@ -2216,7 +2111,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_NeonLights_MainImage_PDP.jpg?v=1746470634&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_NeonLights_SupportingImage_PDP.jpg?v=1746470633&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.7,
     "reviews_count": 51,
@@ -2239,11 +2134,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-neon-lights_5",
-    "double_variation": "flowers_double-the-neon-lights_58"
+    "single_variation": "flowers_the-neon-lights_2",
+    "double_variation": "flowers_double-the-neon-lights_57"
   },
   {
-    "id": "flowers_double-the-dove_59",
+    "id": "flowers_double-the-dove_58",
     "name": "Double the Dove",
     "variant_type": "double",
     "base_name": "the Dove",
@@ -2253,7 +2148,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Peace_MainImage_PDP_d3a9e415-5a3b-4273-a301-6e20dbaca85b.jpg?v=1729627434&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Peace_SupportingImage_1_PDP.jpg?v=1727920404&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.6,
     "reviews_count": 138,
@@ -2282,7 +2177,7 @@
     ]
   },
   {
-    "id": "flowers_double-the-margot_60",
+    "id": "flowers_double-the-margot_59",
     "name": "Double the Margot",
     "variant_type": "double",
     "base_name": "the Margot",
@@ -2292,7 +2187,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Margot_MainImage_PDP_90749c65-6263-4693-be5e-30b57888023b.jpg?v=1729626519&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Margot_SupportingImage_1_PDP.jpg?v=1727921744&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.3,
     "reviews_count": 365,
@@ -2319,7 +2214,7 @@
     ]
   },
   {
-    "id": "flowers_double-the-mariposa_61",
+    "id": "flowers_double-the-mariposa_60",
     "name": "Double The Mariposa",
     "variant_type": "double",
     "base_name": "The Mariposa",
@@ -2329,7 +2224,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Sorbet_MainImage_PDP_72362116-3dbd-41ac-9f49-708a9606d5fd.jpg?v=1729625925&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Sorbet_SupportingImage_1_PDP.jpg?v=1727923027&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.5,
     "reviews_count": 306,
@@ -2351,6 +2246,7 @@
       "sympathy",
       "thank you",
       "congratulations",
+      "anniversary",
       "miss you",
       "wedding",
       "new baby"
@@ -2358,11 +2254,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-mariposa_2",
-    "double_variation": "flowers_double-the-mariposa_61"
+    "single_variation": "flowers_the-mariposa_3",
+    "double_variation": "flowers_double-the-mariposa_60"
   },
   {
-    "id": "flowers_double-the-salt-spray_62",
+    "id": "flowers_double-the-salt-spray_61",
     "name": "Double The Salt Spray",
     "variant_type": "double",
     "base_name": "The Salt Spray",
@@ -2372,7 +2268,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_SaltSpray_MainImage_PDP.jpg?v=1746469448&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_SaltSpray_SupportingImage_PDP.jpg?v=1746469465&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.6,
     "reviews_count": 13,
@@ -2396,11 +2292,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-salt-spray_11",
-    "double_variation": "flowers_double-the-salt-spray_62"
+    "single_variation": "flowers_the-salt-spray_8",
+    "double_variation": "flowers_double-the-salt-spray_61"
   },
   {
-    "id": "flowers_double-the-verona_63",
+    "id": "flowers_double-the-verona_62",
     "name": "Double The Verona",
     "variant_type": "double",
     "base_name": "The Verona",
@@ -2410,10 +2306,10 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Verona_MainImage_PDP_f484855a-5e53-4151-ba17-4623125083b7.jpg?v=1729626059&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Verona_SupportingImage_1_PDP.jpg?v=1727920776&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.3,
-    "reviews_count": 461,
+    "reviews_count": 462,
     "description": "<p><span data-sheets-root=\"1\">A dance of delicate pinks and blushes, The Verona whispers tales of enchantment. Spray roses twirl beside blushing hypericum berries, inviting admiration. Roses reign in this romantic symphony, captivating the senses, while Cocculus foliage and emerald ruscus add a playful sway to this composition.</span><br></p>",
     "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
     "main_detail_src": "https://urbanstems.com/cdn/shop/videos/c/vp/4f680a6cd7ee4d02b2a7c3300c936e61/4f680a6cd7ee4d02b2a7c3300c936e61.HD-1080p-2.5Mbps-36443436.mp4?v=0",
@@ -2431,17 +2327,18 @@
       "birthday",
       "just because",
       "congratulations",
+      "anniversary",
       "wedding",
       "new baby"
     ],
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-verona_25",
-    "double_variation": "flowers_double-the-verona_63"
+    "single_variation": "flowers_the-verona_26",
+    "double_variation": "flowers_double-the-verona_62"
   },
   {
-    "id": "flowers_double-the-birdsong_64",
+    "id": "flowers_double-the-birdsong_63",
     "name": "Double The Birdsong",
     "variant_type": "double",
     "base_name": "The Birdsong",
@@ -2451,7 +2348,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Birdsong_MainImage_PDP_f061d6ab-33fb-41f8-beb2-efa81bd63f41.jpg?v=1741808497&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Birdsong_SupportingImage_PDP_0a1442e0-b178-4580-9cde-65ab209e11bf.jpg?v=1741808504&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.8,
     "reviews_count": 25,
@@ -2473,11 +2370,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-birdsong_13",
-    "double_variation": "flowers_double-the-birdsong_64"
+    "single_variation": "flowers_the-birdsong_16",
+    "double_variation": "flowers_double-the-birdsong_63"
   },
   {
-    "id": "flowers_double-the-honeycrisp_65",
+    "id": "flowers_double-the-honeycrisp_64",
     "name": "Double The Honeycrisp",
     "variant_type": "double",
     "base_name": "The Honeycrisp",
@@ -2508,11 +2405,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-honeycrisp_28",
-    "double_variation": "flowers_double-the-honeycrisp_65"
+    "single_variation": "flowers_the-honeycrisp_27",
+    "double_variation": "flowers_double-the-honeycrisp_64"
   },
   {
-    "id": "flowers_double-the-zucca_66",
+    "id": "flowers_double-the-zucca_65",
     "name": "Double The Zucca",
     "variant_type": "double",
     "base_name": "The Zucca",
@@ -2543,11 +2440,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-zucca_29",
-    "double_variation": "flowers_double-the-zucca_66"
+    "single_variation": "flowers_the-zucca_28",
+    "double_variation": "flowers_double-the-zucca_65"
   },
   {
-    "id": "flowers_double-the-sunflower-field_67",
+    "id": "flowers_double-the-sunflower-field_66",
     "name": "Double The Sunflower Field",
     "variant_type": "double",
     "base_name": "The Sunflower Field",
@@ -2580,11 +2477,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-sunflower-field_31",
-    "double_variation": "flowers_double-the-sunflower-field_67"
+    "single_variation": "flowers_the-sunflower-field_30",
+    "double_variation": "flowers_double-the-sunflower-field_66"
   },
   {
-    "id": "flowers_double-the-juliet_68",
+    "id": "flowers_double-the-juliet_67",
     "name": "Double The Juliet",
     "variant_type": "double",
     "base_name": "The Juliet",
@@ -2594,7 +2491,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_GoodVibes_MainImage_PDP_a0ff1351-31c3-43d3-80e9-106d5c360e84.jpg?v=1729875014&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_GoodVibes_SupportingImage_1_PDP.jpg?v=1727922845&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 3.9,
     "reviews_count": 392,
@@ -2620,11 +2517,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-juliet_27",
-    "double_variation": "flowers_double-the-juliet_68"
+    "single_variation": "flowers_the-juliet_9",
+    "double_variation": "flowers_double-the-juliet_67"
   },
   {
-    "id": "flowers_double-the-pink-lady_69",
+    "id": "flowers_double-the-pink-lady_68",
     "name": "Double The Pink Lady",
     "variant_type": "double",
     "base_name": "The Pink Lady",
@@ -2634,7 +2531,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Palazzo_MainImage_PDP.jpg?v=1738864371&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Palazzo_SupportingImage_PDP.jpg?v=1738864371&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.5,
     "reviews_count": 37,
@@ -2657,11 +2554,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-pink-lady_21",
-    "double_variation": "flowers_double-the-pink-lady_69"
+    "single_variation": "flowers_the-pink-lady_24",
+    "double_variation": "flowers_double-the-pink-lady_68"
   },
   {
-    "id": "flowers_double-the-bikini_70",
+    "id": "flowers_double-the-bikini_69",
     "name": "Double The Bikini",
     "variant_type": "double",
     "base_name": "The Bikini",
@@ -2671,7 +2568,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Bikini_MainImage_PDP_1.jpg?v=1748004616&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Bikini_SupportingImage_PDP_1.jpg?v=1748004616&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.7,
     "reviews_count": 10,
@@ -2690,16 +2587,17 @@
     "occasions": [
       "birthday",
       "congratulations",
+      "anniversary",
       "new baby"
     ],
     "categories": [
       "flowers"
     ],
     "single_variation": "flowers_the-bikini_6",
-    "double_variation": "flowers_double-the-bikini_70"
+    "double_variation": "flowers_double-the-bikini_69"
   },
   {
-    "id": "flowers_double-the-nantucket_71",
+    "id": "flowers_double-the-nantucket_70",
     "name": "Double the Nantucket",
     "variant_type": "double",
     "base_name": "the Nantucket",
@@ -2709,10 +2607,10 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Nantucket_MainImage_PDP.jpg?v=1746470259&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Nantucket_SupportingImage_PDP.jpg?v=1746470259&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
-    "reviews_rating": 4.6,
-    "reviews_count": 17,
+    "reviews_rating": 4.4,
+    "reviews_count": 18,
     "description": "<p>As cool, breezy, and effortlessly laid-back as the Nantucket island for which it’s named, The Nantucket spectacularly celebrates the very best of the warmest days of the year. It’s bright and uplifting, with notes of purple and blue mingling with white and green. The effect is completely relaxed and serene, much like a day spent on the charming island.</p>",
     "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
     "main_detail_src": "https://urbanstems.com/cdn/shop/files/Nantucket_Lifestyle_1.jpg?v=1747076409&width=768",
@@ -2735,7 +2633,7 @@
     ]
   },
   {
-    "id": "flowers_double-the-pearl_72",
+    "id": "flowers_double-the-pearl_71",
     "name": "Double the Pearl",
     "variant_type": "double",
     "base_name": "the Pearl",
@@ -2745,7 +2643,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_SnowPeony_MainImage_PDP.jpg?v=1729717666&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_PeonyClouds_SupportingImage_1_PDP.jpg?v=1729195877&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 3.7,
     "reviews_count": 131,
@@ -2765,6 +2663,7 @@
       "sympathy",
       "thank you",
       "just because",
+      "anniversary",
       "new baby"
     ],
     "categories": [
@@ -2773,7 +2672,7 @@
     ]
   },
   {
-    "id": "flowers_double-the-cottage-core_73",
+    "id": "flowers_double-the-cottage-core_72",
     "name": "Double The Cottage-Core",
     "variant_type": "double",
     "base_name": "The Cottage-Core",
@@ -2783,7 +2682,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_CottageCore_MainImage_PDP.jpg?v=1746471207&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_CottageCore_SupportingImage_PDP.jpg?v=1746471207&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 5.0,
     "reviews_count": 2,
@@ -2805,11 +2704,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-cottage-core_19",
-    "double_variation": "flowers_double-the-cottage-core_73"
+    "single_variation": "flowers_the-cottage-core_22",
+    "double_variation": "flowers_double-the-cottage-core_72"
   },
   {
-    "id": "flowers_double-the-flamenco_74",
+    "id": "flowers_double-the-flamenco_73",
     "name": "Double The Flamenco",
     "variant_type": "double",
     "base_name": "The Flamenco",
@@ -2819,7 +2718,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Flamenco_MainImage_PDP.jpg?v=1746470335&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Flamenco_SupportingImage_PDP.jpg?v=1746470335&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.4,
     "reviews_count": 16,
@@ -2836,16 +2735,17 @@
       "tomorrow"
     ],
     "occasions": [
-      "congratulations"
+      "congratulations",
+      "anniversary"
     ],
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-flamenco_24",
-    "double_variation": "flowers_double-the-flamenco_74"
+    "single_variation": "flowers_the-flamenco_25",
+    "double_variation": "flowers_double-the-flamenco_73"
   },
   {
-    "id": "flowers_double-the-crisp-breeze_75",
+    "id": "flowers_double-the-crisp-breeze_74",
     "name": "Double The Crisp Breeze",
     "variant_type": "double",
     "base_name": "The Crisp Breeze",
@@ -2878,11 +2778,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-crisp-breeze_38",
-    "double_variation": "flowers_double-the-crisp-breeze_75"
+    "single_variation": "flowers_the-crisp-breeze_37",
+    "double_variation": "flowers_double-the-crisp-breeze_74"
   },
   {
-    "id": "flowers_double-the-autumn-sun_76",
+    "id": "flowers_double-the-autumn-sun_75",
     "name": "Double The Autumn Sun",
     "variant_type": "double",
     "base_name": "The Autumn Sun",
@@ -2913,11 +2813,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-autumn-sun_33",
-    "double_variation": "flowers_double-the-autumn-sun_76"
+    "single_variation": "flowers_the-autumn-sun_32",
+    "double_variation": "flowers_double-the-autumn-sun_75"
   },
   {
-    "id": "flowers_double-the-golden-moment_77",
+    "id": "flowers_double-the-golden-moment_76",
     "name": "Double The Golden Moment",
     "variant_type": "double",
     "base_name": "The Golden Moment",
@@ -2948,11 +2848,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-golden-moment_32",
-    "double_variation": "flowers_double-the-golden-moment_77"
+    "single_variation": "flowers_the-golden-moment_31",
+    "double_variation": "flowers_double-the-golden-moment_76"
   },
   {
-    "id": "flowers_double-the-summer-glow_78",
+    "id": "flowers_double-the-summer-glow_77",
     "name": "Double The Summer Glow",
     "variant_type": "double",
     "base_name": "The Summer Glow",
@@ -2962,7 +2862,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_SummerGlow_MainImage_PDP_1.jpg?v=1747858483&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_SummerGlow_SupportingImage_PDP_1.jpg?v=1747858483&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.8,
     "reviews_count": 11,
@@ -2984,47 +2884,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-summer-glow_26",
-    "double_variation": "flowers_double-the-summer-glow_78"
+    "single_variation": "flowers_the-summer-glow_11",
+    "double_variation": "flowers_double-the-summer-glow_77"
   },
   {
-    "id": "flowers_double-the-sunset_79",
-    "name": "Double The Sunset",
-    "variant_type": "double",
-    "base_name": "The Sunset",
-    "url": "https://urbanstems.com/products/double-the-sunset",
-    "price": 12200,
-    "discounted_price": 13600,
-    "main_image": "https://urbanstems.com/cdn/shop/files/Double_Sunset_MainImage_PDP_1.jpg?v=1747860139&width=350",
-    "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Sunset_SupportingImage_PDP_1.jpg?v=1747860140&width=350",
-    "badge_text": "Sale",
-    "delivery_lead_time": null,
-    "stock": 0,
-    "reviews_rating": 4.7,
-    "reviews_count": 3,
-    "description": "<p data-pm-slice=\"1 1 []\">Soft peach roses meet golden marigolds in this moody, magical moment of a bouquet. The Sunset is all warmth and glow, like the sky right before it melts into gold and fire. It’s calm, a little sultry, and totally unforgettable. Perfect for golden hour gatherings, slow summer evenings, or anyone who deserves a little extra light.</p>",
-    "care_instructions": "<p><strong>1) Find a Vase:</strong> You may have noticed your flowers no longer have roots, and that they’re not in soil. Bet they’re thirsty! Time to put them in your favorite vase with some fresh water.</p><p><strong>2) Trim Those Stems:</strong> Keep those stems trimmed! Always cut your flowers at an angle so they can absorb more water &amp; won’t suffocate on the bottom of the vase. After the initial cut, check the bottoms of your stems every couple of days, and if the ends are looking a bit slimy, just snip off an inch or so.</p><p><strong>3) Remove Leaves:</strong> Take off any excess leaves so that all the water is funneled into the petals. Pay special attention to leaves below the water line because they’ll decompose, causing rot and bacteria to grow, which will shorten the lifespan of your blooms.</p><p><strong>4) Remove Spent Blooms:</strong> Any flowers that are past their prime release ethylene gas which will age the flowers around them. Remove any flowers that are beginning to wilt to keep the rest of your bouquet fresh and happy.</p><p><strong>5) Keep Them Cool:</strong> Last but not least, keep your flowers in a cool area. Don’t put them near radiators, computers, televisions, fireplaces, ovens… you get the idea.</p>",
-    "main_detail_src": null,
-    "is_main_detail_video": false,
-    "detail_image_1_src": null,
-    "detail_image_2_src": null,
-    "collections": [
-      "sale",
-      "shop all",
-      "today",
-      "tomorrow"
-    ],
-    "occasions": [
-      "thank you"
-    ],
-    "categories": [
-      "flowers"
-    ],
-    "single_variation": "flowers_the-sunset_22",
-    "double_variation": "flowers_double-the-sunset_79"
-  },
-  {
-    "id": "flowers_double-the-citrine_80",
+    "id": "flowers_double-the-citrine_78",
     "name": "Double The Citrine",
     "variant_type": "double",
     "base_name": "The Citrine",
@@ -3034,7 +2898,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Double_Citrine_MainImage_PDP.jpg?v=1746219704&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Double_Citrine_SupportingImage_PDP.jpg?v=1746219704&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 5.0,
     "reviews_count": 8,
@@ -3050,15 +2914,17 @@
       "today",
       "tomorrow"
     ],
-    "occasions": [],
+    "occasions": [
+      "anniversary"
+    ],
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-citrine_15",
-    "double_variation": "flowers_double-the-citrine_80"
+    "single_variation": "flowers_the-citrine_18",
+    "double_variation": "flowers_double-the-citrine_78"
   },
   {
-    "id": "flowers_triple-the-mariposa_81",
+    "id": "flowers_triple-the-mariposa_79",
     "name": "Triple The Mariposa",
     "variant_type": null,
     "base_name": "Triple The Mariposa",
@@ -3068,7 +2934,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Triple_Sorbet_MainImage_PDP_036267c3-1d41-4b49-9b08-36d5f2e297af.jpg?v=1729625806&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Triple_Sorbet_SupportingImage_1_PDP.jpg?v=1727924831&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.5,
     "reviews_count": 306,
@@ -3088,6 +2954,7 @@
     "occasions": [
       "sympathy",
       "thank you",
+      "anniversary",
       "miss you"
     ],
     "categories": [
@@ -3095,7 +2962,7 @@
     ]
   },
   {
-    "id": "flowers_double-the-mulberry_82",
+    "id": "flowers_double-the-mulberry_80",
     "name": "Double The Mulberry",
     "variant_type": "double",
     "base_name": "The Mulberry",
@@ -3126,11 +2993,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-mulberry_36",
-    "double_variation": "flowers_double-the-mulberry_82"
+    "single_variation": "flowers_the-mulberry_35",
+    "double_variation": "flowers_double-the-mulberry_80"
   },
   {
-    "id": "flowers_double-the-selene_83",
+    "id": "flowers_double-the-selene_81",
     "name": "Double The Selene",
     "variant_type": "double",
     "base_name": "The Selene",
@@ -3165,11 +3032,11 @@
     "categories": [
       "flowers"
     ],
-    "single_variation": "flowers_the-selene_39",
-    "double_variation": "flowers_double-the-selene_83"
+    "single_variation": "flowers_the-selene_38",
+    "double_variation": "flowers_double-the-selene_81"
   },
   {
-    "id": "flowers_triple-the-alaskan-peony_84",
+    "id": "flowers_triple-the-alaskan-peony_82",
     "name": "Triple The Alaskan Peony",
     "variant_type": null,
     "base_name": "Triple The Alaskan Peony",
@@ -3179,8 +3046,8 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Triple_AlaskanPeony_MainImage_PDP.jpg?v=1746470787&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Triple_AlaskanPeony_SupportingImage_PDP.jpg?v=1746470787&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 6,
-    "stock": 100,
+    "delivery_lead_time": null,
+    "stock": 0,
     "reviews_rating": 4.2,
     "reviews_count": 53,
     "description": "<p><span data-sheets-root=\"1\">From bud to bloom, there’s something magnificent about peonies. The Alaskan Peony features hand-chosen peony stems in a variety of colors chosen for their freshness. Choose from three bouquet sizes of lush peonies: a 10-stem Single, a 20-stem Double, or a 30-stem Triple.</span></p><p>Please note:&nbsp;Your peonies may arrive in bud form but will open in 1-2 days, meaning you can enjoy your blooms longer! Flower color may vary slightly from the pictured bouquet and may gradually change as your flowers bloom.<br>If your foliage looks slightly dehydrated upon arrival, place the stems in some water to revive them. (Pro tip: remove any foliage near or below the waterline for a longer-lasting bouquet!)</p>",
@@ -3202,7 +3069,7 @@
     ]
   },
   {
-    "id": "flowers_triple-the-honeycrisp_85",
+    "id": "flowers_triple-the-honeycrisp_83",
     "name": "Triple The Honeycrisp",
     "variant_type": null,
     "base_name": "Triple The Honeycrisp",
@@ -3235,7 +3102,7 @@
     ]
   },
   {
-    "id": "flowers_triple-the-firecracker_86",
+    "id": "flowers_triple-the-firecracker_84",
     "name": "Triple the Firecracker",
     "variant_type": null,
     "base_name": "Triple the Firecracker",
@@ -3245,7 +3112,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Triple_Firecracker_MainImage_PDP_7f39180e-6c5b-45a5-b32e-b574469f52c4.jpg?v=1729625246&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Triple_Firecracker_SupportingImage_1_PDP.jpg?v=1727923620&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.4,
     "reviews_count": 815,
@@ -3274,7 +3141,7 @@
     ]
   },
   {
-    "id": "flowers_triple-the-verona_87",
+    "id": "flowers_triple-the-verona_85",
     "name": "Triple The Verona",
     "variant_type": null,
     "base_name": "Triple The Verona",
@@ -3284,7 +3151,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Triple_Verona_MainImage_PDP_3ea17fc6-60d0-49a2-83d3-cccdc58cd024.jpg?v=1729626310&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Triple_Verona_SupportingImage_1_PDP.jpg?v=1727924735&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.3,
     "reviews_count": 462,
@@ -3305,6 +3172,7 @@
       "birthday",
       "just because",
       "congratulations",
+      "anniversary",
       "wedding"
     ],
     "categories": [
@@ -3312,7 +3180,7 @@
     ]
   },
   {
-    "id": "flowers_triple-the-juliet_88",
+    "id": "flowers_triple-the-juliet_86",
     "name": "Triple The Juliet",
     "variant_type": null,
     "base_name": "Triple The Juliet",
@@ -3322,7 +3190,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Triple_Goodvibes_MainImage_PDP_81331bdc-4d90-4530-8ec1-cacfe45ed194.jpg?v=1729710389&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Triple_GoodVibes_SupportingImage_1_PDP.jpg?v=1727922208&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 3.9,
     "reviews_count": 390,
@@ -3349,7 +3217,7 @@
     ]
   },
   {
-    "id": "flowers_triple-the-dove_89",
+    "id": "flowers_triple-the-dove_87",
     "name": "Triple the Dove",
     "variant_type": null,
     "base_name": "Triple the Dove",
@@ -3359,7 +3227,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Triple_Peace_MainImage_PDP_08bb4844-c271-4f56-8042-3a5b98e4398c.jpg?v=1729627640&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Triple_Peace_SupportingImage_1_PDP.jpg?v=1727920995&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.6,
     "reviews_count": 138,
@@ -3387,7 +3255,7 @@
     ]
   },
   {
-    "id": "flowers_triple-the-peony_90",
+    "id": "flowers_triple-the-peony_88",
     "name": "Triple the Peony",
     "variant_type": null,
     "base_name": "Triple the Peony",
@@ -3397,7 +3265,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Triple_Peony_v2_MainImage_PDP.jpg?v=1737972231&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Triple_Peony_v2_SupportingImage_PDP.jpg?v=1737972231&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.2,
     "reviews_count": 421,
@@ -3416,6 +3284,7 @@
     "occasions": [
       "birthday",
       "congratulations",
+      "anniversary",
       "miss you",
       "wedding"
     ],
@@ -3425,7 +3294,7 @@
     ]
   },
   {
-    "id": "flowers_triple-the-lover-girl_91",
+    "id": "flowers_triple-the-lover-girl_89",
     "name": "Triple the Lover Girl",
     "variant_type": null,
     "base_name": "Triple the Lover Girl",
@@ -3435,7 +3304,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Triple_Unicorn_MainImage_PDP_18d6d922-27d4-4720-b1f2-2a0d736a5dcb.jpg?v=1729697317&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/LoverGirl_SupportingImage_PDP.jpg?v=1754312434&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.5,
     "reviews_count": 248,
@@ -3461,7 +3330,7 @@
     ]
   },
   {
-    "id": "flowers_triple-the-pearl_92",
+    "id": "flowers_triple-the-pearl_90",
     "name": "Triple the Pearl",
     "variant_type": null,
     "base_name": "Triple the Pearl",
@@ -3471,7 +3340,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Triple_SnowPeony_MainImage_PDP.jpg?v=1729717666&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Triple_PeonyClouds_SupportingImage_1_PDP.jpg?v=1727923962&width=350",
     "badge_text": "Sale",
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 3.7,
     "reviews_count": 131,
@@ -3490,6 +3359,7 @@
     "occasions": [
       "thank you",
       "just because",
+      "anniversary",
       "miss you",
       "wedding"
     ],
@@ -3499,7 +3369,7 @@
     ]
   },
   {
-    "id": "flowers_the-citrine-with-blanca-vase_93",
+    "id": "flowers_the-citrine-with-blanca-vase_91",
     "name": "The Citrine with Blanca Vase",
     "variant_type": null,
     "base_name": "The Citrine with Blanca Vase",
@@ -3509,7 +3379,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Citrine_BlancaVase_MainImage_PDP_copy.jpg?v=1752699499&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Citrine_SupportingImage_PDP_2.jpg?v=1752699499&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -3534,7 +3404,7 @@
     ]
   },
   {
-    "id": "plants_the-good-omen_94",
+    "id": "plants_the-good-omen_92",
     "name": "The Good Omen",
     "variant_type": null,
     "base_name": "The Good Omen",
@@ -3570,7 +3440,7 @@
     ]
   },
   {
-    "id": "plants_the-dinero_95",
+    "id": "plants_the-dinero_93",
     "name": "The Dinero",
     "variant_type": null,
     "base_name": "The Dinero",
@@ -3580,7 +3450,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Canopy_MainImage_PDP_a6eefb36-8996-4dcb-bf2f-ac1a668f2035.jpg?v=1729716900&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Canopy_SupportingImage_1_PDP.jpg?v=1729204006&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 5.0,
     "reviews_count": 10,
@@ -3603,7 +3473,7 @@
     ]
   },
   {
-    "id": "plants_the-lemon-drop_96",
+    "id": "plants_the-lemon-drop_94",
     "name": "The Lemon Drop",
     "variant_type": null,
     "base_name": "The Lemon Drop",
@@ -3613,7 +3483,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/dw56fec516_VDAY_2021_LemonDrop_New_Carousel.jpg?v=1723790318&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/dw7edabaf6_VDAY_2021_LemonDrop_New_top.jpg?v=1723790318&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.3,
     "reviews_count": 41,
@@ -3636,7 +3506,7 @@
     ]
   },
   {
-    "id": "plants_the-whale-fin_97",
+    "id": "plants_the-whale-fin_95",
     "name": "The Whale Fin",
     "variant_type": null,
     "base_name": "The Whale Fin",
@@ -3646,7 +3516,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Dad_sTie_Lifestyle_1.jpg?v=1748624164&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Dad_sTie_SupportingImage_PDP.jpg?v=1748622267&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -3666,7 +3536,7 @@
     ]
   },
   {
-    "id": "plants_the-serenity_98",
+    "id": "plants_the-serenity_96",
     "name": "The Serenity",
     "variant_type": null,
     "base_name": "The Serenity",
@@ -3676,7 +3546,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Serenity_MainImage_PDP_6b96c2b9-82d5-4161-a4d0-1a4c85aee109.jpg?v=1746548332&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Serenity_SupportingImage_1_PDP_ca0f61b2-d2ff-4579-8041-e0d898f8dd67.jpg?v=1746548332&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.6,
     "reviews_count": 10,
@@ -3701,7 +3571,7 @@
     ]
   },
   {
-    "id": "plants_the-renewal_99",
+    "id": "plants_the-renewal_97",
     "name": "The Renewal",
     "variant_type": null,
     "base_name": "The Renewal",
@@ -3711,7 +3581,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Renewal_MainImage_PDP.jpg?v=1753391754&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Renewal_SupportingImage_1_PDP.jpg?v=1753391753&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 5.0,
     "reviews_count": 12,
@@ -3735,7 +3605,7 @@
     ]
   },
   {
-    "id": "plants_the-turmeric_100",
+    "id": "plants_the-turmeric_98",
     "name": "The Turmeric",
     "variant_type": null,
     "base_name": "The Turmeric",
@@ -3768,7 +3638,7 @@
     ]
   },
   {
-    "id": "plants_the-crisp-morning_101",
+    "id": "plants_the-crisp-morning_99",
     "name": "The Crisp Morning",
     "variant_type": null,
     "base_name": "The Crisp Morning",
@@ -3799,7 +3669,7 @@
     ]
   },
   {
-    "id": "plants_the-orchid-garden_102",
+    "id": "plants_the-orchid-garden_100",
     "name": "The Orchid Garden",
     "variant_type": null,
     "base_name": "The Orchid Garden",
@@ -3809,7 +3679,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/OrchidGarden_Lifestyle_1.jpg?v=1748624167&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/OrchidGarden_SupportingImage_1_PDP.jpg?v=1733999678&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.7,
     "reviews_count": 15,
@@ -3826,6 +3696,7 @@
     "occasions": [
       "birthday",
       "congratulations",
+      "anniversary",
       "miss you",
       "entertaining",
       "new baby"
@@ -3835,7 +3706,7 @@
     ]
   },
   {
-    "id": "plants_the-serpent_103",
+    "id": "plants_the-serpent_101",
     "name": "The Serpent",
     "variant_type": null,
     "base_name": "The Serpent",
@@ -3869,7 +3740,7 @@
     ]
   },
   {
-    "id": "plants_the-jetsetter_104",
+    "id": "plants_the-jetsetter_102",
     "name": "The Jetsetter",
     "variant_type": null,
     "base_name": "The Jetsetter",
@@ -3879,7 +3750,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Jetsetter_MainImage_PDP.jpg?v=1746217456&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Tumeric_SupportingImage_1_PDP_568f8553-958c-402e-8f8e-1ca5d950a5d0.jpg?v=1746217456&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 5.0,
     "reviews_count": 4,
@@ -3896,6 +3767,7 @@
     "occasions": [
       "birthday",
       "congratulations",
+      "anniversary",
       "miss you"
     ],
     "categories": [
@@ -3903,7 +3775,7 @@
     ]
   },
   {
-    "id": "plants_the-black-velvet_105",
+    "id": "plants_the-black-velvet_103",
     "name": "The Black Velvet",
     "variant_type": null,
     "base_name": "The Black Velvet",
@@ -3937,7 +3809,7 @@
     ]
   },
   {
-    "id": "plants_the-st-lucia_106",
+    "id": "plants_the-st-lucia_104",
     "name": "The St. Lucia",
     "variant_type": null,
     "base_name": "The St. Lucia",
@@ -3947,7 +3819,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/StLucia_Lifestyle_1.jpg?v=1748628231&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/StLucia_SupportingImage_PDP.jpg?v=1747252998&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 5.0,
     "reviews_count": 1,
@@ -3969,7 +3841,7 @@
     ]
   },
   {
-    "id": "plants_the-breezy-palm_107",
+    "id": "plants_the-breezy-palm_105",
     "name": "The Breezy Palm",
     "variant_type": null,
     "base_name": "The Breezy Palm",
@@ -3979,7 +3851,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/BreezyPalm_MainImage_PDP.jpg?v=1746217532&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/BreezyPalm_SupportingImage_PDP.jpg?v=1746217534&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -4001,7 +3873,7 @@
     ]
   },
   {
-    "id": "plants_the-dawn_108",
+    "id": "plants_the-dawn_106",
     "name": "The Dawn",
     "variant_type": null,
     "base_name": "The Dawn",
@@ -4011,7 +3883,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Dawn_Lifestyle_1.jpg?v=1748624163&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Dawn_SupportingImage_PDP_7a967f10-6edc-46da-b412-c08e55a330e5.jpg?v=1740402572&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 5.0,
     "reviews_count": 4,
@@ -4026,6 +3898,7 @@
       "tomorrow"
     ],
     "occasions": [
+      "anniversary",
       "miss you",
       "entertaining"
     ],
@@ -4034,7 +3907,7 @@
     ]
   },
   {
-    "id": "plants_the-paradise_109",
+    "id": "plants_the-paradise_107",
     "name": "The Paradise",
     "variant_type": null,
     "base_name": "The Paradise",
@@ -4044,7 +3917,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Paradise_MainImage_PDP.jpg?v=1748552511&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Paradise_SupportingImage_PDP.jpg?v=1748552511&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -4060,6 +3933,7 @@
     ],
     "occasions": [
       "birthday",
+      "anniversary",
       "miss you",
       "new baby"
     ],
@@ -4068,7 +3942,7 @@
     ]
   },
   {
-    "id": "plants_the-pink-princess_110",
+    "id": "plants_the-pink-princess_108",
     "name": "The Pink Princess",
     "variant_type": null,
     "base_name": "The Pink Princess",
@@ -4078,11 +3952,11 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/PinkPrincess_MainImage_PDP.jpg?v=1740143636&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/PinkPrincess_SupportingImage_1.jpg?v=1740143642&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 5.0,
     "reviews_count": 1,
-    "description": "<p>Step into the world of rare plant supremacy with this stunning Pink Princess Philodendron that’s as enchanting as its name suggests. Known for its striking pink variegation and glossy green leaves, this botanical gem makes a bold statement. Housed in the modern Jabi pot, featuring a textured matte finish that perfectly complements the plant's unique hues, this showstopper is ideal for stylish plant enthusiasts. The care level is moderate and it thrives with bright, indirect light. So whether you’re adding a bit of chic to your space or looking for the perfect gift, this rare beauty is sure to turn heads.</p>",
+    "description": null,
     "care_instructions": null,
     "main_detail_src": null,
     "is_main_detail_video": false,
@@ -4098,7 +3972,7 @@
     ]
   },
   {
-    "id": "plants_the-orchid-spa_111",
+    "id": "plants_the-orchid-spa_109",
     "name": "The Orchid Spa",
     "variant_type": null,
     "base_name": "The Orchid Spa",
@@ -4108,7 +3982,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/DivineFeminine_MainImage_PDP_7465f05a-88a0-41af-8290-327d53bd8fa8.jpg?v=1740493867&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Dawn_SupportingImage_PDP_1.jpg?v=1740493870&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -4132,7 +4006,7 @@
     ]
   },
   {
-    "id": "plants_the-sun-beam_112",
+    "id": "plants_the-sun-beam_110",
     "name": "The Sun Beam",
     "variant_type": null,
     "base_name": "The Sun Beam",
@@ -4142,7 +4016,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/SunBeam_Lifestyle_1.jpg?v=1748624170&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/TheSunBeam_SupportingImage_1_PDP.jpg?v=1732638139&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 4.9,
     "reviews_count": 7,
@@ -4167,7 +4041,7 @@
     ]
   },
   {
-    "id": "plants_the-orchid-simplicity_113",
+    "id": "plants_the-orchid-simplicity_111",
     "name": "The Orchid Simplicity",
     "variant_type": null,
     "base_name": "The Orchid Simplicity",
@@ -4177,7 +4051,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Simplicity_MainImage_PDP.jpg?v=1746216845&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Simplicity_SupportingImage_Smaller_PDP.jpg?v=1747671193&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": 5.0,
     "reviews_count": 3,
@@ -4203,7 +4077,7 @@
     ]
   },
   {
-    "id": "plants_the-mykonos_114",
+    "id": "plants_the-mykonos_112",
     "name": "The Mykonos",
     "variant_type": null,
     "base_name": "The Mykonos",
@@ -4213,7 +4087,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Mykonos_MainImage_PDP.jpg?v=1746217151&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Mykonos_SupportingImage_PDP_1.jpg?v=1747671425&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -4233,7 +4107,7 @@
     ]
   },
   {
-    "id": "plants_the-strength_115",
+    "id": "plants_the-strength_113",
     "name": "The Strength",
     "variant_type": null,
     "base_name": "The Strength",
@@ -4243,7 +4117,7 @@
     "main_image": "https://urbanstems.com/cdn/shop/files/Strength_MainImage_PDP.jpg?v=1746216986&width=350",
     "hover_image": "https://urbanstems.com/cdn/shop/files/Serenity_SupportingImage_PDP_1.jpg?v=1746217021&width=350",
     "badge_text": null,
-    "delivery_lead_time": 1,
+    "delivery_lead_time": 2,
     "stock": 100,
     "reviews_rating": null,
     "reviews_count": null,
@@ -4266,7 +4140,7 @@
     ]
   },
   {
-    "id": "plants_the-raven_116",
+    "id": "plants_the-raven_114",
     "name": "The Raven",
     "variant_type": null,
     "base_name": "The Raven",
@@ -4297,7 +4171,7 @@
     ]
   },
   {
-    "id": "plants_the-neutral-orchids_117",
+    "id": "plants_the-neutral-orchids_115",
     "name": "The Neutral Orchids",
     "variant_type": null,
     "base_name": "The Neutral Orchids",
@@ -4328,7 +4202,7 @@
     ]
   },
   {
-    "id": "plants_the-shooting-star_118",
+    "id": "plants_the-shooting-star_116",
     "name": "The Shooting Star",
     "variant_type": null,
     "base_name": "The Shooting Star",
@@ -4359,7 +4233,7 @@
     ]
   },
   {
-    "id": "plants_the-white-knight_119",
+    "id": "plants_the-white-knight_117",
     "name": "The White Knight",
     "variant_type": null,
     "base_name": "The White Knight",
@@ -4390,7 +4264,7 @@
     ]
   },
   {
-    "id": "plants_the-spike_120",
+    "id": "plants_the-spike_118",
     "name": "The Spike",
     "variant_type": null,
     "base_name": "The Spike",
@@ -4421,7 +4295,7 @@
     ]
   },
   {
-    "id": "plants_the-earthen-orchid_121",
+    "id": "plants_the-earthen-orchid_119",
     "name": "The Earthen Orchid",
     "variant_type": null,
     "base_name": "The Earthen Orchid",
@@ -4452,7 +4326,7 @@
     ]
   },
   {
-    "id": "plants_the-signature-orchid_122",
+    "id": "plants_the-signature-orchid_120",
     "name": "The Signature Orchid",
     "variant_type": null,
     "base_name": "The Signature Orchid",
@@ -4483,7 +4357,7 @@
     ]
   },
   {
-    "id": "the-classics-collection_classic-flower-subscription_123",
+    "id": "the-classics-collection_classic-flower-subscription_121",
     "name": "Classic Subscription",
     "variant_type": null,
     "base_name": "Classic Subscription",
@@ -4512,7 +4386,7 @@
     "categories": []
   },
   {
-    "id": "today_seasonal-flower-subscription_124",
+    "id": "today_seasonal-flower-subscription_122",
     "name": "Seasonal Subscription",
     "variant_type": null,
     "base_name": "Seasonal Subscription",
@@ -4540,7 +4414,7 @@
     "categories": []
   },
   {
-    "id": "today_luxe-flower-subscription_125",
+    "id": "today_luxe-flower-subscription_123",
     "name": "Luxe Subscription",
     "variant_type": null,
     "base_name": "Luxe Subscription",

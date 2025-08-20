@@ -1,19 +1,78 @@
 # Sproutly
 
-**Sproutly** is a web scraper designed to gather structured product data that will seed a future project focused on recreating product listings for an UrbanStems-inspired site.
+  **Sproutly** is a modern web scraper built with Playwright that gathers structured product data from UrbanStems to seed a future e-commerce prototype project.
 
-## Features
+  ## Features
 
-- Parses product details such as names, prices, images, and delivery estimates from UrbanStems flower collection pages.
-- Processes multiple occasion and collection HTML files dynamically.
-- Aggregates and updates product information efficiently.
-- Designed to generate a clean dataset for seeding a future e-commerce prototype.
+  - **Dynamic Scraping**: Uses Playwright browser automation to handle JavaScript-rendered content
+  - **Intelligent Discovery**: Automatically discovers categories, collections, and occasions from site navigation
+  - **Comprehensive Product Data**: Extracts names, prices, images, descriptions, delivery info, and variant relationships
+  - **Cross-Page Product Tracking**: Handles products that appear in multiple categories/collections
+  - **Configurable Limits**: Flexible controls for testing and production scraping
+  - **Robust Error Handling**: Retry logic and graceful failure handling
+  - **Clean JSON Output**: Structured data ready for database seeding
 
-## Tech Stack
+  ## Architecture
 
-- **Python 3.8+**
-- **BeautifulSoup**
-- **Playwright** 
+  - **Browser Automation**: Playwright handles dynamic content and user
+  interactions
+  - **Modular Design**: Separate modules for scraping, product processing, and detail extraction
+  - **Configuration System**: Preset configurations for different use cases
+  - **Command Line Interface**: Easy-to-use CLI with extensive options
+
+  ## Tech Stack
+
+  - **Python 3.8+**
+  - **Playwright** - Browser automation and dynamic content handling
+  - **AsyncIO** - Asynchronous processing for performance
+
+    ## Installation
+
+  1. Install dependencies:
+  ```bash
+  pip install playwright
+
+  2. Install browser binaries:
+  playwright install chromium
+
+  Usage
+
+  Basic Usage
+
+  python main.py
+
+  Common Examples
+
+  # Fast mode with limits
+  python main.py --fast --max-products 20
+
+  # Test specific page types
+  python main.py --max-categories 0 --max-collections 4 --max-occasions 0
+
+  # Development mode with custom settings
+  python main.py --headless --max-products 50 --initial-wait 0.5
+
+  Configuration Options
+
+  - --fast: Quick mode with reduced waits
+  - --headless: Run browser without GUI
+  - --max-products N: Limit total products scraped
+  - --max-categories N: Limit number of categories (0 to skip)
+  - --max-collections N: Limit number of collections (0 to skip)
+  - --max-occasions N: Limit number of occasions (0 to skip)
+  - --output FILE: Custom output file path
+
+  Output
+
+  The scraper generates a JSON file with structured product data
+  including:
+
+  - Product details (name, price, description)
+  - Images and media information
+  - Category, collection, and occasion associations
+  - Variant relationships and cross-references
+  - Delivery and availability information
+
 
 ## Ethical Use and Disclaimer
 

@@ -15,6 +15,11 @@ class ScrapingConfig:
     specific_categories: Optional[List[str]] = None  # Specific categories to scrape, e.g. ["flowers", "plants"]
     category_discovery_url: str = "https://urbanstems.com"  # URL to discover categories from
     
+    # Page type limits
+    max_categories: Optional[int] = None  # Limit number of categories to scrape
+    max_collections: Optional[int] = None  # Limit number of collections to scrape  
+    max_occasions: Optional[int] = None   # Limit number of occasions to scrape
+    
     # Browser configuration
     viewport_width: int = 1280
     viewport_height: int = 800
@@ -22,16 +27,15 @@ class ScrapingConfig:
     
     # Scrolling configuration
     scroll_step_divisor: float = 1.4 # viewport_height // this = scroll_step
-    initial_wait: int = 3  # seconds to wait after page load
-    scroll_wait: float = 2.0  # seconds to wait after each scroll
+    initial_wait: int = 1  # seconds to wait after page load
+    scroll_wait: float = 0.5  # seconds to wait after each scroll
     
     # Modal handling
     modal_wait_timeout: int = 8000  # milliseconds to wait for modal
-    modal_close_wait: float = 1.0  # seconds to wait after closing modal
+    modal_close_wait: float = 0.5  # seconds to wait after closing modal
     
     # Error handling
-    max_retries: int = 3
-    max_consecutive_no_new: int = 3  # Stop scrolling after this many empty scrolls
+    max_retries: int = 2
     
     # Output configuration
     output_file: str = "products.json"
@@ -112,7 +116,6 @@ class ConfigPresets:
             initial_wait=3,
             scroll_wait=2.0,
             max_retries=5,
-            max_consecutive_no_new=5,
             discover_categories=True,  # Discover all categories
             output_file="products.json"
         )

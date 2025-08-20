@@ -136,6 +136,25 @@ def parse_arguments() -> argparse.Namespace:
         help="Maximum products per category"
     )
     
+    # Page type limits
+    parser.add_argument(
+        "--max-categories",
+        type=int,
+        help="Maximum categories to scrape (0 to skip all categories)"
+    )
+    
+    parser.add_argument(
+        "--max-collections", 
+        type=int,
+        help="Maximum collections to scrape (0 to skip all collections)"
+    )
+    
+    parser.add_argument(
+        "--max-occasions",
+        type=int, 
+        help="Maximum occasions to scrape (0 to skip all occasions)"
+    )
+    
     # Logging options
     parser.add_argument(
         "--log-level",
@@ -197,7 +216,10 @@ def create_config_from_args(args: argparse.Namespace) -> ScrapingConfig:
         output_file=args.output,
         headless=args.headless,
         max_products=args.max_products,
-        max_products_per_category=args.max_per_category
+        max_products_per_category=args.max_per_category,
+        max_categories=args.max_categories,
+        max_collections=args.max_collections,
+        max_occasions=args.max_occasions
     )
     
     return config
@@ -229,6 +251,12 @@ def print_config_summary(config: ScrapingConfig) -> None:
         print(f"Max products (total): {config.max_products}")
     if config.max_products_per_category:
         print(f"Max products per category: {config.max_products_per_category}")
+    if config.max_categories is not None:
+        print(f"Max categories: {config.max_categories}")
+    if config.max_collections is not None:
+        print(f"Max collections: {config.max_collections}")
+    if config.max_occasions is not None:
+        print(f"Max occasions: {config.max_occasions}")
     
     print("="*50 + "\n")
 

@@ -56,11 +56,16 @@ class UrbanStemsScraper:
     async def _scrape_all_pages(self, context: BrowserContext) -> None:
         """Scrape products from all discovered categories, collections, and occasions"""
         
+        # Apply page type limits before combining
+        limited_categories = self.discovered_categories[:self.config.max_categories] if self.config.max_categories is not None else self.discovered_categories
+        limited_collections = self.discovered_collections[:self.config.max_collections] if self.config.max_collections is not None else self.discovered_collections  
+        limited_occasions = self.discovered_occasions[:self.config.max_occasions] if self.config.max_occasions is not None else self.discovered_occasions
+        
         # Combine all page types into one list
         all_pages = [
-            *[(info, 'category') for info in self.discovered_categories],
-            *[(info, 'collection') for info in self.discovered_collections], 
-            *[(info, 'occasion') for info in self.discovered_occasions]
+            *[(info, 'category') for info in limited_categories],
+            *[(info, 'collection') for info in limited_collections], 
+            *[(info, 'occasion') for info in limited_occasions]
         ]
         
         # Apply specific category filter if configured (ONLY affects categories, not collections/occasions)
@@ -136,10 +141,10 @@ class UrbanStemsScraper:
         
         # Wait for product cards to be present in DOM (not necessarily visible)
         try:
-            await page.wait_for_selector(".product-card", timeout=15000, state="attached")
+            await page.wait_for_selector("#products .product-card", timeout=15000, state="attached")
             
             # Count total cards
-            card_count = await page.locator(".product-card").count()
+            card_count = await page.locator("#products .product-card").count()
             logger.info(f"✅ Found {card_count} product cards on {page_type} page (will scroll to make them visible)")
             
             if card_count == 0:
@@ -204,7 +209,7 @@ class UrbanStemsScraper:
     async def _process_visible_cards(self, page: Page, context: BrowserContext, page_slug: str, page_type: str = "category", page_name: str = "unknown") -> int:
         """Process all visible product cards on current viewport with better visibility detection"""
         
-        locator = page.locator(".product-card")
+        locator = page.locator("#products .product-card")
         count = await locator.count()
         new_products_count = 0
 
