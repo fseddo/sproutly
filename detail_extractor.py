@@ -9,7 +9,7 @@ import time
 import logging
 from typing import Optional, Dict, List, Any
 from playwright.async_api import BrowserContext, TimeoutError, Page
-from utils import get_item_description_info, scroll_and_extract
+from utils import get_item_description_info, scroll_and_extract, get_item_media_info
 
 logger = logging.getLogger(__name__)
 
@@ -104,11 +104,15 @@ class ProductDetailExtractor:
                 None
             )
             
+            # Extract media information (lifestyle images and videos)
+            media_info = await get_item_media_info(page)
+            
             return {
                 "description": description,
                 "care_instructions": care_instructions,
                 "accordions": accordions,
                 "images": images,
+                "media_info": media_info,
                 "total_accordions": len(accordions),
                 "total_images": len(images)
             }
@@ -161,15 +165,21 @@ class ProductDetailExtractor:
             
             # Log success
             duration = time.time() - start_time
+            media_info = detail_content.get("media_info", {})
             logger.info(f"✅ Successfully extracted details for '{product_name}' in {duration:.2f}s")
             logger.debug(f"   - Description: {'✓' if detail_content.get('description') else '✗'}")
             logger.debug(f"   - Care Instructions: {'✓' if detail_content.get('care_instructions') else '✗'}")
+            logger.debug(f"   - Media Info: {'✓' if media_info else '✗'}")
+            if media_info:
+                logger.debug(f"     - Main Detail: {'Video' if media_info.get('is_main_detail_video') else 'Image'} {'✓' if media_info.get('main_detail_src') else '✗'}")
+                logger.debug(f"     - Detail Images: {sum(1 for key in ['detail_image_1_src', 'detail_image_2_src'] if media_info.get(key))}")
             logger.debug(f"   - Total accordions: {detail_content.get('total_accordions', 0)}")
             logger.debug(f"   - Total images: {detail_content.get('total_images', 0)}")
             
             return {
                 "description": detail_content.get("description"),
                 "care_instructions": detail_content.get("care_instructions"),
+                "media_info": media_info,
                 "extraction_time": duration,
                 "extraction_success": True,
                 # Future expansion - uncomment when needed

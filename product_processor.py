@@ -123,7 +123,9 @@ def create_product_object(
     pricing_info: Dict[str, Optional[float]],
     additional_info: Dict[str, Any],
     detail_info: Optional[Dict[str, Any]],
-    category: str
+    category: str,
+    collection: Optional[str] = None,
+    occasion: Optional[str] = None,
 ) -> Dict[str, Any]:
     """Create a standardized product object with category support"""
     
@@ -144,8 +146,12 @@ def create_product_object(
         "reviews_count": basic_info['review_count'],
         "description": detail_info.get("description") if detail_info else None,
         "care_instructions": detail_info.get("care_instructions") if detail_info else None,
-        "collection": None,
-        "occasion": None,
+        "main_detail_src": detail_info.get("media_info", {}).get("main_detail_src") if detail_info and detail_info.get("media_info") else None,
+        "is_main_detail_video": detail_info.get("media_info", {}).get("is_main_detail_video") if detail_info and detail_info.get("media_info") else False,
+        "detail_image_1_src": detail_info.get("media_info", {}).get("detail_image_1_src") if detail_info and detail_info.get("media_info") else None,
+        "detail_image_2_src": detail_info.get("media_info", {}).get("detail_image_2_src") if detail_info and detail_info.get("media_info") else None,
+        "collections": [collection] if collection else [],
+        "occasions": [occasion] if occasion else [],
         # "category": category,  # Primary category (for backward compatibility)
         "categories": [category],  # Will be updated by scraper if product appears in multiple categories
     }
@@ -189,6 +195,16 @@ def link_product_variations(
     
     # Update the lookup table
     variation_lookup[base_name][variant_type] = product
+    
+    # NEW FIX: Update variant_type for single variants that have other variants
+    # After adding this product to the lookup, check if we now have multiple variants
+    all_variants = variation_lookup[base_name]
+    if len(all_variants) > 1:  # Multiple variants exist for this base name
+        for var_type, var_product in all_variants.items():
+            # If this is a "single" variant but variant_type is None, update it
+            if var_type == "single" and var_product.get("variant_type") is None:
+                var_product["variant_type"] = "single"
+                logger.debug(f"Updated variant_type to 'single' for base product: {var_product['name']}")
     
     if linked_count > 0:
         logger.info(f"Product '{product['name']}' linked to {linked_count} variant(s)")

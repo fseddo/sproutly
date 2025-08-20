@@ -21,7 +21,7 @@ class ScrapingConfig:
     headless: bool = False
     
     # Scrolling configuration
-    scroll_step_divisor: int = 10  # viewport_height // this = scroll_step
+    scroll_step_divisor: float = 1.4 # viewport_height // this = scroll_step
     initial_wait: int = 3  # seconds to wait after page load
     scroll_wait: float = 2.0  # seconds to wait after each scroll
     
@@ -43,7 +43,7 @@ class ScrapingConfig:
     @property
     def scroll_step(self) -> int:
         """Calculate scroll step based on viewport height"""
-        return self.viewport_height // self.scroll_step_divisor
+        return int(self.viewport_height // self.scroll_step_divisor)
     
     def __post_init__(self):
         """Validate configuration after initialization"""

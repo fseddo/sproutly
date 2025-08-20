@@ -36,20 +36,12 @@ class UrbanStemsScraper:
             async with async_playwright() as p:
                 browser = await p.chromium.launch(headless=self.config.headless)
                 context = await self._create_context(browser)
-                
-                # Discover categories if enabled
-                if self.config.discover_categories:
-                    await self._discover_categories(context)
-                else:
-                    # Use specific categories or fallback to flowers
-                    categories = self.config.specific_categories or ["flowers"]
-                    self.discovered_categories = [
-                        {"name": cat, "url": f"{self.config.base_url}/collections/{cat}", "category": cat}
-                        for cat in categories
-                    ]
-                
-                # Scrape each discovered category
-                await self._scrape_all_categories(context)
+
+                # Discover pages for scraping
+                await self._discover_pages(context)
+
+                # Scrape item info from each page (categories, collections, occassions)
+                await self._scrape_all_pages(context)
                 
                 await browser.close()
                 
@@ -61,6 +53,329 @@ class UrbanStemsScraper:
         await self._save_results(duration)
         return self.products
 
+    async def _scrape_all_pages(self, context: BrowserContext) -> None:
+        """Scrape products from all discovered categories, collections, and occasions"""
+        
+        # Combine all page types into one list
+        all_pages = [
+            *[(info, 'category') for info in self.discovered_categories],
+            *[(info, 'collection') for info in self.discovered_collections], 
+            *[(info, 'occasion') for info in self.discovered_occasions]
+        ]
+        
+        # Apply specific category filter if configured (ONLY affects categories, not collections/occasions)
+        if self.config.specific_categories:
+            filtered_pages = []
+            for page_info, page_type in all_pages:
+                if page_type == 'category':
+                    # Only filter categories - check if this category is in the allowed list
+                    if page_info["category"] in self.config.specific_categories:
+                        filtered_pages.append((page_info, page_type))
+                    # else: skip this category
+                else:
+                    # Always include collections and occasions regardless of category filter
+                    filtered_pages.append((page_info, page_type))
+            
+            all_pages = filtered_pages
+            logger.info(f"Filtered to {len([p for p in all_pages if p[1] == 'category'])} specific categories, keeping all collections/occasions")
+        
+        total_pages = len(all_pages)
+        logger.info(f"🎯 Starting to scrape {total_pages} pages:")
+        logger.info(f"   - Categories: {len([p for p in all_pages if p[1] == 'category'])}")
+        logger.info(f"   - Collections: {len([p for p in all_pages if p[1] == 'collection'])}")
+        logger.info(f"   - Occasions: {len([p for p in all_pages if p[1] == 'occasion'])}")
+        
+        for i, (page_info, page_type) in enumerate(all_pages, 1):
+            page_name = page_info["name"]
+            page_url = page_info["url"]
+            page_slug = page_info.get("category", page_info["name"].lower().replace(" ", "-"))
+            
+            logger.info(f"\n{'='*60}")
+            logger.info(f"📂 Scraping {page_type} {i}/{total_pages}: {page_name}")
+            logger.info(f"🔗 URL: {page_url}")
+            logger.info(f"{'='*60}")
+            
+            initial_product_count = len(self.products)
+            
+            try:
+                await self._scrape_single_page(context, page_url, page_slug, page_type, page_name)
+                
+                page_product_count = len(self.products) - initial_product_count
+                logger.info(f"✅ {page_type.title()} '{page_name}' complete: {page_product_count} products")
+                
+                # Check global product limit
+                if self.config.max_products and len(self.products) >= self.config.max_products:
+                    logger.info(f"🏁 Reached global product limit: {self.config.max_products}")
+                    break
+                    
+            except Exception as e:
+                logger.error(f"❌ Failed to scrape {page_type} '{page_name}': {e}")
+                continue
+        
+        logger.info(f"\n🎉 All pages complete! Total products: {len(self.products)}")
+
+    async def _scrape_single_page(self, context: BrowserContext, page_url: str, page_slug: str, page_type: str, page_name: str) -> None:
+        """Scrape products from a single page (category, collection, or occasion)"""
+        page = None
+        try:
+            page = await context.new_page()
+            await self._setup_page(page, page_url, page_type, page_name)
+            await self._scrape_products_from_page(page, context, page_slug, page_type, page_name)
+            
+        finally:
+            if page:
+                await page.close()
+
+    async def _setup_page(self, page: Page, page_url: str, page_type: str, page_name: str) -> None:
+        """Setup a page for scraping - NO menu interactions here"""
+        logger.info(f"📄 Loading {page_type} page: {page_url}")
+        await page.goto(page_url, wait_until="domcontentloaded")
+        
+        # Wait for initial content to load
+        await asyncio.sleep(self.config.initial_wait)
+        
+        # Wait for product cards to be present in DOM (not necessarily visible)
+        try:
+            await page.wait_for_selector(".product-card", timeout=15000, state="attached")
+            
+            # Count total cards
+            card_count = await page.locator(".product-card").count()
+            logger.info(f"✅ Found {card_count} product cards on {page_type} page (will scroll to make them visible)")
+            
+            if card_count == 0:
+                logger.warning(f"No product cards found on this {page_type} page")
+                
+        except Exception as e:
+            logger.warning(f"⚠️ Product cards not found within timeout on {page_type} page: {e}")
+            # Continue anyway - maybe they'll appear during scrolling
+
+    async def _scrape_products_from_page(self, page: Page, context: BrowserContext, page_slug: str, page_type: str, page_name: str) -> None:
+        """Scrape products from a single page with comprehensive scrolling"""
+        scroll_step = self.config.scroll_step
+        scroll_height = await page.evaluate("document.body.scrollHeight")
+        pos = 0 
+        page_product_count = 0
+        total_items_processed = 0  # Track all items (new + existing)
+
+        logger.info(f"📜 Starting to scrape '{page_name}' ({page_type}). Initial scroll height: {scroll_height}")
+
+        # Start from the very top to ensure we don't miss any products
+        await page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
+        await asyncio.sleep(1)
+
+        while pos < scroll_height:
+            # Scroll DOWN to the current position
+            await self._scroll_to_position(page, pos)
+            
+            # Process visible cards after scrolling
+            new_products_found = await self._process_visible_cards(page, context, page_slug, page_type, page_name)
+            page_product_count += new_products_found
+            total_items_processed += new_products_found
+            
+            if new_products_found > 0:
+                logger.info(f"Found {new_products_found} new products in '{page_name}' ({page_type}) at scroll position {pos} (page total: {page_product_count})")
+            else:
+                logger.debug(f"No new products found at position {pos} (but may have processed existing products for tagging)")
+
+            # Check category-specific product limit (only applies to categories)
+            if (page_type == 'category' and self.config.max_products_per_category and 
+                page_product_count >= self.config.max_products_per_category):
+                logger.info(f"🏁 Reached category limit for '{page_name}': {self.config.max_products_per_category}")
+                break
+            
+            # Check global product limit
+            if self.config.max_products and len(self.products) >= self.config.max_products:
+                logger.info(f"🏁 Reached global product limit: {self.config.max_products}")
+                break
+
+            # Check for more content (page might have grown)
+            new_scroll_height = await page.evaluate("document.body.scrollHeight")
+            if new_scroll_height > scroll_height:
+                scroll_height = new_scroll_height
+                logger.debug(f"Page height increased to: {scroll_height}")
+            
+            # Move to next scroll position (GOING DOWN THE PAGE)
+            pos += scroll_step  # This should be positive to go down
+            
+            logger.debug(f"Next scroll position will be: {pos} (scroll_height: {scroll_height})")
+
+        logger.info(f"✅ {page_type.title()} '{page_name}' scraping completed. New products found: {page_product_count}")
+
+    async def _process_visible_cards(self, page: Page, context: BrowserContext, page_slug: str, page_type: str = "category", page_name: str = "unknown") -> int:
+        """Process all visible product cards on current viewport with better visibility detection"""
+        
+        locator = page.locator(".product-card")
+        count = await locator.count()
+        new_products_count = 0
+
+        logger.debug(f"Processing {count} product cards in {page_type} '{page_name}'")
+
+        for i in range(count):
+            try:
+                card = locator.nth(i)
+                
+                # Check if card is actually visible in viewport
+                is_visible = await card.is_visible()
+                if not is_visible:
+                    continue
+                
+                # Additional check for viewport visibility
+                try:
+                    bounding_box = await card.bounding_box()
+                    if not bounding_box:
+                        continue
+                    
+                    # Check if at least part of the card is in viewport
+                    viewport_size = page.viewport_size
+                    if viewport_size and (bounding_box["y"] + bounding_box["height"] < 0 or 
+                        bounding_box["y"] > viewport_size["height"]):
+                        continue
+                        
+                except Exception:
+                    # If bounding box check fails, continue with visibility check
+                    pass
+                
+                if await self._process_single_card(card, i, context, page_slug, page_type, page_name):
+                    new_products_count += 1
+                    
+            except Exception as e:
+                logger.error(f"Error processing card {i} in {page_type} '{page_name}': {e}")
+                continue
+
+        return new_products_count
+
+    async def _process_single_card(self, card, index: int, context: BrowserContext, page_slug: str, page_type: str = "category", page_name: str = "unknown") -> bool:
+        """Process a single product card with cross-page duplicate handling"""
+        for attempt in range(self.config.max_retries):
+            try:
+                if not await card.is_visible():
+                    return False
+
+                await card.scroll_into_view_if_needed()
+
+                # Extract product information for deduplication
+                href = await card.locator("a.cover").get_attribute("href")
+                if not href:
+                    logger.warning(f"No href found for card {index} in {page_type} '{page_name}'")
+                    return False
+
+                product_id = self._extract_product_id(href)
+                
+                # Check if we've already processed this exact product
+                if product_id in self.seen_cards:
+                    logger.debug(f"Product {product_id} already exists - adding {page_type} '{page_name}'")
+                    self._add_attribute_to_existing_product(product_id, page_type, page_name)
+                    return False  # Don't count as new product, but attribute was added
+
+                # Generate a proper unique ID
+                unique_id = f"{page_slug}_{product_id}_{len(self.products)}"
+
+                # Add product using function from product_processor
+                product = await add_product(
+                    tile=card,
+                    idx=unique_id,
+                    products=self.products,
+                    variation_lookup=self.variation_lookup,
+                    context=context,
+                    category=page_slug,  # Keep this for backward compatibility
+                    max_products=self.config.max_products
+                )
+
+                if product:
+                    product_name = product.get('name', 'Unknown')
+                    
+                    # Initialize attributes for this product based on page type
+                    product['categories'] = [page_slug] if page_type == 'category' else []
+                    product['collections'] = [page_name] if page_type == 'collection' else []
+                    product['occasions'] = [page_name] if page_type == 'occasion' else []
+                    
+                    # Track this product
+                    self.seen_cards.add(product_id)
+                    
+                    # Initialize tracking for cross-page appearances
+                    if product_id not in self.category_mapping:
+                        self.category_mapping[product_id] = []
+                    
+                    # Add the appropriate attribute
+                    if page_type == 'category':
+                        self.category_mapping[product_id].append(page_name)
+                    
+                    logger.info(f"✅ Added [{page_type}] {product_id} - {product_name}")
+                    
+                    # Log variation info if applicable
+                    if product.get('variant_type'):
+                        base_name = product.get('base_name', 'Unknown')
+                        variant_type = product.get('variant_type')
+                        logger.debug(f"  └─ Variant: {base_name} ({variant_type})")
+                    
+                    return True
+
+                return False
+
+            except Exception as e:
+                if attempt == self.config.max_retries - 1:
+                    logger.error(f"Failed to process card {index} in '{page_name}' ({page_type}) after {self.config.max_retries} attempts: {e}")
+                    return False
+                else:
+                    logger.warning(f"Attempt {attempt + 1} failed for card {index} in '{page_name}' ({page_type}): {e}. Retrying...")
+                    await asyncio.sleep(1)
+
+        return False
+
+    def _add_attribute_to_existing_product(self, product_id: str, page_type: str, page_name: str) -> None:
+        """Add a category, collection, or occasion to an existing product"""
+        try:
+            # Find the existing product
+            existing_product = None
+            for product in self.products:
+                if self._extract_product_id(product.get('url', '')) == product_id:  # Match by URL-based product ID
+                    existing_product = product
+                    break
+            
+            if existing_product:
+                if page_type == 'category':
+                    # Add to categories list
+                    current_categories = existing_product.get('categories', [])
+                    if isinstance(current_categories, str):
+                        current_categories = [current_categories]
+                    
+                    if page_name not in current_categories:
+                        current_categories.append(page_name)
+                        existing_product['categories'] = current_categories
+                        
+                        # Update category mapping
+                        if product_id in self.category_mapping:
+                            self.category_mapping[product_id].append(page_name)
+                        else:
+                            self.category_mapping[product_id] = current_categories.copy()
+                        
+                        logger.info(f"📂 Added category '{page_name}' to existing product: {existing_product.get('name')} (now in: {', '.join(current_categories)})")
+                
+                elif page_type == 'collection':
+                    # Add to collections list
+                    current_collections = existing_product.get('collections', [])
+                    if isinstance(current_collections, str):
+                        current_collections = [current_collections]
+                    
+                    if page_name not in current_collections:
+                        current_collections.append(page_name)
+                        existing_product['collections'] = current_collections
+                        logger.info(f"🏷️ Added collection '{page_name}' to existing product: {existing_product.get('name')} (now in: {', '.join(current_collections)})")
+                
+                elif page_type == 'occasion':
+                    # Add to occasions list
+                    current_occasions = existing_product.get('occasions', [])
+                    if isinstance(current_occasions, str):
+                        current_occasions = [current_occasions]
+                    
+                    if page_name not in current_occasions:
+                        current_occasions.append(page_name)
+                        existing_product['occasions'] = current_occasions
+                        logger.info(f"🎉 Added occasion '{page_name}' to existing product: {existing_product.get('name')} (now in: {', '.join(current_occasions)})")
+                        
+        except Exception as e:
+            logger.warning(f"Failed to add {page_type} to existing product {product_id}: {e}")
+
     async def _create_context(self, browser) -> BrowserContext:
         """Create browser context with proper viewport"""
         return await browser.new_context(
@@ -70,7 +385,7 @@ class UrbanStemsScraper:
             }
         )
 
-    async def _discover_categories(self, context: BrowserContext) -> None:
+    async def _discover_pages(self, context: BrowserContext) -> None:
         """Discover product categories from the main navigation"""
         page = None
         try:
@@ -204,66 +519,6 @@ class UrbanStemsScraper:
              # If hover fails, let's just proceed and see if categories are already visible
             logger.info("Proceeding without hover - categories might already be visible")
     
-    
-    
-            
-            
-                
-    async def _scrape_all_categories(self, context: BrowserContext) -> None:
-        """Scrape products from all discovered categories"""
-        total_categories = len(self.discovered_categories)
-        
-        # Apply specific category filter if configured
-        if self.config.specific_categories:
-            filtered_categories = [
-                cat for cat in self.discovered_categories 
-                if cat["category"] in self.config.specific_categories
-            ]
-            self.discovered_categories = filtered_categories
-            logger.info(f"Filtered to {len(self.discovered_categories)} specific categories")
-        
-        logger.info(f"🎯 Starting to scrape {len(self.discovered_categories)} categories")
-        
-        for i, category_info in enumerate(self.discovered_categories, 1):
-            category_name = category_info["name"]
-            category_url = category_info["url"]
-            category_slug = category_info["category"]
-            
-            logger.info(f"\n{'='*60}")
-            logger.info(f"📂 Scraping category {i}/{len(self.discovered_categories)}: {category_name}")
-            logger.info(f"🔗 URL: {category_url}")
-            logger.info(f"{'='*60}")
-            
-            initial_product_count = len(self.products)
-            
-            try:
-                await self._scrape_single_category(context, category_url, category_slug)
-                
-                category_product_count = len(self.products) - initial_product_count
-                logger.info(f"✅ Category '{category_name}' complete: {category_product_count} products")
-                
-                # Check global product limit
-                if self.config.max_products and len(self.products) >= self.config.max_products:
-                    logger.info(f"🏁 Reached global product limit: {self.config.max_products}")
-                    break
-                    
-            except Exception as e:
-                logger.error(f"❌ Failed to scrape category '{category_name}': {e}")
-                continue
-        
-        logger.info(f"\n🎉 All categories complete! Total products: {len(self.products)}")
-
-    async def _scrape_single_category(self, context: BrowserContext, category_url: str, category_name: str) -> None:
-        """Scrape products from a single category"""
-        page = None
-        try:
-            page = await context.new_page()
-            await self._setup_category_page(page, category_url)
-            await self._scrape_products_from_page(page, context, category_name)
-            
-        finally:
-            if page:
-                await page.close()
 
     async def _setup_category_page(self, page: Page, category_url: str) -> None:
         """Setup a category page for scraping - NO menu interactions here"""
@@ -273,8 +528,6 @@ class UrbanStemsScraper:
         # Wait for initial content to load
         await asyncio.sleep(self.config.initial_wait)
         
-        # Handle potential modal popup (email signup, etc.) on category pages
-        await self._handle_modal_popup(page)
         
         # Wait for product cards to be present in DOM (not necessarily visible)
         try:
@@ -293,95 +546,34 @@ class UrbanStemsScraper:
 
     async def _handle_modal_popup(self, page: Page) -> None:
         """Handle modal popups that might block content - AVOID SCROLLING"""
+        logger.debug("Checking for modal popup...")
+        close_button_selector = "button.big-close"
+            
         try:
-            # Wait up to 8 seconds for modal to appear
-            logger.debug("Checking for modal popup...")
-            
-            # Look for the close button with class "button big-close"
-            close_button_selector = "button.big-close"
-            
             # Wait for the modal close button to appear (with timeout)
+            await page.wait_for_selector(close_button_selector, timeout=8000)
+            logger.info("Modal popup detected - attempting to close")
+            
+            # Use force click to avoid automatic scrolling
+            await page.click(close_button_selector, force=True)
+            logger.info("✅ Successfully closed modal popup")
+            
+            # Wait a moment for modal to disappear
+            await asyncio.sleep(1)
+            
+            # Verify modal is gone by checking if close button is no longer visible
             try:
-                await page.wait_for_selector(close_button_selector, timeout=8000)
-                logger.info("Modal popup detected - attempting to close WITHOUT scrolling")
-                
-                # Use force click to avoid automatic scrolling
-                await page.click(close_button_selector, force=True)
-                logger.info("✅ Successfully closed modal popup")
-                
-                # Wait a moment for modal to disappear
-                await asyncio.sleep(1)
-                
-                # Verify modal is gone by checking if close button is no longer visible
-                try:
-                    is_visible = await page.is_visible(close_button_selector)
-                    if not is_visible:
-                        logger.debug("Modal successfully dismissed")
-                    else:
-                        logger.warning("Modal close button still visible after clicking")
-                except Exception:
-                    logger.debug("Modal close button no longer exists (good)")
-                
-            except Exception as e:
-                logger.debug("No modal popup detected or failed to close (this is often normal)")
-                
+                is_visible = await page.is_visible(close_button_selector)
+                if not is_visible:
+                    logger.debug("Modal successfully dismissed")
+                else:
+                    logger.warning("Modal close button still visible after clicking")
+            except Exception:
+                logger.debug("Modal close button no longer exists (good)")
+            
         except Exception as e:
-            logger.warning(f"Error handling modal popup: {e}")
+            logger.debug("No modal popup detected or failed to close (this is often normal)")
 
-
-    async def _scrape_products_from_page(self, page: Page, context: BrowserContext, category_name: str) -> None:
-        """Scrape products from a single page with comprehensive scrolling"""
-        scroll_step = 800
-        scroll_height = await page.evaluate("document.body.scrollHeight")
-        pos = 0  # Start at top
-        consecutive_no_new_items = 0
-        category_product_count = 0
-
-        logger.info(f"📜 Starting to scrape '{category_name}'. Initial scroll height: {scroll_height}")
-
-        # Start from the very top to ensure we don't miss any products
-        await page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
-        await asyncio.sleep(1)
-
-        while pos < scroll_height and consecutive_no_new_items < self.config.max_consecutive_no_new:
-            # Scroll DOWN to the current position
-            await self._scroll_to_position(page, pos)
-            
-            # Process visible cards after scrolling
-            new_products_found = await self._process_visible_cards(page, context, category_name)
-            category_product_count += new_products_found
-            
-            if new_products_found == 0:
-                consecutive_no_new_items += 1
-                logger.debug(f"No new products found at position {pos}. Consecutive count: {consecutive_no_new_items}")
-            else:
-                consecutive_no_new_items = 0
-                logger.info(f"Found {new_products_found} new products in '{category_name}' at scroll position {pos} (category total: {category_product_count})")
-
-            # Check category-specific product limit
-            if (self.config.max_products_per_category and 
-                category_product_count >= self.config.max_products_per_category):
-                logger.info(f"🏁 Reached category limit for '{category_name}': {self.config.max_products_per_category}")
-                break
-            
-            # Check global product limit
-            if self.config.max_products and len(self.products) >= self.config.max_products:
-                logger.info(f"🏁 Reached global product limit: {self.config.max_products}")
-                break
-
-            # Check for more content (page might have grown)
-            new_scroll_height = await page.evaluate("document.body.scrollHeight")
-            if new_scroll_height > scroll_height:
-                scroll_height = new_scroll_height
-                logger.debug(f"Page height increased to: {scroll_height}")
-            
-            # Move to next scroll position (GOING DOWN THE PAGE)
-            pos += scroll_step  # This should be positive to go down
-            
-            logger.debug(f"Next scroll position will be: {pos} (scroll_height: {scroll_height})")
-
-        logger.info(f"✅ Category '{category_name}' scraping completed. Products found: {category_product_count}")
-    
     async def _scroll_to_position(self, page: Page, position: int) -> None:
         """Scroll to position with verification"""
         # Get current position before scrolling
@@ -414,125 +606,13 @@ class UrbanStemsScraper:
         # Additional wait for any content that loads after scroll
         await asyncio.sleep(self.config.scroll_wait)
 
-    async def _process_visible_cards(self, page: Page, context: BrowserContext, category_name: str = "unknown") -> int:
-        """Process all visible product cards on current viewport with better visibility detection"""
-        
-        locator = page.locator(".product-card")
-        count = await locator.count()
-        new_products_count = 0
-
-        logger.debug(f"Processing {count} product cards in category '{category_name}'")
-
-        for i in range(count):
-            try:
-                card = locator.nth(i)
-                
-                # Check if card is actually visible in viewport
-                is_visible = await card.is_visible()
-                if not is_visible:
-                    continue
-                
-                # Additional check for viewport visibility
-                try:
-                    bounding_box = await card.bounding_box()
-                    if not bounding_box:
-                        continue
-                    
-                    # Check if at least part of the card is in viewport
-                    viewport_size = page.viewport_size
-                    if viewport_size and (bounding_box["y"] + bounding_box["height"] < 0 or 
-                        bounding_box["y"] > viewport_size["height"]):
-                        continue
-                        
-                except Exception:
-                    # If bounding box check fails, continue with visibility check
-                    pass
-                
-                if await self._process_single_card(card, i, context, category_name):
-                    new_products_count += 1
-                    
-            except Exception as e:
-                logger.error(f"Error processing card {i} in category '{category_name}': {e}")
-                continue
-
-        return new_products_count
-
-    async def _process_single_card(self, card, index: int, context: BrowserContext, category_name: str = "unknown") -> bool:
-        """Process a single product card with cross-category duplicate handling"""
-        for attempt in range(self.config.max_retries):
-            try:
-                if not await card.is_visible():
-                    return False
-
-                await card.scroll_into_view_if_needed()
-
-                # Extract product information for deduplication
-                href = await card.locator("a.cover").get_attribute("href")
-                if not href:
-                    logger.warning(f"No href found for card {index} in category '{category_name}'")
-                    return False
-
-                product_id = self._extract_product_id(href)
-                
-                # Check if we've already processed this exact product
-                if product_id in self.seen_cards:
-                    logger.debug(f"Product {product_id} already exists - adding category '{category_name}'")
-                    self._add_category_to_existing_product(product_id, category_name)
-                    return False  # Don't count as new product, but category was added
-
-                # Generate a proper unique ID
-                unique_id = f"{category_name}_{product_id}_{len(self.products)}"
-
-                # Add product using function from product_processor
-                product = await add_product(
-                    tile=card,
-                    idx=unique_id,
-                    products=self.products,
-                    variation_lookup=self.variation_lookup,
-                    context=context,
-                    category=category_name,
-                    max_products=self.config.max_products
-                )
-
-                if product:
-                    product_name = product.get('name', 'Unknown')
-                    
-                    # Initialize categories list for this product
-                    product['categories'] = [category_name]  # Store as list instead of single category
-                    
-                    # Track this product
-                    self.seen_cards.add(product_id)
-                    self.category_mapping[product_id] = [category_name]
-                    
-                    logger.info(f"✅ Added [{category_name}] {product_id} - {product_name}")
-                    
-                    # Log variation info if applicable
-                    if product.get('variant_type'):
-                        base_name = product.get('base_name', 'Unknown')
-                        variant_type = product.get('variant_type')
-                        logger.debug(f"  └─ Variant: {base_name} ({variant_type})")
-                    
-                    return True
-
-                return False
-
-            except Exception as e:
-                if attempt == self.config.max_retries - 1:
-                    logger.error(f"Failed to process card {index} in '{category_name}' after {self.config.max_retries} attempts: {e}")
-                    return False
-                else:
-                    logger.warning(f"Attempt {attempt + 1} failed for card {index} in '{category_name}': {e}. Retrying...")
-                    await asyncio.sleep(1)
-
-        return False
-
     def _add_category_to_existing_product(self, product_id: str, new_category: str) -> None:
         """Add a category to an existing product that appears in multiple categories"""
         try:
             # Find the existing product
             existing_product = None
             for product in self.products:
-                if product_id in product.get('id', ''):  # Check if product_id is in the unique ID
+                if self._extract_product_id(product.get('url', '')) == product_id:  # Match by URL-based product ID
                     existing_product = product
                     break
             
@@ -614,7 +694,10 @@ class UrbanStemsScraper:
         
         logger.info(f"📊 Final Scraping Statistics:")
         logger.info(f"   - Total unique products: {len(self.products)}")
-        logger.info(f"   - Categories discovered: {len(self.discovered_categories)}")
+        logger.info(f"🔍 Discovery Summary:")
+        logger.info(f"   - Categories: {len(self.discovered_categories)}")
+        logger.info(f"   - Collections: {len(self.discovered_collections)}")
+        logger.info(f"   - Occasions: {len(self.discovered_occasions)}")        
         logger.info(f"   - Cross-category products: {cross_category_products}")
         logger.info(f"   - Single products: {single_products}")
         logger.info(f"   - Variant products: {variant_products}")

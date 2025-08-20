@@ -16,9 +16,6 @@ from .get_item_description_info import get_item_description_info
 from .get_item_media_info import get_item_media_info
 from .get_item_variant_type import get_item_variant_type
 from .get_item_delivery_lead_time import get_item_delivery_lead_time
-# from .add_products import add_products
-from .hydrate_item_types import hydrate_item_types
-from .hydrate_type_from_folder import hydrate_type_from_folder
 
 # Note: get_item_detail_info is now in detail_extractor.py at the project root
 
@@ -35,7 +32,4 @@ __all__ = [
     "get_item_media_info",
     "get_item_variant_type", 
     "get_item_delivery_lead_time",
-    # "add_products",
-    "hydrate_item_types",
-    "hydrate_type_from_folder",
 ]
