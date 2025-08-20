@@ -1,27 +1,23 @@
-from bs4 import BeautifulSoup
+from playwright.async_api import Locator
 
 
-def get_item_description_info(soup: BeautifulSoup):
+async def get_item_description_info(tile: Locator, id: str):
     # --- Product Description and Care Instructions ---
-    accordions = soup.select(".pdp__accordion-content")
-    description = None
-    care_instructions = None
+    paragraphs = await tile.locator("p").all()
+    # Concatenate outerHTML of all <p> tags
+    paragraph_htmls = []
+    print(f"  ↪️ Accordion [{id}] contains {len(paragraphs)} paragraph(s)")
+    for i, p in enumerate(paragraphs):
+        html = await p.evaluate("(el) => el.outerHTML")
+        paragraph_htmls.append(html)
+        text = await p.text_content()
+        snippet = text.strip()[:60] if text else ""
+        print(f"    • Paragraph [{i}]: {snippet}")
 
-    for idx, section in enumerate(accordions):
-        paragraphs = section.find_all("p")
-        section_html = "".join(str(p) for p in paragraphs)
+    section_html = "".join(paragraph_htmls)
 
-        print(f"  ↪️ Accordion [{idx}] contains {len(paragraphs)} paragraph(s)")
-        for i, p in enumerate(paragraphs):
-            print(f"    • Paragraph [{i}]: {p.get_text(strip=True)[:60]}")
-
-        if idx == 0:
-            description = section_html
-        elif idx == 1:
-            care_instructions = section_html
-
-    if not description and not care_instructions:
-        print("  ⚠️ No product description or care instructions found.")
+    if not section_html:
+        print("  ⚠️ No product information found.")
         return None
-    
-    return {"care_instructions": care_instructions, "description": description}
+
+    return section_html

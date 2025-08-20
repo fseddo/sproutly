@@ -1,7 +1,7 @@
-from bs4 import Tag
+from playwright.async_api import Locator
 
-
-def get_item_badge(tile: Tag):
-    badge_tag = tile.select_one(".badge__text")
-    badge_text = badge_tag.get_text(strip=True) if badge_tag else None
+async def get_item_badge(tile: Locator):
+    badge_text = None
+    if await tile.locator(".badge").count() > 0:
+        badge_text = (await tile.locator(".badge").inner_text()).strip()
     return badge_text

@@ -1,17 +1,15 @@
 from datetime import date, datetime
-from bs4 import Tag
+from typing import Optional
+from playwright.async_api import Locator
 
-
-def get_item_delivery_lead_time(tile: Tag):
-    time_tag = tile.select_one("time")
-    date_field = time_tag.get("datetime") if time_tag else None
-    target_date = datetime.strptime(str(date_field), "%Y-%m-%d").date() if date_field else None
-
-    if not target_date:
+async def get_item_delivery_lead_time(tile: Locator) -> Optional[int]:
+    date_field = await tile.locator("time").get_attribute("datetime")
+   
+    if not date_field or date_field.lower() == "null":
         return None
-
-    # Today's date
-    today = date.today()
-
-    # Difference in days
-    return (target_date - today).days
+    
+    try:
+        parsed_date = datetime.strptime(date_field, "%Y-%m-%d").date()
+        return (parsed_date - date.today()).days
+    except ValueError:
+        return None

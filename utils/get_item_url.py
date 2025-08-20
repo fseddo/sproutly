@@ -1,8 +1,7 @@
-from bs4 import Tag
+from playwright.async_api import Locator
 
 
-def get_item_url(tile: Tag, base_url: str):
-    link_tag = tile.select_one("a.cover")
-    relative_url = link_tag.get("href", "") if link_tag else ""
+async def get_item_url(tile: Locator, base_url: str):
+    relative_url = await tile.locator("a.cover").first.get_attribute("href")
     full_url = base_url + relative_url if isinstance(relative_url, str) else None
     return full_url

@@ -1,8 +1,19 @@
-from bs4 import Tag
+from playwright.async_api import Locator
 
 
-def get_item_price(tile: Tag, element_name: str, modifier: str): 
-    price_tag = tile.select_one(element_name + "[data-product-card-price-" + modifier + "]")
-    price_text = price_tag.get_text(strip=True).replace("$", "") if price_tag else None
-    price = int(float(price_text) * 100) if price_text else None
+
+async def get_item_price(tile: Locator, element_name: str, modifier: str): 
+    price = None
+    price_locator = tile.locator(f"{element_name}[data-product-card-price-{modifier}]")
+    if await price_locator.count() > 0:
+        raw_text = (await price_locator.inner_text()).strip().replace("$", "")
+        if raw_text:
+            try:
+                price = int(float(raw_text) * 100)
+            except ValueError:
+                price = None
+        else:
+            price = None
+
     return price
+

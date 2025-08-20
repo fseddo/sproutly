@@ -1,37 +1,672 @@
-from pathlib import Path
+"""
+Main scraper class for Urban Stems flower products.
+"""
+
+import asyncio
 import time
 import json
-from playwright.sync_api import sync_playwright
-from utils import add_products, hydrate_type_from_folder
+import logging
+from pathlib import Path
+from urllib.parse import urlparse
+from typing import List, Dict, Set, Optional
+from playwright.async_api import async_playwright, Page, BrowserContext
 
+from config import ScrapingConfig
+from product_processor import add_product
 
-start_time = time.time()
+logger = logging.getLogger(__name__)
+      
+class UrbanStemsScraper:
+    def __init__(self, config: Optional[ScrapingConfig] = None):
+        self.config = config or ScrapingConfig()
+        self.products: List[Dict] = []
+        self.variation_lookup: Dict = {}
+        self.seen_cards: Set[str] = set()  # Track by product URL/ID to avoid duplicates
+        self.discovered_categories: List[Dict[str, str]] = []
+        self.discovered_collections: List[Dict[str, str]] = []
+        self.discovered_occasions: List[Dict[str, str]] = []
 
-with sync_playwright() as p:
+        self.category_mapping: Dict[str, List[str]] = {}  # Track which categories each product appears in
+        
+    async def scrape(self) -> List[Dict]:
+        """Main scraping method with category discovery"""
+        start_time = time.time()
+        
+        try:
+            async with async_playwright() as p:
+                browser = await p.chromium.launch(headless=self.config.headless)
+                context = await self._create_context(browser)
+                
+                # Discover categories if enabled
+                if self.config.discover_categories:
+                    await self._discover_categories(context)
+                else:
+                    # Use specific categories or fallback to flowers
+                    categories = self.config.specific_categories or ["flowers"]
+                    self.discovered_categories = [
+                        {"name": cat, "url": f"{self.config.base_url}/collections/{cat}", "category": cat}
+                        for cat in categories
+                    ]
+                
+                # Scrape each discovered category
+                await self._scrape_all_categories(context)
+                
+                await browser.close()
+                
+        except Exception as e:
+            logger.error(f"Scraping failed: {e}")
+            raise
+        
+        duration = time.time() - start_time
+        await self._save_results(duration)
+        return self.products
 
-    products = []
-    variation_lookup = {}
+    async def _create_context(self, browser) -> BrowserContext:
+        """Create browser context with proper viewport"""
+        return await browser.new_context(
+            viewport={
+                "width": self.config.viewport_width, 
+                "height": self.config.viewport_height
+            }
+        )
+
+    async def _discover_categories(self, context: BrowserContext) -> None:
+        """Discover product categories from the main navigation"""
+        page = None
+        try:
+            logger.info("🔍 Discovering product categories from navigation...")
+            page = await context.new_page()
+            
+            # Navigate to main page
+            await page.goto(self.config.category_discovery_url, wait_until="domcontentloaded")
+            await asyncio.sleep(self.config.initial_wait)
+            
+            # Handle modal on main page first
+            await self._handle_modal_popup(page)
+            await self._hover_shop_nav_item(page)
+        
+        except Exception as e:
+            logger.error(f"Category discovery failed: {e}")
+            # Fallback
+            self.discovered_categories = [
+                {"name": "flowers", "url": f"{self.config.base_url}/collections/flowers", "category": "flowers"}
+            ]
+        finally:
+            if page:
+                await page.close()
+            
+    async def _hover_shop_nav_item(self, page: Page) -> None:
+        """Hover over the Shop nav item to reveal dropdown"""
+        try:
+            nav_item = page.locator('div[data-nav-menu="shop"]').first
+            if await nav_item.count() > 0:
+                logger.info(f"🖱️ Hovering over Shop nav")
+                
+                # HOVER to reveal dropdown
+                await nav_item.hover()
+                await asyncio.sleep(2)  # Wait for dropdown to appear
+                
+                logger.info("✅ Shop dropdown should now be visible")
     
-    browser = p.chromium.launch(headless=True)
-    context = browser.new_context()
+            try:
+                # Look for category navigation links
+                shop_type_selector = ".menu__col"
+                
+                # Wait for categories to be present (they might not be visible initially)
+                await page.wait_for_selector(shop_type_selector, timeout=10000)
+                
+                # Get all category cards
+                shop_type_cards = page.locator(shop_type_selector)
+                card_count = await shop_type_cards.count()
+                
+                logger.info(f"Found {card_count} shop type cards")
+                
+                for i in range(card_count):
+                    try:
+                        card = shop_type_cards.nth(i)
+                        await asyncio.sleep(0.5)  # Small delay for visibility
+                        
+                        # Extract href and text
+                        data_type = (await card.locator('strong.nav__menu-headline').first.inner_text()).strip()
+                        type_fields = card.locator('a.hover-u')
+                        type_fields_count = await type_fields.count()
 
-    category_folder = Path("data/category")
-    for file_path in category_folder.glob("*.html"):
-        category_name = file_path.stem 
-        add_products(str(file_path), products, variation_lookup, context, category_name)
+                        logger.info(f"Found {type_fields_count} cards for {data_type}")
+                        
+                        for c in range(type_fields_count):
+                            try:
+                                field_card = type_fields.nth(c)
+                                href = await field_card.get_attribute("href")
+                                strong_element = field_card.locator('strong')
+                                strong_count = await strong_element.count()
+                                
+                                if strong_count > 0:
+                                    # Strong element exists, get its text
+                                    category_name = (await strong_element.inner_text()).strip().lower()
+                                else:
+                                    # No strong element, use the anchor tag's text
+                                    category_name = (await field_card.inner_text()).strip().lower()
+                                
+                                if href and category_name:
+                                    # Clean up category name (remove special chars, spaces)
+                                    clean_category = category_name.replace(" ", "-").replace("&", "and")
+                                    
+                                    # Build full URL
+                                    if href.startswith("/"):
+                                        full_url = f"{self.config.base_url}{href}"
+                                    else:
+                                        full_url = href
+                                    
+                                    category_info = {
+                                        "name": category_name,
+                                        "url": full_url,
+                                        "category": clean_category
+                                    }
+                                    
+                                    if data_type == 'Categories':
+                                        self.discovered_categories.append(category_info)
+                                        logger.info(f"📂 Discovered category: {category_name} → {full_url}")
+                                    if data_type == 'Featured':
+                                        self.discovered_collections.append(category_info)
+                                        logger.info(f"📂 Discovered collection: {category_name} → {full_url}")
+                                    if data_type == 'Occasions':
+                                        self.discovered_occasions.append(category_info)
+                                        logger.info(f"📂 Discovered occasion: {category_name} → {full_url}")
+                                
+                            except Exception as e:
+                                logger.warning(f"Failed to extract type info for {data_type}: {e}")
+                            
+                    except Exception as e:
+                        logger.warning(f"Failed to extract category info from card {i}: {e}")
+                        continue
+                
+                if not self.discovered_categories:
+                    logger.warning("No categories discovered, falling back to flowers")
+                    self.discovered_categories = [{
+                        "name": "flowers",
+                        "url": f"{self.config.base_url}/collections/flowers", 
+                        "category": "flowers"
+                    }]
+                else:
+                    logger.info(f"✅ Discovered {len(self.discovered_categories)} categories")
+                    
+            except Exception as e:
+                logger.error(f"Failed to find category navigation: {e}")
+                # Fallback to default categories
+                self.discovered_categories = [
+                    {"name": "flowers", "url": f"{self.config.base_url}/collections/flowers", "category": "flowers"},
+                    {"name": "plants", "url": f"{self.config.base_url}/collections/plants", "category": "plants"}
+                ]
+                return
+                
+        except Exception as e:
+            logger.warning("Could not find Shop nav item to hover over - trying fallback")
+             # If hover fails, let's just proceed and see if categories are already visible
+            logger.info("Proceeding without hover - categories might already be visible")
+    
+    
+    
+            
+            
+                
+    async def _scrape_all_categories(self, context: BrowserContext) -> None:
+        """Scrape products from all discovered categories"""
+        total_categories = len(self.discovered_categories)
+        
+        # Apply specific category filter if configured
+        if self.config.specific_categories:
+            filtered_categories = [
+                cat for cat in self.discovered_categories 
+                if cat["category"] in self.config.specific_categories
+            ]
+            self.discovered_categories = filtered_categories
+            logger.info(f"Filtered to {len(self.discovered_categories)} specific categories")
+        
+        logger.info(f"🎯 Starting to scrape {len(self.discovered_categories)} categories")
+        
+        for i, category_info in enumerate(self.discovered_categories, 1):
+            category_name = category_info["name"]
+            category_url = category_info["url"]
+            category_slug = category_info["category"]
+            
+            logger.info(f"\n{'='*60}")
+            logger.info(f"📂 Scraping category {i}/{len(self.discovered_categories)}: {category_name}")
+            logger.info(f"🔗 URL: {category_url}")
+            logger.info(f"{'='*60}")
+            
+            initial_product_count = len(self.products)
+            
+            try:
+                await self._scrape_single_category(context, category_url, category_slug)
+                
+                category_product_count = len(self.products) - initial_product_count
+                logger.info(f"✅ Category '{category_name}' complete: {category_product_count} products")
+                
+                # Check global product limit
+                if self.config.max_products and len(self.products) >= self.config.max_products:
+                    logger.info(f"🏁 Reached global product limit: {self.config.max_products}")
+                    break
+                    
+            except Exception as e:
+                logger.error(f"❌ Failed to scrape category '{category_name}': {e}")
+                continue
+        
+        logger.info(f"\n🎉 All categories complete! Total products: {len(self.products)}")
 
-    hydrate_type_from_folder("data/collection", products, "collection")
-    hydrate_type_from_folder("data/occasion", products, "occasion")
+    async def _scrape_single_category(self, context: BrowserContext, category_url: str, category_name: str) -> None:
+        """Scrape products from a single category"""
+        page = None
+        try:
+            page = await context.new_page()
+            await self._setup_category_page(page, category_url)
+            await self._scrape_products_from_page(page, context, category_name)
+            
+        finally:
+            if page:
+                await page.close()
 
-    browser.close()
+    async def _setup_category_page(self, page: Page, category_url: str) -> None:
+        """Setup a category page for scraping - NO menu interactions here"""
+        logger.info(f"📄 Loading category page: {category_url}")
+        await page.goto(category_url, wait_until="domcontentloaded")
+        
+        # Wait for initial content to load
+        await asyncio.sleep(self.config.initial_wait)
+        
+        # Handle potential modal popup (email signup, etc.) on category pages
+        await self._handle_modal_popup(page)
+        
+        # Wait for product cards to be present in DOM (not necessarily visible)
+        try:
+            await page.wait_for_selector(".product-card", timeout=15000, state="attached")
+            
+            # Count total cards
+            card_count = await page.locator(".product-card").count()
+            logger.info(f"✅ Found {card_count} product cards on page (will scroll to make them visible)")
+            
+            if card_count == 0:
+                logger.warning("No product cards found on this category page")
+                
+        except Exception as e:
+            logger.warning(f"⚠️ Product cards not found within timeout: {e}")
+            # Continue anyway - maybe they'll appear during scrolling
+
+    async def _handle_modal_popup(self, page: Page) -> None:
+        """Handle modal popups that might block content - AVOID SCROLLING"""
+        try:
+            # Wait up to 8 seconds for modal to appear
+            logger.debug("Checking for modal popup...")
+            
+            # Look for the close button with class "button big-close"
+            close_button_selector = "button.big-close"
+            
+            # Wait for the modal close button to appear (with timeout)
+            try:
+                await page.wait_for_selector(close_button_selector, timeout=8000)
+                logger.info("Modal popup detected - attempting to close WITHOUT scrolling")
+                
+                # Use force click to avoid automatic scrolling
+                await page.click(close_button_selector, force=True)
+                logger.info("✅ Successfully closed modal popup")
+                
+                # Wait a moment for modal to disappear
+                await asyncio.sleep(1)
+                
+                # Verify modal is gone by checking if close button is no longer visible
+                try:
+                    is_visible = await page.is_visible(close_button_selector)
+                    if not is_visible:
+                        logger.debug("Modal successfully dismissed")
+                    else:
+                        logger.warning("Modal close button still visible after clicking")
+                except Exception:
+                    logger.debug("Modal close button no longer exists (good)")
+                
+            except Exception as e:
+                logger.debug("No modal popup detected or failed to close (this is often normal)")
+                
+        except Exception as e:
+            logger.warning(f"Error handling modal popup: {e}")
 
 
-# Save to JSON file
-with open("products.json", "w") as f:
-    json.dump(products, f, indent=2)
+    async def _scrape_products_from_page(self, page: Page, context: BrowserContext, category_name: str) -> None:
+        """Scrape products from a single page with comprehensive scrolling"""
+        scroll_step = 800
+        scroll_height = await page.evaluate("document.body.scrollHeight")
+        pos = 0  # Start at top
+        consecutive_no_new_items = 0
+        category_product_count = 0
 
-end_time = time.time()
-duration = end_time - start_time
+        logger.info(f"📜 Starting to scrape '{category_name}'. Initial scroll height: {scroll_height}")
 
-print(f"✅ Scraped {len(products)} products and saved to 'products.json'")
-print(f"\n⏱️ Script finished in {duration:.2f} seconds.")
+        # Start from the very top to ensure we don't miss any products
+        await page.evaluate("window.scrollTo({top: 0, behavior: 'instant'})")
+        await asyncio.sleep(1)
+
+        while pos < scroll_height and consecutive_no_new_items < self.config.max_consecutive_no_new:
+            # Scroll DOWN to the current position
+            await self._scroll_to_position(page, pos)
+            
+            # Process visible cards after scrolling
+            new_products_found = await self._process_visible_cards(page, context, category_name)
+            category_product_count += new_products_found
+            
+            if new_products_found == 0:
+                consecutive_no_new_items += 1
+                logger.debug(f"No new products found at position {pos}. Consecutive count: {consecutive_no_new_items}")
+            else:
+                consecutive_no_new_items = 0
+                logger.info(f"Found {new_products_found} new products in '{category_name}' at scroll position {pos} (category total: {category_product_count})")
+
+            # Check category-specific product limit
+            if (self.config.max_products_per_category and 
+                category_product_count >= self.config.max_products_per_category):
+                logger.info(f"🏁 Reached category limit for '{category_name}': {self.config.max_products_per_category}")
+                break
+            
+            # Check global product limit
+            if self.config.max_products and len(self.products) >= self.config.max_products:
+                logger.info(f"🏁 Reached global product limit: {self.config.max_products}")
+                break
+
+            # Check for more content (page might have grown)
+            new_scroll_height = await page.evaluate("document.body.scrollHeight")
+            if new_scroll_height > scroll_height:
+                scroll_height = new_scroll_height
+                logger.debug(f"Page height increased to: {scroll_height}")
+            
+            # Move to next scroll position (GOING DOWN THE PAGE)
+            pos += scroll_step  # This should be positive to go down
+            
+            logger.debug(f"Next scroll position will be: {pos} (scroll_height: {scroll_height})")
+
+        logger.info(f"✅ Category '{category_name}' scraping completed. Products found: {category_product_count}")
+    
+    async def _scroll_to_position(self, page: Page, position: int) -> None:
+        """Scroll to position with verification"""
+        # Get current position before scrolling
+        current_pos = await page.evaluate("window.pageYOffset")
+        
+        if abs(current_pos - position) < 50:  # Already close enough
+            return
+        
+        # Perform the scroll
+        await page.evaluate(f"window.scrollTo({{top: {position}, behavior: 'smooth'}})")
+        
+        # Wait for scroll to complete (with timeout)
+        max_wait_time = 3.0  # 3 seconds max
+        check_interval = 0.1  # Check every 100ms
+        elapsed_time = 0
+        
+        while elapsed_time < max_wait_time:
+            await asyncio.sleep(check_interval)
+            elapsed_time += check_interval
+            
+            new_pos = await page.evaluate("window.pageYOffset")
+            if abs(new_pos - position) < 50:  # Close enough to target
+                logger.debug(f"Scroll completed: {current_pos} → {new_pos} (target: {position})")
+                break
+        else:
+            # If we exit the while loop due to timeout
+            final_pos = await page.evaluate("window.pageYOffset")
+            logger.warning(f"Scroll timeout: {current_pos} → {final_pos} (target: {position})")
+        
+        # Additional wait for any content that loads after scroll
+        await asyncio.sleep(self.config.scroll_wait)
+
+    async def _process_visible_cards(self, page: Page, context: BrowserContext, category_name: str = "unknown") -> int:
+        """Process all visible product cards on current viewport with better visibility detection"""
+        
+        locator = page.locator(".product-card")
+        count = await locator.count()
+        new_products_count = 0
+
+        logger.debug(f"Processing {count} product cards in category '{category_name}'")
+
+        for i in range(count):
+            try:
+                card = locator.nth(i)
+                
+                # Check if card is actually visible in viewport
+                is_visible = await card.is_visible()
+                if not is_visible:
+                    continue
+                
+                # Additional check for viewport visibility
+                try:
+                    bounding_box = await card.bounding_box()
+                    if not bounding_box:
+                        continue
+                    
+                    # Check if at least part of the card is in viewport
+                    viewport_size = page.viewport_size
+                    if viewport_size and (bounding_box["y"] + bounding_box["height"] < 0 or 
+                        bounding_box["y"] > viewport_size["height"]):
+                        continue
+                        
+                except Exception:
+                    # If bounding box check fails, continue with visibility check
+                    pass
+                
+                if await self._process_single_card(card, i, context, category_name):
+                    new_products_count += 1
+                    
+            except Exception as e:
+                logger.error(f"Error processing card {i} in category '{category_name}': {e}")
+                continue
+
+        return new_products_count
+
+    async def _process_single_card(self, card, index: int, context: BrowserContext, category_name: str = "unknown") -> bool:
+        """Process a single product card with cross-category duplicate handling"""
+        for attempt in range(self.config.max_retries):
+            try:
+                if not await card.is_visible():
+                    return False
+
+                await card.scroll_into_view_if_needed()
+
+                # Extract product information for deduplication
+                href = await card.locator("a.cover").get_attribute("href")
+                if not href:
+                    logger.warning(f"No href found for card {index} in category '{category_name}'")
+                    return False
+
+                product_id = self._extract_product_id(href)
+                
+                # Check if we've already processed this exact product
+                if product_id in self.seen_cards:
+                    logger.debug(f"Product {product_id} already exists - adding category '{category_name}'")
+                    self._add_category_to_existing_product(product_id, category_name)
+                    return False  # Don't count as new product, but category was added
+
+                # Generate a proper unique ID
+                unique_id = f"{category_name}_{product_id}_{len(self.products)}"
+
+                # Add product using function from product_processor
+                product = await add_product(
+                    tile=card,
+                    idx=unique_id,
+                    products=self.products,
+                    variation_lookup=self.variation_lookup,
+                    context=context,
+                    category=category_name,
+                    max_products=self.config.max_products
+                )
+
+                if product:
+                    product_name = product.get('name', 'Unknown')
+                    
+                    # Initialize categories list for this product
+                    product['categories'] = [category_name]  # Store as list instead of single category
+                    
+                    # Track this product
+                    self.seen_cards.add(product_id)
+                    self.category_mapping[product_id] = [category_name]
+                    
+                    logger.info(f"✅ Added [{category_name}] {product_id} - {product_name}")
+                    
+                    # Log variation info if applicable
+                    if product.get('variant_type'):
+                        base_name = product.get('base_name', 'Unknown')
+                        variant_type = product.get('variant_type')
+                        logger.debug(f"  └─ Variant: {base_name} ({variant_type})")
+                    
+                    return True
+
+                return False
+
+            except Exception as e:
+                if attempt == self.config.max_retries - 1:
+                    logger.error(f"Failed to process card {index} in '{category_name}' after {self.config.max_retries} attempts: {e}")
+                    return False
+                else:
+                    logger.warning(f"Attempt {attempt + 1} failed for card {index} in '{category_name}': {e}. Retrying...")
+                    await asyncio.sleep(1)
+
+        return False
+
+    def _add_category_to_existing_product(self, product_id: str, new_category: str) -> None:
+        """Add a category to an existing product that appears in multiple categories"""
+        try:
+            # Find the existing product
+            existing_product = None
+            for product in self.products:
+                if product_id in product.get('id', ''):  # Check if product_id is in the unique ID
+                    existing_product = product
+                    break
+            
+            if existing_product:
+                # Add category to the categories list
+                current_categories = existing_product.get('categories', [existing_product.get('category')])
+                if isinstance(current_categories, str):
+                    current_categories = [current_categories]
+                
+                if new_category not in current_categories:
+                    current_categories.append(new_category)
+                    existing_product['categories'] = current_categories
+                    
+                    # Update category mapping
+                    if product_id in self.category_mapping:
+                        self.category_mapping[product_id].append(new_category)
+                    else:
+                        self.category_mapping[product_id] = current_categories.copy()
+                    
+                    logger.info(f"📂 Added category '{new_category}' to existing product: {existing_product.get('name')} (now in: {', '.join(current_categories)})")
+                    
+        except Exception as e:
+            logger.warning(f"Failed to add category to existing product {product_id}: {e}")
+
+    def _extract_product_id(self, href: str) -> str:
+        """Extract product ID from href"""
+        return urlparse(href).path.split("/")[-1]
+
+    async def _save_results(self, duration: float) -> None:
+        """Save results to JSON file with summary"""
+        output_path = Path(self.config.output_file)
+        
+        try:
+            with open(output_path, "w", encoding='utf-8') as f:
+                json.dump(self.products, f, indent=2, ensure_ascii=False)
+            
+            logger.info(f"✅ Scraped {len(self.products)} products and saved to '{output_path}'")
+            logger.info(f"⏱️ Script finished in {duration:.2f} seconds.")
+            
+            # Log some statistics
+            self._log_statistics()
+            
+        except Exception as e:
+            logger.error(f"Failed to save results: {e}")
+            raise
+
+    def _log_statistics(self) -> None:
+        """Log scraping statistics with category breakdown and cross-category analysis"""
+        if not self.products:
+            return
+        
+        # Count products by category (including cross-category products)
+        category_counts = {}
+        cross_category_products = 0
+        
+        for product in self.products:
+            categories = product.get('categories', [product.get('category', 'unknown')])
+            if isinstance(categories, str):
+                categories = [categories]
+            
+            # Count cross-category products
+            if len(categories) > 1:
+                cross_category_products += 1
+            
+            # Count each category
+            for category in categories:
+                category_counts[category] = category_counts.get(category, 0) + 1
+            
+        # Count variations by analyzing variant types
+        single_products = sum(1 for p in self.products if p.get('variant_type') is None)
+        variant_products = len(self.products) - single_products
+        
+        # Count unique base names (product families)
+        unique_families = len(self.variation_lookup)
+        
+        # Count products with cross-references to other variants
+        cross_referenced = sum(1 for p in self.products 
+                             if any(key.endswith('_variation') for key in p.keys()))
+        
+        logger.info(f"📊 Final Scraping Statistics:")
+        logger.info(f"   - Total unique products: {len(self.products)}")
+        logger.info(f"   - Categories discovered: {len(self.discovered_categories)}")
+        logger.info(f"   - Cross-category products: {cross_category_products}")
+        logger.info(f"   - Single products: {single_products}")
+        logger.info(f"   - Variant products: {variant_products}")
+        logger.info(f"   - Product families: {unique_families}")
+        logger.info(f"   - Cross-referenced products: {cross_referenced}")
+        
+        # Log category breakdown (total appearances, not unique products)
+        logger.info(f"   📂 Product appearances by category:")
+        total_appearances = sum(category_counts.values())
+        for category, count in sorted(category_counts.items()):
+            percentage = (count / total_appearances * 100) if total_appearances > 0 else 0
+            logger.info(f"      - {category}: {count} ({percentage:.1f}%)")
+        
+        # Log discovered categories
+        if self.discovered_categories:
+            logger.info(f"   🔍 Categories discovered:")
+            for cat in self.discovered_categories:
+                logger.info(f"      - {cat['name']} → {cat['url']}")
+        
+        # Log cross-category examples
+        if cross_category_products > 0:
+            logger.info(f"   🔄 Cross-category product examples:")
+            examples_shown = 0
+            for product in self.products:
+                categories = product.get('categories', [])
+                if isinstance(categories, list) and len(categories) > 1 and examples_shown < 3:
+                    logger.info(f"      - '{product.get('name', 'Unknown')}' appears in: {', '.join(categories)}")
+                    examples_shown += 1
+        
+        # Log some example variants if they exist
+        if self.variation_lookup:
+            example_family = next(iter(self.variation_lookup.keys()))
+            variants = list(self.variation_lookup[example_family].keys())
+            if len(variants) > 1:
+                logger.info(f"   - Example family: '{example_family}' has variants: {variants}")
+
+async def main():
+    """Main entry point with configuration - kept for backward compatibility"""
+    from config import ConfigPresets
+    
+    config = ConfigPresets.development()  # Use a preset for the standalone version
+    
+    scraper = UrbanStemsScraper(config)
+    
+    try:
+        products = await scraper.scrape()
+        logger.info(f"Scraping completed successfully with {len(products)} products")
+    except Exception as e:
+        logger.error(f"Scraping failed: {e}")
+        raise
+
+if __name__ == "__main__":
+    # Configure basic logging for standalone execution
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    asyncio.run(main())
