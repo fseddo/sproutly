@@ -8,11 +8,7 @@ Urban Stems product tiles, including variation linking logic.
 import logging
 from typing import Dict, List, Optional, Any
 from playwright.async_api import BrowserContext
-from utils import (
-    get_item_badge, get_item_delivery_lead_time, get_item_name, 
-    get_item_price, get_item_review_info, get_item_url, 
-    get_item_variant_type, get_image_src
-)
+from extractors import ProductTileExtractor
 # Import the improved detail extraction function
 from detail_extractor import get_item_detail_info
 
@@ -31,12 +27,28 @@ class ProductProcessor:
     async def extract_basic_info(tile) -> Dict[str, Any]:
         """Extract basic product information from tile"""
         try:
-            name = await get_item_name(tile)
+            name = await ProductTileExtractor.extract_name(tile)
             if not name:
                 raise ProductExtractionError("Product name is empty")
                 
-            variant_type, base_name = get_item_variant_type(name)
-            review_rating, review_count = await get_item_review_info(tile)
+            variant_type, base_name = ProductTileExtractor.extract_variant_type(name)
+            review_rating_str, review_count_str = await ProductTileExtractor.extract_review_info(tile)
+            
+            # Convert string ratings to appropriate types
+            review_rating = None
+            review_count = None
+            
+            if review_rating_str and review_rating_str != "0":
+                try:
+                    review_rating = float(review_rating_str)
+                except ValueError:
+                    review_rating = None
+                    
+            if review_count_str and review_count_str != "0":
+                try:
+                    review_count = int(review_count_str)
+                except ValueError:
+                    review_count = None
             
             return {
                 'name': name.strip(),
@@ -53,8 +65,8 @@ class ProductProcessor:
     async def extract_image_info(tile) -> Dict[str, Optional[str]]:
         """Extract image information with fallback handling"""
         try:
-            main_image = await get_image_src(tile, "main")
-            hover_image = await get_image_src(tile, "hover")
+            main_image = await ProductTileExtractor.extract_image_src(tile, "main")
+            hover_image = await ProductTileExtractor.extract_image_src(tile, "hover")
             
             return {
                 'main_image': main_image,
@@ -65,11 +77,12 @@ class ProductProcessor:
             return {'main_image': None, 'hover_image': None}
 
     @staticmethod
-    async def extract_pricing_info(tile) -> Dict[str, Optional[float]]:
-        """Extract pricing information with validation"""
+    async def extract_pricing_info(tile) -> Dict[str, Optional[int]]:
+        """Extract pricing information with validation (prices in cents)"""
         try:
-            price = await get_item_price(tile, "span", "regular")
-            discounted_price = await get_item_price(tile, "s", "compare")
+            # Extract prices in cents
+            price = await ProductTileExtractor.extract_price(tile, "span", "regular")
+            discounted_price = await ProductTileExtractor.extract_price(tile, "s", "compare")
             
             # Basic validation
             if price is not None and price < 0:
@@ -92,9 +105,9 @@ class ProductProcessor:
     async def extract_additional_info(tile) -> Dict[str, Any]:
         """Extract additional product information"""
         try:
-            badge_text = await get_item_badge(tile)
-            product_url = await get_item_url(tile, BASE_URL)
-            delivery_lead_time = await get_item_delivery_lead_time(tile)
+            badge_text = await ProductTileExtractor.extract_badge(tile)
+            product_url = await ProductTileExtractor.extract_url(tile, BASE_URL)
+            delivery_lead_time = await ProductTileExtractor.extract_delivery_lead_time(tile)
             
             # Validate URL
             if not product_url or not product_url.startswith('http'):
@@ -120,7 +133,7 @@ def create_product_object(
     product_id: str,
     basic_info: Dict[str, Any],
     image_info: Dict[str, Optional[str]],
-    pricing_info: Dict[str, Optional[float]],
+    pricing_info: Dict[str, Optional[int]],
     additional_info: Dict[str, Any],
     detail_info: Optional[Dict[str, Any]],
     category: str,
@@ -152,8 +165,7 @@ def create_product_object(
         "detail_image_2_src": detail_info.get("media_info", {}).get("detail_image_2_src") if detail_info and detail_info.get("media_info") else None,
         "collections": [collection] if collection else [],
         "occasions": [occasion] if occasion else [],
-        # "category": category,  # Primary category (for backward compatibility)
-        "categories": [category],  # Will be updated by scraper if product appears in multiple categories
+        "categories": [category],
     }
 
 def link_product_variations(

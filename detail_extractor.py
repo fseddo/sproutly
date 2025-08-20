@@ -9,7 +9,7 @@ import time
 import logging
 from typing import Optional, Dict, List, Any
 from playwright.async_api import BrowserContext, TimeoutError, Page
-from utils import get_item_description_info, scroll_and_extract, get_item_media_info
+from extractors import ProductDetailMediaExtractor, ProductDetailContentExtractor
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +32,7 @@ class ProductDetailExtractor:
                 return None
                 
             content_locator = card.locator(".pdp__accordion-content")
-            content = await get_item_description_info(content_locator, id_text)
+            content = await ProductDetailContentExtractor.extract_description_info(content_locator, id_text)
             
             if content:
                 logger.debug(f"Extracted accordion: {id_text}")
@@ -89,7 +89,7 @@ class ProductDetailExtractor:
         """Extract all detail content from the page"""
         try:
             extractors = self.get_extractors()
-            results = await scroll_and_extract(page, extractors)
+            results = await ProductDetailContentExtractor.scroll_and_extract(page, extractors)
             
             accordions = results.get("accordions", [])
             images = results.get("images", [])
@@ -105,7 +105,7 @@ class ProductDetailExtractor:
             )
             
             # Extract media information (lifestyle images and videos)
-            media_info = await get_item_media_info(page)
+            media_info = await ProductDetailMediaExtractor.extract_media_info(page)
             
             return {
                 "description": description,

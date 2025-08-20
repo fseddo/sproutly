@@ -127,7 +127,7 @@ class UrbanStemsScraper:
                 await page.close()
 
     async def _setup_page(self, page: Page, page_url: str, page_type: str, page_name: str) -> None:
-        """Setup a page for scraping - NO menu interactions here"""
+        """Setup a page for scraping with unified logic"""
         logger.info(f"📄 Loading {page_type} page: {page_url}")
         await page.goto(page_url, wait_until="domcontentloaded")
         
@@ -322,56 +322,45 @@ class UrbanStemsScraper:
 
         return False
 
+    def _add_list_attribute(self, product: dict, attribute_name: str, value: str, emoji: str, update_mapping: bool = False, product_id: Optional[str] = None) -> None:
+        """Generic method to add a value to a list attribute"""
+        current_values = product.get(attribute_name, [])
+        if isinstance(current_values, str):
+            current_values = [current_values]
+        
+        if value not in current_values:
+            current_values.append(value)
+            product[attribute_name] = current_values
+            
+            # Update category mapping if needed
+            if update_mapping and product_id and attribute_name == 'categories':
+                if product_id in self.category_mapping:
+                    self.category_mapping[product_id].append(value)
+                else:
+                    self.category_mapping[product_id] = current_values.copy()
+            
+            logger.info(f"{emoji} Added {attribute_name[:-1]} '{value}' to existing product: {product.get('name')} (now in: {', '.join(current_values)})")
+
     def _add_attribute_to_existing_product(self, product_id: str, page_type: str, page_name: str) -> None:
         """Add a category, collection, or occasion to an existing product"""
         try:
             # Find the existing product
             existing_product = None
             for product in self.products:
-                if self._extract_product_id(product.get('url', '')) == product_id:  # Match by URL-based product ID
+                if self._extract_product_id(product.get('url', '')) == product_id:
                     existing_product = product
                     break
             
             if existing_product:
-                if page_type == 'category':
-                    # Add to categories list
-                    current_categories = existing_product.get('categories', [])
-                    if isinstance(current_categories, str):
-                        current_categories = [current_categories]
-                    
-                    if page_name not in current_categories:
-                        current_categories.append(page_name)
-                        existing_product['categories'] = current_categories
-                        
-                        # Update category mapping
-                        if product_id in self.category_mapping:
-                            self.category_mapping[product_id].append(page_name)
-                        else:
-                            self.category_mapping[product_id] = current_categories.copy()
-                        
-                        logger.info(f"📂 Added category '{page_name}' to existing product: {existing_product.get('name')} (now in: {', '.join(current_categories)})")
+                attribute_config = {
+                    'category': ('categories', '📂', True),
+                    'collection': ('collections', '🏷️', False),
+                    'occasion': ('occasions', '🎉', False)
+                }
                 
-                elif page_type == 'collection':
-                    # Add to collections list
-                    current_collections = existing_product.get('collections', [])
-                    if isinstance(current_collections, str):
-                        current_collections = [current_collections]
-                    
-                    if page_name not in current_collections:
-                        current_collections.append(page_name)
-                        existing_product['collections'] = current_collections
-                        logger.info(f"🏷️ Added collection '{page_name}' to existing product: {existing_product.get('name')} (now in: {', '.join(current_collections)})")
-                
-                elif page_type == 'occasion':
-                    # Add to occasions list
-                    current_occasions = existing_product.get('occasions', [])
-                    if isinstance(current_occasions, str):
-                        current_occasions = [current_occasions]
-                    
-                    if page_name not in current_occasions:
-                        current_occasions.append(page_name)
-                        existing_product['occasions'] = current_occasions
-                        logger.info(f"🎉 Added occasion '{page_name}' to existing product: {existing_product.get('name')} (now in: {', '.join(current_occasions)})")
+                if page_type in attribute_config:
+                    attr_name, emoji, update_mapping = attribute_config[page_type]
+                    self._add_list_attribute(existing_product, attr_name, page_name, emoji, update_mapping, product_id)
                         
         except Exception as e:
             logger.warning(f"Failed to add {page_type} to existing product {product_id}: {e}")
@@ -520,29 +509,6 @@ class UrbanStemsScraper:
             logger.info("Proceeding without hover - categories might already be visible")
     
 
-    async def _setup_category_page(self, page: Page, category_url: str) -> None:
-        """Setup a category page for scraping - NO menu interactions here"""
-        logger.info(f"📄 Loading category page: {category_url}")
-        await page.goto(category_url, wait_until="domcontentloaded")
-        
-        # Wait for initial content to load
-        await asyncio.sleep(self.config.initial_wait)
-        
-        
-        # Wait for product cards to be present in DOM (not necessarily visible)
-        try:
-            await page.wait_for_selector(".product-card", timeout=15000, state="attached")
-            
-            # Count total cards
-            card_count = await page.locator(".product-card").count()
-            logger.info(f"✅ Found {card_count} product cards on page (will scroll to make them visible)")
-            
-            if card_count == 0:
-                logger.warning("No product cards found on this category page")
-                
-        except Exception as e:
-            logger.warning(f"⚠️ Product cards not found within timeout: {e}")
-            # Continue anyway - maybe they'll appear during scrolling
 
     async def _handle_modal_popup(self, page: Page) -> None:
         """Handle modal popups that might block content - AVOID SCROLLING"""
