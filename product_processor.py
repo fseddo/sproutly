@@ -6,14 +6,14 @@ Urban Stems product tiles, including variation linking logic.
 """
 
 import logging
-from typing import Dict, List, Optional, Any
+from typing import Dict, Optional, Any
+from product_types import ProductList, VariationMapping, ProductDict, VariantType
 from playwright.async_api import BrowserContext, Locator
 from extraction_utils import ProductTileExtractor
 from product_detail_extractor import get_item_detail_info
+from constants import BASE_URL, DEFAULT_STOCK
 
 logger = logging.getLogger(__name__)
-
-BASE_URL = "https://urbanstems.com"
 
 class ProductExtractionError(Exception):
     """Custom exception for product extraction errors"""
@@ -23,7 +23,7 @@ class ProductProcessor:
     """Handles product processing with better error handling and validation"""
     
     @staticmethod
-    def find_existing_product(products: List[Dict[str, Any]], name: str, url: Optional[str] = None) -> Optional[Dict[str, Any]]:
+    def find_existing_product(products: ProductList, name: str, url: Optional[str] = None) -> Optional[ProductDict]:
      """Find existing product by name or URL"""
      for product in products:
          if product['name'] == name or (url and product['url'] == url):
@@ -121,7 +121,7 @@ class ProductProcessor:
                 'badge_text': await ProductTileExtractor.extract_badge(tile),
                 'product_url': await ProductTileExtractor.extract_url(tile, BASE_URL),
                 'delivery_lead_time': delivery_lead_time,
-                'stock': 100 if delivery_lead_time else 0 
+                'stock': DEFAULT_STOCK if delivery_lead_time else 0 
             }
         except Exception as e:
             logger.warning(f"Failed to extract additional info: {e}")
@@ -142,13 +142,13 @@ def create_product_object(
     category: Optional[str] = None,
     collection: Optional[str] = None,
     occasion: Optional[str] = None,
-) -> Dict[str, Any]:
+) -> ProductDict:
     """Create a standardized product object"""
     
     return {
         "id": product_id,
         "name": basic_info['name'],
-        "variant_type": basic_info['variant_type'] if basic_info['variant_type'] != "single" else None,
+        "variant_type": basic_info['variant_type'] if basic_info['variant_type'] != VariantType.SINGLE else None,
         "base_name": basic_info['base_name'],
         "url": additional_info['product_url'],
         "price": pricing_info['price'],
@@ -172,10 +172,10 @@ def create_product_object(
     }
 
 def link_product_variations(
-    product: Dict[str, Any], 
-    variant_type: str, 
+    product: ProductDict, 
+    variant_type: VariantType, 
     base_name: str, 
-    variation_lookup: Dict[str, Dict[str, Any]]
+    variation_lookup: VariationMapping
 ) -> None:
     """
     Link product variations together with cross-references.
@@ -197,16 +197,32 @@ def link_product_variations(
     for other_variant_type, other_product in existing_variants.items():
         if other_variant_type != variant_type:
             # Link current product to other variant
-            product[f"{other_variant_type}_variation"] = other_product["id"]
-            # Link other product to current variant
-            other_product[f"{variant_type}_variation"] = product_id
-            linked_count += 1
+            if other_variant_type == VariantType.SINGLE:
+                product["single_variation"] = other_product["id"]
+            elif other_variant_type == VariantType.DOUBLE:
+                product["double_variation"] = other_product["id"]
+            elif other_variant_type == VariantType.TRIPLE:
+                product["triple_variation"] = other_product["id"]
             
+            # Link other product to current variant
+            if variant_type == VariantType.SINGLE:
+                other_product["single_variation"] = product_id
+            elif variant_type == VariantType.DOUBLE:
+                other_product["double_variation"] = product_id
+            elif variant_type == VariantType.TRIPLE:
+                other_product["triple_variation"] = product_id
+            
+            linked_count += 1
             logger.debug(f"Linked '{product['name']}' ({variant_type}) with '{other_product['name']}' ({other_variant_type})")
     
     # Add self-reference if other variants exist
     if existing_variants and any(v != variant_type for v in existing_variants):
-        product[f"{variant_type}_variation"] = product_id
+        if variant_type == VariantType.SINGLE:
+            product["single_variation"] = product_id
+        elif variant_type == VariantType.DOUBLE:
+            product["double_variation"] = product_id
+        elif variant_type == VariantType.TRIPLE:
+            product["triple_variation"] = product_id
     
     # Update the lookup table
     variation_lookup[base_name][variant_type] = product
@@ -216,8 +232,8 @@ def link_product_variations(
     if len(all_variants) > 1:  # Multiple variants exist for this base name
         for var_type, var_product in all_variants.items():
             # If this is a "single" variant but variant_type is None, update it
-            if var_type == "single" and var_product.get("variant_type") is None:
-                var_product["variant_type"] = "single"
+            if var_type == VariantType.SINGLE and var_product.get("variant_type") is None:
+                var_product["variant_type"] = VariantType.SINGLE
                 logger.debug(f"Updated variant_type to 'single' for base product: {var_product['name']}")
     
     if linked_count > 0:
@@ -226,12 +242,12 @@ def link_product_variations(
 async def add_product(
     product_locator: Locator,
     idx: str,
-    products: List[Dict[str, Any]],
-    variation_lookup: Dict[str, Dict[str, Any]],
+    products: ProductList,
+    variation_lookup: VariationMapping,
     context: BrowserContext,
     category: str,
     max_products: Optional[int] = None
-) -> Optional[Dict[str, Any]]:
+) -> Optional[ProductDict]:
     """
     Add a product to the products list with variation linking.
     
@@ -271,7 +287,7 @@ async def add_product(
             logger.warning(f"Skipping product {idx}: No URL found")
             return None
         
-        # Get detailed information (optional, with timeout protection)
+        # Get detailed information (required - skip product if timeout occurs)
         detail_info = None
         try:
             detail_info = await get_item_detail_info(
@@ -280,10 +296,13 @@ async def add_product(
                 additional_info['product_url'], 
                 idx
             )
+            if detail_info is None:
+                logger.warning(f"Detail extraction failed/timed out for '{basic_info['name']}' - skipping product")
+                return None
             logger.debug(f"Successfully extracted detail info for {basic_info['name']}")
         except Exception as e:
-            logger.warning(f"Failed to get detail info for '{basic_info['name']}': {e}")
-            # Continue without detail info rather than failing entirely
+            logger.warning(f"Failed to get detail info for '{basic_info['name']}': {e} - skipping product")
+            return None
         
         # Create product object
         product = create_product_object(

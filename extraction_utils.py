@@ -8,7 +8,10 @@ import asyncio
 import logging
 from contextlib import asynccontextmanager
 from typing import Dict, Optional, Any, Tuple, List
+from product_types import VariantType
 from playwright.async_api import Locator, Page, BrowserContext
+from constants import PRICE_MULTIPLIER
+from product_selectors import (PRODUCT_CARD_TITLE, PRODUCT_CARD_BADGE, IMG_TAG, get_price_selector, get_media_selector)
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +42,7 @@ class ProductTileExtractor:
     async def extract_name(tile: Locator) -> Optional[str]:
         """Extract product name from tile"""
         try:
-            name_locator = tile.locator(".product-card__title")
+            name_locator = tile.locator(PRODUCT_CARD_TITLE)
             if await name_locator.count() == 0:
                 return None
             return await name_locator.inner_text()
@@ -51,7 +54,7 @@ class ProductTileExtractor:
     async def extract_price(tile: Locator, element_name: str, modifier: str) -> Optional[int]:
         """Extract price from tile (returns price in cents as integer)"""
         try:
-            price_locator = tile.locator(f"{element_name}[data-product-card-price-{modifier}]")
+            price_locator = tile.locator(get_price_selector(element_name, modifier))
             if await price_locator.count() == 0:
                 return None
                 
@@ -61,7 +64,7 @@ class ProductTileExtractor:
                 
             try:
                 # Convert to cents (multiply by 100 and convert to int)
-                return int(float(raw_text) * 100)
+                return int(float(raw_text) * PRICE_MULTIPLIER)
             except ValueError:
                 return None
         except Exception as e:
@@ -72,8 +75,8 @@ class ProductTileExtractor:
     async def extract_image_src(tile: Locator, modifier: str) -> Optional[str]:
         """Extract image source from tile"""
         try:
-            picture_tag = tile.locator(f"picture.product-card__media--{modifier}").first
-            image_tag = picture_tag.locator("img").first
+            picture_tag = tile.locator(get_media_selector(modifier)).first
+            image_tag = picture_tag.locator(IMG_TAG).first
 
             if await image_tag.count() == 0:
                 return None
@@ -99,7 +102,7 @@ class ProductTileExtractor:
     async def extract_badge(tile: Locator) -> Optional[str]:
         """Extract badge text from tile"""
         try:
-            badge_locator = tile.locator(".badge")
+            badge_locator = tile.locator(PRODUCT_CARD_BADGE)
             if await badge_locator.count() == 0:
                 return None
             return (await badge_locator.inner_text()).strip()
@@ -169,23 +172,23 @@ class ProductTileExtractor:
             return "0", "0"
 
     @staticmethod
-    def extract_variant_type(name: str) -> Tuple[str, str]:
+    def extract_variant_type(name: str) -> Tuple[VariantType, str]:
         """Extract variant type and base name from product name"""
         if not name:
-            return "single", name or ""
+            return VariantType.SINGLE, name or ""
             
         name = name.strip()
         
         # Check for "Double" variant (name is already title-cased)
         if name.startswith("Double "):
             base_name = name[7:]  # Remove "Double "
-            return "double", base_name
+            return VariantType.DOUBLE, base_name
         
         if name.startswith("Triple "):
             base_name = name[7:]  # Remove "Triple "
-            return "triple", base_name
+            return VariantType.TRIPLE, base_name
         
-        return "single", name
+        return VariantType.SINGLE, name
 
 class ProductDetailContentExtractor:
     """Handles extraction of content information from product detail pages"""

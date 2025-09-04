@@ -158,7 +158,8 @@ class ProductDetailExtractor:
             
             # Wait for page to be ready
             if not await self.wait_for_page_ready(page):
-                logger.warning(f"Page not ready for '{product_name}' - proceeding anyway")
+                logger.warning(f"Page not ready for '{product_name}' - skipping product due to timeout")
+                return None
             
             # Extract content
             detail_content = await self.extract_detail_content(page)
@@ -250,8 +251,8 @@ async def get_item_detail_info_advanced(
     context: BrowserContext,
     product_url: Optional[str],
     product_id: str,
-    timeout: int = 10000,
-    max_scroll_attempts: int = 3
+    timeout: int = 5000,
+    max_scroll_attempts: int = 2
 ) -> Optional[Dict[str, Any]]:
     """
     Advanced version with configurable parameters.

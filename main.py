@@ -1,4 +1,3 @@
-from typing import List, Dict
 """
 Urban Stems Scraper - Main Execution Script
 
@@ -10,13 +9,13 @@ import asyncio
 import argparse
 import logging
 import sys
+import time
 from pathlib import Path
-from typing import List, Dict
-
 from config import ScrapingConfig
 from scraper import UrbanStemsScraper
+from product_types import ProductList
 
-def setup_logging(level: str = "INFO", log_file: bool = False) -> None:
+def setup_logging(level: str = "INFO") -> None:
     """Setup logging configuration"""
     log_level = getattr(logging, level.upper())
     
@@ -206,7 +205,7 @@ def print_config_summary(config: ScrapingConfig) -> None:
     
     print("="*50 + "\n")
 
-async def run_scraper(config: ScrapingConfig) -> List[Dict]:
+async def run_scraper(config: ScrapingConfig) -> ProductList:
     """Run the scraper with error handling"""
     scraper = UrbanStemsScraper(config)
     
@@ -226,6 +225,8 @@ async def run_scraper(config: ScrapingConfig) -> List[Dict]:
 
 def main() -> None:
     """Main entry point"""
+    start_time = time.time()
+    
     args = parse_arguments()
     
     # Setup logging
@@ -244,7 +245,23 @@ def main() -> None:
     # Run the scraper and get results
     try:
         products = asyncio.run(run_scraper(config))
+        
+        # Calculate and log total execution time
+        total_time = time.time() - start_time
+        hours = int(total_time // 3600)
+        minutes = int((total_time % 3600) // 60)
+        seconds = total_time % 60
+        
+        time_str = []
+        if hours > 0:
+            time_str.append(f"{hours}h")
+        if minutes > 0:
+            time_str.append(f"{minutes}m")
+        time_str.append(f"{seconds:.1f}s")
+        
         print(f"\n🎉 Final result: {len(products)} products successfully scraped!")
+        print(f"⏱️  Total execution time: {' '.join(time_str)}")
+        
     except Exception as e:
         print(f"\n💥 Fatal error: {e}")
         sys.exit(1)

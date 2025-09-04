@@ -3,33 +3,57 @@ Main scraper class for Urban Stems flower products.
 """
 
 import asyncio
+from enum import Enum
 import time
 import json
 import logging
 from pathlib import Path
 from urllib.parse import urlparse
-from typing import List, Dict, Set, Optional
+from typing import Set, Optional, Dict
 from playwright.async_api import async_playwright, Page, BrowserContext, Locator
 
 from config import ScrapingConfig
 from product_processor import add_product
+from product_types import ProductList, AttributeList, VariationMapping, ProductDict, AttributeInfo, AttributeType
+from constants import IGNORED_COLLECTIONS, SCROLL_CHECK_INTERVAL, SCROLL_MAX_WAIT_TIME, MODAL_WAIT_TIMEOUT, VIEWPORT_TOLERANCE
 
 logger = logging.getLogger(__name__)
       
 class UrbanStemsScraper:
     def __init__(self, config: Optional[ScrapingConfig] = None):
         self.config = config or ScrapingConfig()
-        self.products: List[Dict] = []
-        self.variation_lookup: Dict = {}
+        self.products: ProductList = []
+        self.variation_lookup: VariationMapping = {}
         self.seen_cards: Set[str] = set()  # Track by product URL/ID to avoid duplicates
-        self.discovered_categories: List[Dict[str, str]] = []
-        self.discovered_collections: List[Dict[str, str]] = []
-        self.discovered_occasions: List[Dict[str, str]] = []
+        self.discovered_categories: AttributeList = []
+        self.discovered_collections: AttributeList = []
+        self.discovered_occasions: AttributeList = []
 
-        self.category_mapping: Dict[str, List[str]] = {}  # Track which categories each product appears in
+    def _add_discovered_attribute(self, data_type: str, name: str, url: str) -> None:
+        """Add a discovered attribute (category, collection, or occasion) to the appropriate list"""
+        # Filter out unwanted collections
+        if data_type == 'Featured' and name in IGNORED_COLLECTIONS:
+            logger.debug(f"Ignoring collection: {name}")
+            return
+            
+        type_mapping: Dict[str, tuple[AttributeType, AttributeList]] = {
+            'Categories': (AttributeType.CATEGORY, self.discovered_categories),
+            'Featured': (AttributeType.COLLECTION, self.discovered_collections), 
+            'Occasions': (AttributeType.OCCASION, self.discovered_occasions)
+        }
         
-    async def scrape(self) -> List[Dict]:
-        """Main scraping method with category discovery"""
+        if data_type in type_mapping:
+            attr_type, target_list = type_mapping[data_type]
+            attribute_info: AttributeInfo = {
+                "name": name,
+                "url": url,
+                "type": attr_type
+            }
+            target_list.append(attribute_info)
+            logger.info(f"📂 Discovered {attr_type.value}: {name} → {url}")
+        
+    async def scrape(self) -> ProductList:
+        """Main scraping method with attribute discovery"""
         start_time = time.time()
         
         try:
@@ -125,7 +149,7 @@ class UrbanStemsScraper:
         
         # Wait for product cards to be present in DOM (not necessarily visible)
         try:
-            await page.wait_for_selector("#products .product-card", timeout=15000, state="attached")
+            await page.wait_for_selector("#products .product-card", timeout=5000, state="attached")
             
             # Count total cards
             card_count = await page.locator("#products .product-card").count()
@@ -144,7 +168,6 @@ class UrbanStemsScraper:
         scroll_height = await page.evaluate("document.body.scrollHeight")
         pos = 0 
         page_product_count = 0
-        total_items_processed = 0  # Track all items (new + existing)
 
         logger.info(f"📜 Starting to scrape '{page_name}' ({page_type}). Initial scroll height: {scroll_height}")
 
@@ -158,8 +181,13 @@ class UrbanStemsScraper:
             
             # Process visible cards after scrolling
             new_products_found = await self._process_visible_cards(page, context, page_slug, page_type, page_name)
+            
+            # Check for early exit signal (no cards found)
+            if new_products_found == -1:
+                logger.info(f"🏁 No product cards found on '{page_name}' ({page_type}) - exiting early")
+                break
+                
             page_product_count += new_products_found
-            total_items_processed += new_products_found
             
             if new_products_found > 0:
                 logger.info(f"Found {new_products_found} new products in '{page_name}' ({page_type}) at scroll position {pos} (page total: {page_product_count})")
@@ -212,6 +240,11 @@ class UrbanStemsScraper:
         new_products_count = 0
 
         logger.debug(f"Processing {count} product cards in {page_type} '{page_name}'")
+        
+        # If no cards found, return -1 to signal early exit
+        if count == 0:
+            logger.debug(f"No product cards found - signaling early exit")
+            return -1
 
         for i in range(count):
             try:
@@ -270,8 +303,8 @@ class UrbanStemsScraper:
                     self._add_attribute_to_existing_product(product_id, page_type, page_name)
                     return False  # Don't count as new product, but attribute was added
 
-                # Generate a proper unique ID
-                unique_id = f"{page_slug}_{product_id}_{len(self.products)}"
+                # Generate simple sequential ID
+                unique_id = str(len(self.products))
 
                 # Add product using function from product_processor
                 product = await add_product(
@@ -294,15 +327,7 @@ class UrbanStemsScraper:
                     product['categories'] = [page_slug] if page_type == 'category' else []
                     product['collections'] = [page_name] if page_type == 'collection' else []
                     product['occasions'] = [page_name] if page_type == 'occasion' else []
-                    
-                    # Initialize tracking for cross-page appearances
-                    if product_id not in self.category_mapping:
-                        self.category_mapping[product_id] = []
-                    
-                    # Add the appropriate attribute
-                    if page_type == 'category':
-                        self.category_mapping[product_id].append(page_name)
-                    
+                       
                     logger.info(f"✅ Added [{page_type}] {product_id} - {product_name}")
                     
                     # Log variation info if applicable
@@ -310,9 +335,7 @@ class UrbanStemsScraper:
                         base_name = product.get('base_name', 'Unknown')
                         variant_type = product.get('variant_type')
                         logger.debug(f"  └─ Variant: {base_name} ({variant_type})")
-                    
                     return True
-
                 return False
 
             except Exception as e:
@@ -322,10 +345,9 @@ class UrbanStemsScraper:
                 else:
                     logger.warning(f"Attempt {attempt + 1} failed for card {index} in '{page_name}' ({page_type}): {e}. Retrying...")
                     await asyncio.sleep(1)
-
         return False
 
-    def _add_list_attribute(self, product: dict, attribute_name: str, value: str, emoji: str, update_mapping: bool = False, product_id: Optional[str] = None) -> None:
+    def _add_list_attribute(self, product: ProductDict, attribute_name: str, value: str, emoji: str) -> None:
         """Generic method to add a value to a list attribute"""
         current_values = product.get(attribute_name, [])
         if isinstance(current_values, str):
@@ -334,14 +356,6 @@ class UrbanStemsScraper:
         if value not in current_values:
             current_values.append(value)
             product[attribute_name] = current_values
-            
-            # Update category mapping if needed
-            if update_mapping and product_id and attribute_name == 'categories':
-                if product_id in self.category_mapping:
-                    self.category_mapping[product_id].append(value)
-                else:
-                    self.category_mapping[product_id] = current_values.copy()
-            
             logger.info(f"{emoji} Added {attribute_name[:-1]} '{value}' to existing product: {product.get('name')} (now in: {', '.join(current_values)})")
 
     def _add_attribute_to_existing_product(self, product_id: str, page_type: str, page_name: str) -> None:
@@ -356,14 +370,14 @@ class UrbanStemsScraper:
             
             if existing_product:
                 attribute_config = {
-                    'category': ('categories', '📂', True),
-                    'collection': ('collections', '🏷️', False),
-                    'occasion': ('occasions', '🎉', False)
+                    'category': ('categories', '📂'),
+                    'collection': ('collections', '🏷️'),
+                    'occasion': ('occasions', '🎉')
                 }
                 
                 if page_type in attribute_config:
-                    attr_name, emoji, update_mapping = attribute_config[page_type]
-                    self._add_list_attribute(existing_product, attr_name, page_name, emoji, update_mapping, product_id)
+                    attr_name, emoji = attribute_config[page_type]
+                    self._add_list_attribute(existing_product, attr_name, page_name, emoji)
                         
         except Exception as e:
             logger.warning(f"Failed to add {page_type} to existing product {product_id}: {e}")
@@ -378,10 +392,10 @@ class UrbanStemsScraper:
         )
 
     async def _discover_pages(self, context: BrowserContext) -> None:
-        """Discover product categories from the main navigation"""
+        """Discover product attributes from the main navigation"""
         page = None
         try:
-            logger.info("🔍 Discovering product categories from navigation...")
+            logger.info("🔍 Discovering product attributes from navigation...")
             page = await context.new_page()
             
             # Navigate to main page
@@ -394,10 +408,6 @@ class UrbanStemsScraper:
         
         except Exception as e:
             logger.error(f"Category discovery failed: {e}")
-            # Fallback
-            self.discovered_categories = [
-                {"name": "flowers", "url": f"{self.config.base_url}/collections/flowers", "category": "flowers"}
-            ]
         finally:
             if page:
                 await page.close()
@@ -409,20 +419,20 @@ class UrbanStemsScraper:
             if await nav_item.count() > 0:
                 logger.info(f"🖱️ Hovering over Shop nav")
                 
-                # HOVER to reveal dropdown
+                # hover to reveal dropdown
                 await nav_item.hover()
                 await asyncio.sleep(2)  # Wait for dropdown to appear
                 
                 logger.info("✅ Shop dropdown should now be visible")
     
             try:
-                # Look for category navigation links
+                # Look for attribute navigation links
                 shop_type_selector = ".menu__col"
                 
-                # Wait for categories to be present (they might not be visible initially)
+                # Wait for attributes to be present (they might not be visible initially)
                 await page.wait_for_selector(shop_type_selector, timeout=10000)
                 
-                # Get all category cards
+                # Get all attribute cards
                 shop_type_cards = page.locator(shop_type_selector)
                 card_count = await shop_type_cards.count()
                 
@@ -449,36 +459,19 @@ class UrbanStemsScraper:
                                 
                                 if strong_count > 0:
                                     # Strong element exists, get its text
-                                    category_name = (await strong_element.inner_text()).strip().lower()
+                                    attribute_name = (await strong_element.inner_text()).strip().lower()
                                 else:
                                     # No strong element, use the anchor tag's text
-                                    category_name = (await field_card.inner_text()).strip().lower()
+                                    attribute_name = (await field_card.inner_text()).strip().lower()
                                 
-                                if href and category_name:
-                                    # Clean up category name (remove special chars, spaces)
-                                    clean_category = category_name.replace(" ", "-").replace("&", "and")
-                                    
+                                if href and attribute_name:                                 
                                     # Build full URL
                                     if href.startswith("/"):
                                         full_url = f"{self.config.base_url}{href}"
                                     else:
                                         full_url = href
                                     
-                                    category_info = {
-                                        "name": category_name,
-                                        "url": full_url,
-                                        "category": clean_category
-                                    }
-                                    
-                                    if data_type == 'Categories':
-                                        self.discovered_categories.append(category_info)
-                                        logger.info(f"📂 Discovered category: {category_name} → {full_url}")
-                                    if data_type == 'Featured':
-                                        self.discovered_collections.append(category_info)
-                                        logger.info(f"📂 Discovered collection: {category_name} → {full_url}")
-                                    if data_type == 'Occasions':
-                                        self.discovered_occasions.append(category_info)
-                                        logger.info(f"📂 Discovered occasion: {category_name} → {full_url}")
+                                    self._add_discovered_attribute(data_type, attribute_name, full_url)
                                 
                             except Exception as e:
                                 logger.warning(f"Failed to extract type info for {data_type}: {e}")
@@ -486,24 +479,11 @@ class UrbanStemsScraper:
                     except Exception as e:
                         logger.warning(f"Failed to extract category info from card {i}: {e}")
                         continue
-                
-                if not self.discovered_categories:
-                    logger.warning("No categories discovered, falling back to flowers")
-                    self.discovered_categories = [{
-                        "name": "flowers",
-                        "url": f"{self.config.base_url}/collections/flowers", 
-                        "category": "flowers"
-                    }]
-                else:
-                    logger.info(f"✅ Discovered {len(self.discovered_categories)} categories")
+
+                logger.info(f"✅ Discovered {len(self.discovered_categories)} categories")
                     
             except Exception as e:
                 logger.error(f"Failed to find category navigation: {e}")
-                # Fallback to default categories
-                self.discovered_categories = [
-                    {"name": "flowers", "url": f"{self.config.base_url}/collections/flowers", "category": "flowers"},
-                    {"name": "plants", "url": f"{self.config.base_url}/collections/plants", "category": "plants"}
-                ]
                 return
                 
         except Exception as e:
@@ -520,7 +500,7 @@ class UrbanStemsScraper:
             
         try:
             # Wait for the modal close button to appear (with timeout)
-            await page.wait_for_selector(close_button_selector, timeout=8000)
+            await page.wait_for_selector(close_button_selector, timeout=int(MODAL_WAIT_TIMEOUT * 1000))
             logger.info("Modal popup detected - attempting to close")
             
             # Use force click to avoid automatic scrolling
@@ -548,15 +528,15 @@ class UrbanStemsScraper:
         # Get current position before scrolling
         current_pos = await page.evaluate("window.pageYOffset")
         
-        if abs(current_pos - position) < 50:  # Already close enough
+        if abs(current_pos - position) < VIEWPORT_TOLERANCE:  # Already close enough
             return
         
         # Perform the scroll
         await page.evaluate(f"window.scrollTo({{top: {position}, behavior: 'smooth'}})")
         
         # Wait for scroll to complete (with timeout)
-        max_wait_time = 3.0  # 3 seconds max
-        check_interval = 0.1  # Check every 100ms
+        max_wait_time = SCROLL_MAX_WAIT_TIME
+        check_interval = SCROLL_CHECK_INTERVAL
         elapsed_time = 0
         
         while elapsed_time < max_wait_time:
@@ -564,7 +544,7 @@ class UrbanStemsScraper:
             elapsed_time += check_interval
             
             new_pos = await page.evaluate("window.pageYOffset")
-            if abs(new_pos - position) < 50:  # Close enough to target
+            if abs(new_pos - position) < VIEWPORT_TOLERANCE:  # Close enough to target
                 logger.debug(f"Scroll completed: {current_pos} → {new_pos} (target: {position})")
                 break
         else:
@@ -575,40 +555,16 @@ class UrbanStemsScraper:
         # Additional wait for any content that loads after scroll
         await asyncio.sleep(self.config.scroll_wait)
 
-    def _add_category_to_existing_product(self, product_id: str, new_category: str) -> None:
-        """Add a category to an existing product that appears in multiple categories"""
-        try:
-            # Find the existing product
-            existing_product = None
-            for product in self.products:
-                if self._extract_product_id(product.get('url', '')) == product_id:  # Match by URL-based product ID
-                    existing_product = product
-                    break
-            
-            if existing_product:
-                # Add category to the categories list
-                current_categories = existing_product.get('categories', [existing_product.get('category')])
-                if isinstance(current_categories, str):
-                    current_categories = [current_categories]
-                
-                if new_category not in current_categories:
-                    current_categories.append(new_category)
-                    existing_product['categories'] = current_categories
-                    
-                    # Update category mapping
-                    if product_id in self.category_mapping:
-                        self.category_mapping[product_id].append(new_category)
-                    else:
-                        self.category_mapping[product_id] = current_categories.copy()
-                    
-                    logger.info(f"📂 Added category '{new_category}' to existing product: {existing_product.get('name')} (now in: {', '.join(current_categories)})")
-                    
-        except Exception as e:
-            logger.warning(f"Failed to add category to existing product {product_id}: {e}")
 
     def _extract_product_id(self, href: str) -> str:
         """Extract product ID from href"""
         return urlparse(href).path.split("/")[-1]
+
+    def _enum_serializer(self, obj):
+        if isinstance(obj, Enum):
+            return obj.value 
+        raise TypeError(f"Type {obj.__class__.__name__} not serializable")
+
 
     async def _save_results(self, duration: float) -> None:
         """Save results to JSON file with summary"""
@@ -616,7 +572,7 @@ class UrbanStemsScraper:
         
         try:
             with open(output_path, "w", encoding='utf-8') as f:
-                json.dump(self.products, f, indent=2, ensure_ascii=False)
+                json.dump(self.products, f, indent=2, ensure_ascii=False, default=self._enum_serializer)
             
             logger.info(f"✅ Scraped {len(self.products)} products and saved to '{output_path}'")
             logger.info(f"⏱️ Script finished in {duration:.2f} seconds.")
@@ -632,24 +588,7 @@ class UrbanStemsScraper:
         """Log scraping statistics with category breakdown and cross-category analysis"""
         if not self.products:
             return
-        
-        # Count products by category (including cross-category products)
-        category_counts = {}
-        cross_category_products = 0
-        
-        for product in self.products:
-            categories = product.get('categories', [product.get('category', 'unknown')])
-            if isinstance(categories, str):
-                categories = [categories]
-            
-            # Count cross-category products
-            if len(categories) > 1:
-                cross_category_products += 1
-            
-            # Count each category
-            for category in categories:
-                category_counts[category] = category_counts.get(category, 0) + 1
-            
+             
         # Count variations by analyzing variant types
         single_products = sum(1 for p in self.products if p.get('variant_type') is None)
         variant_products = len(self.products) - single_products
@@ -667,58 +606,8 @@ class UrbanStemsScraper:
         logger.info(f"   - Categories: {len(self.discovered_categories)}")
         logger.info(f"   - Collections: {len(self.discovered_collections)}")
         logger.info(f"   - Occasions: {len(self.discovered_occasions)}")        
-        logger.info(f"   - Cross-category products: {cross_category_products}")
         logger.info(f"   - Single products: {single_products}")
         logger.info(f"   - Variant products: {variant_products}")
         logger.info(f"   - Product families: {unique_families}")
         logger.info(f"   - Cross-referenced products: {cross_referenced}")
-        
-        # Log category breakdown (total appearances, not unique products)
-        logger.info(f"   📂 Product appearances by category:")
-        total_appearances = sum(category_counts.values())
-        for category, count in sorted(category_counts.items()):
-            percentage = (count / total_appearances * 100) if total_appearances > 0 else 0
-            logger.info(f"      - {category}: {count} ({percentage:.1f}%)")
-        
-        # Log discovered categories
-        if self.discovered_categories:
-            logger.info(f"   🔍 Categories discovered:")
-            for cat in self.discovered_categories:
-                logger.info(f"      - {cat['name']} → {cat['url']}")
-        
-        # Log cross-category examples
-        if cross_category_products > 0:
-            logger.info(f"   🔄 Cross-category product examples:")
-            examples_shown = 0
-            for product in self.products:
-                categories = product.get('categories', [])
-                if isinstance(categories, list) and len(categories) > 1 and examples_shown < 3:
-                    logger.info(f"      - '{product.get('name', 'Unknown')}' appears in: {', '.join(categories)}")
-                    examples_shown += 1
-        
-        # Log some example variants if they exist
-        if self.variation_lookup:
-            example_family = next(iter(self.variation_lookup.keys()))
-            variants = list(self.variation_lookup[example_family].keys())
-            if len(variants) > 1:
-                logger.info(f"   - Example family: '{example_family}' has variants: {variants}")
 
-async def main():
-    """Main entry point with configuration - kept for backward compatibility"""
-    from config import ConfigPresets
-    
-    config = ConfigPresets.development()  # Use a preset for the standalone version
-    
-    scraper = UrbanStemsScraper(config)
-    
-    try:
-        products = await scraper.scrape()
-        logger.info(f"Scraping completed successfully with {len(products)} products")
-    except Exception as e:
-        logger.error(f"Scraping failed: {e}")
-        raise
-
-if __name__ == "__main__":
-    # Configure basic logging for standalone execution
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-    asyncio.run(main())
