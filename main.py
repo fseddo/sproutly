@@ -1,4 +1,4 @@
-from typing import List, Dict#!/usr/bin/env python3
+from typing import List, Dict
 """
 Urban Stems Scraper - Main Execution Script
 
@@ -11,7 +11,6 @@ import argparse
 import logging
 import sys
 from pathlib import Path
-from datetime import datetime
 from typing import List, Dict
 
 from config import ScrapingConfig
@@ -35,17 +34,6 @@ def setup_logging(level: str = "INFO", log_file: bool = False) -> None:
     root_logger.setLevel(log_level)
     root_logger.addHandler(console_handler)
     
-    # Optional file logging
-    if log_file:
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        log_path = Path(f"logs/scraper_{timestamp}.log")
-        log_path.parent.mkdir(exist_ok=True)
-        
-        file_handler = logging.FileHandler(log_path)
-        file_handler.setFormatter(formatter)
-        root_logger.addHandler(file_handler)
-        
-        print(f"Logging to file: {log_path}")
 
 def parse_arguments() -> argparse.Namespace:
     """Parse command line arguments"""
@@ -60,6 +48,7 @@ def parse_arguments() -> argparse.Namespace:
         action="store_true",
         help="Run browser in headless mode"
     )
+    
     
     parser.add_argument(
         "--output", "-o",
@@ -76,22 +65,22 @@ def parse_arguments() -> argparse.Namespace:
     # Timing options
     parser.add_argument(
         "--initial-wait",
-        type=int,
-        default=3,
+        type=float,
+        default=0.2,
         help="Seconds to wait after page load"
     )
     
     parser.add_argument(
         "--scroll-wait",
         type=float,
-        default=2.0,
+        default=0.2,
         help="Seconds to wait after each scroll"
     )
     
     parser.add_argument(
         "--max-retries",
         type=int,
-        default=3,
+        default=1,
         help="Maximum retries per product card"
     )
     
@@ -114,20 +103,6 @@ def parse_arguments() -> argparse.Namespace:
         "--base-url",
         default="https://urbanstems.com",
         help="Base URL for the site"
-    )
-    
-    # Category discovery options
-    parser.add_argument(
-        "--discover-categories",
-        action="store_true",
-        default=True,
-        help="Auto-discover product categories from navigation (default: True)"
-    )
-    
-    parser.add_argument(
-        "--categories",
-        nargs="+",
-        help="Specific categories to scrape (e.g., --categories flowers plants)"
     )
     
     parser.add_argument(
@@ -163,12 +138,6 @@ def parse_arguments() -> argparse.Namespace:
         help="Logging level"
     )
     
-    parser.add_argument(
-        "--log-file",
-        action="store_true",
-        help="Enable file logging"
-    )
-    
     # Quick presets
     parser.add_argument(
         "--fast",
@@ -176,27 +145,11 @@ def parse_arguments() -> argparse.Namespace:
         help="Fast mode: shorter waits, headless (good for testing)"
     )
     
-    parser.add_argument(
-        "--test",
-        action="store_true",
-        help="Test mode: fast + max 20 products + debug logging"
-    )
-    
     return parser.parse_args()
 
 def create_config_from_args(args: argparse.Namespace) -> ScrapingConfig:
     """Create scraping configuration from command line arguments"""
-    
-    # Apply presets first
-    if args.test:
-        args.fast = True
-        args.max_products = 6
-        args.max_per_category = 3
-        args.categories = ["flowers", "plants"]  # Limit to 2 categories for testing
-        args.log_level = "DEBUG"
-        args.headless = True
-        print("🧪 Test mode activated: fast + max 6 products (3 per category) + 2 categories + debug logging")
-    
+
     if args.fast:
         args.initial_wait = 1
         args.scroll_wait = 1.0
@@ -206,8 +159,6 @@ def create_config_from_args(args: argparse.Namespace) -> ScrapingConfig:
     # Create configuration
     config = ScrapingConfig(
         base_url=args.base_url,
-        discover_categories=args.discover_categories or True,  # Default to True
-        specific_categories=args.categories,
         viewport_width=args.viewport_width,
         viewport_height=args.viewport_height,
         initial_wait=args.initial_wait,
@@ -238,13 +189,8 @@ def print_config_summary(config: ScrapingConfig) -> None:
     print(f"Max retries: {config.max_retries}")
     
     # Category information
-    if config.discover_categories:
-        print(f"Category discovery: ✅ Auto-discover from navigation")
-        if config.specific_categories:
-            print(f"Filter to categories: {', '.join(config.specific_categories)}")
-    else:
-        categories = config.specific_categories or ["flowers"]
-        print(f"Categories: {', '.join(categories)}")
+    print(f"Category discovery: ✅ Auto-discover from navigation")
+
     
     # Limits
     if config.max_products:
@@ -267,16 +213,10 @@ async def run_scraper(config: ScrapingConfig) -> List[Dict]:
     try:
         print("🚀 Starting scraper...")
         products = await scraper.scrape()
-        
-        print(f"\n✅ Scraping completed successfully!")
-        print(f"📄 Results saved to: {config.output_file}")
-        print(f"📊 Total products scraped: {len(products)}")
-        
         return products
         
     except KeyboardInterrupt:
         print("\n⚠️  Scraping interrupted by user")
-        print(f"📄 Partial results may be saved to: {config.output_file}")
         sys.exit(1)
         
     except Exception as e:
@@ -289,7 +229,7 @@ def main() -> None:
     args = parse_arguments()
     
     # Setup logging
-    setup_logging(args.log_level, args.log_file)
+    setup_logging(args.log_level)
     
     # Create configuration
     config = create_config_from_args(args)

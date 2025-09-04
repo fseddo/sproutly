@@ -7,10 +7,9 @@ Urban Stems product tiles, including variation linking logic.
 
 import logging
 from typing import Dict, List, Optional, Any
-from playwright.async_api import BrowserContext
-from extractors import ProductTileExtractor
-# Import the improved detail extraction function
-from detail_extractor import get_item_detail_info
+from playwright.async_api import BrowserContext, Locator
+from extraction_utils import ProductTileExtractor
+from product_detail_extractor import get_item_detail_info
 
 logger = logging.getLogger(__name__)
 
@@ -24,12 +23,40 @@ class ProductProcessor:
     """Handles product processing with better error handling and validation"""
     
     @staticmethod
+    def find_existing_product(products: List[Dict[str, Any]], name: str, url: Optional[str] = None) -> Optional[Dict[str, Any]]:
+     """Find existing product by name or URL"""
+     for product in products:
+         if product['name'] == name or (url and product['url'] == url):
+             return product
+     return None
+
+    @staticmethod
+    def update_product_tags(
+      product: Dict[str, Any], 
+      category: Optional[str] = None,
+      collection: Optional[str] = None, 
+      occasion: Optional[str] = None
+    ) -> None:
+      """Update product tags by appending to existing arrays"""
+      if category and category not in product['categories']:
+          product['categories'].append(category)
+
+      if collection and collection not in product['collections']:
+          product['collections'].append(collection)
+
+      if occasion and occasion not in product['occasions']:
+          product['occasions'].append(occasion)
+
+    @staticmethod
     async def extract_basic_info(tile) -> Dict[str, Any]:
         """Extract basic product information from tile"""
         try:
             name = await ProductTileExtractor.extract_name(tile)
             if not name:
                 raise ProductExtractionError("Product name is empty")
+            
+            # Normalize name to title case for consistency
+            name = name.strip().title()
                 
             variant_type, base_name = ProductTileExtractor.extract_variant_type(name)
             review_rating_str, review_count_str = await ProductTileExtractor.extract_review_info(tile)
@@ -65,12 +92,9 @@ class ProductProcessor:
     async def extract_image_info(tile) -> Dict[str, Optional[str]]:
         """Extract image information with fallback handling"""
         try:
-            main_image = await ProductTileExtractor.extract_image_src(tile, "main")
-            hover_image = await ProductTileExtractor.extract_image_src(tile, "hover")
-            
             return {
-                'main_image': main_image,
-                'hover_image': hover_image
+                'main_image': await ProductTileExtractor.extract_image_src(tile, "main"),
+                'hover_image': await ProductTileExtractor.extract_image_src(tile, "hover")
             }
         except Exception as e:
             logger.warning(f"Failed to extract image info: {e}")
@@ -80,22 +104,9 @@ class ProductProcessor:
     async def extract_pricing_info(tile) -> Dict[str, Optional[int]]:
         """Extract pricing information with validation (prices in cents)"""
         try:
-            # Extract prices in cents
-            price = await ProductTileExtractor.extract_price(tile, "span", "regular")
-            discounted_price = await ProductTileExtractor.extract_price(tile, "s", "compare")
-            
-            # Basic validation
-            if price is not None and price < 0:
-                logger.warning(f"Invalid negative price: {price}")
-                price = None
-                
-            if discounted_price is not None and discounted_price < 0:
-                logger.warning(f"Invalid negative discounted price: {discounted_price}")
-                discounted_price = None
-                
             return {
-                'price': price,
-                'discounted_price': discounted_price
+                'price': await ProductTileExtractor.extract_price(tile, "span", "regular"),
+                'discounted_price': await ProductTileExtractor.extract_price(tile, "s", "compare")
             }
         except Exception as e:
             logger.warning(f"Failed to extract pricing info: {e}")
@@ -105,20 +116,12 @@ class ProductProcessor:
     async def extract_additional_info(tile) -> Dict[str, Any]:
         """Extract additional product information"""
         try:
-            badge_text = await ProductTileExtractor.extract_badge(tile)
-            product_url = await ProductTileExtractor.extract_url(tile, BASE_URL)
             delivery_lead_time = await ProductTileExtractor.extract_delivery_lead_time(tile)
-            
-            # Validate URL
-            if not product_url or not product_url.startswith('http'):
-                logger.warning(f"Invalid product URL: {product_url}")
-                product_url = None
-            
             return {
-                'badge_text': badge_text,
-                'product_url': product_url,
+                'badge_text': await ProductTileExtractor.extract_badge(tile),
+                'product_url': await ProductTileExtractor.extract_url(tile, BASE_URL),
                 'delivery_lead_time': delivery_lead_time,
-                'stock': 100 if delivery_lead_time else 0  # Business logic for stock
+                'stock': 100 if delivery_lead_time else 0 
             }
         except Exception as e:
             logger.warning(f"Failed to extract additional info: {e}")
@@ -136,11 +139,11 @@ def create_product_object(
     pricing_info: Dict[str, Optional[int]],
     additional_info: Dict[str, Any],
     detail_info: Optional[Dict[str, Any]],
-    category: str,
+    category: Optional[str] = None,
     collection: Optional[str] = None,
     occasion: Optional[str] = None,
 ) -> Dict[str, Any]:
-    """Create a standardized product object with category support"""
+    """Create a standardized product object"""
     
     return {
         "id": product_id,
@@ -165,7 +168,7 @@ def create_product_object(
         "detail_image_2_src": detail_info.get("media_info", {}).get("detail_image_2_src") if detail_info and detail_info.get("media_info") else None,
         "collections": [collection] if collection else [],
         "occasions": [occasion] if occasion else [],
-        "categories": [category],
+        "categories": [category] if category else [],
     }
 
 def link_product_variations(
@@ -208,7 +211,6 @@ def link_product_variations(
     # Update the lookup table
     variation_lookup[base_name][variant_type] = product
     
-    # NEW FIX: Update variant_type for single variants that have other variants
     # After adding this product to the lookup, check if we now have multiple variants
     all_variants = variation_lookup[base_name]
     if len(all_variants) > 1:  # Multiple variants exist for this base name
@@ -222,7 +224,7 @@ def link_product_variations(
         logger.info(f"Product '{product['name']}' linked to {linked_count} variant(s)")
 
 async def add_product(
-    tile,
+    product_locator: Locator,
     idx: str,
     products: List[Dict[str, Any]],
     variation_lookup: Dict[str, Dict[str, Any]],
@@ -234,7 +236,7 @@ async def add_product(
     Add a product to the products list with variation linking.
     
     Args:
-        tile: The product tile element from Playwright
+        product_locator: Locator tied to product from Playwright
         idx: Unique identifier for the product
         products: List to add the product to
         variation_lookup: Dictionary tracking product variations
@@ -255,10 +257,10 @@ async def add_product(
         # Extract all product information with error handling
         logger.debug(f"Processing product {idx}")
         
-        basic_info = await ProductProcessor.extract_basic_info(tile)
-        image_info = await ProductProcessor.extract_image_info(tile)
-        pricing_info = await ProductProcessor.extract_pricing_info(tile)
-        additional_info = await ProductProcessor.extract_additional_info(tile)
+        basic_info = await ProductProcessor.extract_basic_info(product_locator)
+        image_info = await ProductProcessor.extract_image_info(product_locator)
+        pricing_info = await ProductProcessor.extract_pricing_info(product_locator)
+        additional_info = await ProductProcessor.extract_additional_info(product_locator)
         
         # Validate essential information
         if not basic_info['name']:
@@ -314,73 +316,3 @@ async def add_product(
     except Exception as e:
         logger.error(f"Unexpected error adding product {idx}: {e}")
         return None
-
-def get_variation_statistics(variation_lookup: Dict[str, Dict[str, Any]]) -> Dict[str, int]:
-    """Get statistics about product variations"""
-    stats = {
-        'total_families': len(variation_lookup),
-        'families_with_variants': 0,
-        'total_variants': 0,
-        'max_variants_per_family': 0
-    }
-    
-    for base_name, variants in variation_lookup.items():
-        variant_count = len(variants)
-        stats['total_variants'] += variant_count
-        
-        if variant_count > 1:
-            stats['families_with_variants'] += 1
-            
-        if variant_count > stats['max_variants_per_family']:
-            stats['max_variants_per_family'] = variant_count
-    
-    return stats
-
-# Alternative batch processing function for high-volume scenarios
-async def add_product_batch(
-    tiles: List[Any],
-    products: List[Dict[str, Any]],
-    variation_lookup: Dict[str, Dict[str, Any]],
-    context: BrowserContext,
-    category: str,
-    start_idx: int = 0,
-    max_products: Optional[int] = None
-) -> Dict[str, int]:
-    """
-    Process multiple product tiles in batch with comprehensive error handling.
-    
-    Returns:
-        Dictionary with processing statistics
-    """
-    stats = {
-        'processed': 0,
-        'successful': 0,
-        'failed': 0,
-        'skipped': 0
-    }
-    
-    for i, tile in enumerate(tiles):
-        if max_products and stats['successful'] >= max_products:
-            stats['skipped'] = len(tiles) - i
-            break
-            
-        try:
-            product_id = f"{category}_{start_idx + i}"
-            result = await add_product(
-                tile, product_id, products, variation_lookup, 
-                context, category, max_products
-            )
-            
-            stats['processed'] += 1
-            if result:
-                stats['successful'] += 1
-            else:
-                stats['failed'] += 1
-                
-        except Exception as e:
-            logger.error(f"Batch processing failed for tile {i}: {e}")
-            stats['processed'] += 1
-            stats['failed'] += 1
-    
-    logger.info(f"Batch processing complete: {stats}")
-    return stats

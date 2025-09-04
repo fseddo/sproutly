@@ -9,7 +9,7 @@ import time
 import logging
 from typing import Optional, Dict, List, Any
 from playwright.async_api import BrowserContext, TimeoutError, Page
-from extractors import ProductDetailMediaExtractor, ProductDetailContentExtractor
+from extraction_utils import ProductDetailMediaExtractor, ProductDetailContentExtractor
 
 logger = logging.getLogger(__name__)
 

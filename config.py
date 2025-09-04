@@ -10,9 +10,7 @@ class ScrapingConfig:
     """Configuration for scraping parameters"""
     
     # Target configuration
-    base_url: str = "https://urbanstems.com"  # Changed from specific URL to base URL
-    discover_categories: bool = True  # Whether to auto-discover categories
-    specific_categories: Optional[List[str]] = None  # Specific categories to scrape, e.g. ["flowers", "plants"]
+    base_url: str = "https://urbanstems.com"  
     category_discovery_url: str = "https://urbanstems.com"  # URL to discover categories from
     
     # Page type limits
@@ -26,16 +24,16 @@ class ScrapingConfig:
     headless: bool = False
     
     # Scrolling configuration
-    scroll_step_divisor: float = 1.4 # viewport_height // this = scroll_step
-    initial_wait: int = 1  # seconds to wait after page load
-    scroll_wait: float = 0.5  # seconds to wait after each scroll
+    scroll_step_divisor: float = 1.6 # viewport_height // this = scroll_step
+    initial_wait: float = 0.2  # seconds to wait after page load
+    scroll_wait: float = 0.2  # seconds to wait after each scroll
     
     # Modal handling
     modal_wait_timeout: int = 8000  # milliseconds to wait for modal
     modal_close_wait: float = 0.5  # seconds to wait after closing modal
     
     # Error handling
-    max_retries: int = 2
+    max_retries: int = 1
     
     # Output configuration
     output_file: str = "products.json"
@@ -51,8 +49,8 @@ class ScrapingConfig:
     
     def __post_init__(self):
         """Validate configuration after initialization"""
-        if self.scroll_wait < 0.5:
-            raise ValueError("scroll_wait should be at least 0.5 seconds")
+        if self.scroll_wait < 0.2:
+            raise ValueError("scroll_wait should be at least 0.2 seconds")
         
         if self.max_retries < 1:
             raise ValueError("max_retries should be at least 1")
@@ -63,10 +61,7 @@ class ScrapingConfig:
 @dataclass 
 class ProductConfig:
     """Configuration for product processing"""
-    
-    # Categories to scrape
-    default_category: str = "flower"
-    
+        
     # Processing limits
     max_detail_fetch_retries: int = 2
     detail_fetch_timeout: int = 30  # seconds
@@ -104,7 +99,6 @@ class ConfigPresets:
             max_products=6,
             max_products_per_category=3,  # 3 products per category for testing
             max_retries=2,
-            specific_categories=["flowers", "plants"],  # Only test 2 categories
             output_file="test_products.json"
         )
     
@@ -116,7 +110,6 @@ class ConfigPresets:
             initial_wait=3,
             scroll_wait=2.0,
             max_retries=5,
-            discover_categories=True,  # Discover all categories
             output_file="products.json"
         )
     

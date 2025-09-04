@@ -9,7 +9,7 @@ import logging
 from pathlib import Path
 from urllib.parse import urlparse
 from typing import List, Dict, Set, Optional
-from playwright.async_api import async_playwright, Page, BrowserContext
+from playwright.async_api import async_playwright, Page, BrowserContext, Locator
 
 from config import ScrapingConfig
 from product_processor import add_product
@@ -67,22 +67,6 @@ class UrbanStemsScraper:
             *[(info, 'collection') for info in limited_collections], 
             *[(info, 'occasion') for info in limited_occasions]
         ]
-        
-        # Apply specific category filter if configured (ONLY affects categories, not collections/occasions)
-        if self.config.specific_categories:
-            filtered_pages = []
-            for page_info, page_type in all_pages:
-                if page_type == 'category':
-                    # Only filter categories - check if this category is in the allowed list
-                    if page_info["category"] in self.config.specific_categories:
-                        filtered_pages.append((page_info, page_type))
-                    # else: skip this category
-                else:
-                    # Always include collections and occasions regardless of category filter
-                    filtered_pages.append((page_info, page_type))
-            
-            all_pages = filtered_pages
-            logger.info(f"Filtered to {len([p for p in all_pages if p[1] == 'category'])} specific categories, keeping all collections/occasions")
         
         total_pages = len(all_pages)
         logger.info(f"🎯 Starting to scrape {total_pages} pages:")
@@ -193,6 +177,20 @@ class UrbanStemsScraper:
                 logger.info(f"🏁 Reached global product limit: {self.config.max_products}")
                 break
 
+            # Check if products container is still in viewport
+            try:
+                products_container = page.locator("#products")
+                if await products_container.count() > 0:
+                    container_box = await products_container.bounding_box()
+                    if container_box:
+                        viewport_height = page.viewport_size['height'] if page.viewport_size else 800
+                        # If the container is completely above the viewport, we've scrolled past it
+                        if container_box['y'] + container_box['height'] < 0:
+                            logger.info(f"🏁 Products container is out of view - stopping scroll at position {pos}")
+                            break
+            except Exception as e:
+                logger.debug(f"Could not check products container visibility: {e}")
+
             # Check for more content (page might have grown)
             new_scroll_height = await page.evaluate("document.body.scrollHeight")
             if new_scroll_height > scroll_height:
@@ -249,7 +247,7 @@ class UrbanStemsScraper:
 
         return new_products_count
 
-    async def _process_single_card(self, card, index: int, context: BrowserContext, page_slug: str, page_type: str = "category", page_name: str = "unknown") -> bool:
+    async def _process_single_card(self, card: Locator, index: int, context: BrowserContext, page_slug: str, page_type: str = "category", page_name: str = "unknown") -> bool:
         """Process a single product card with cross-page duplicate handling"""
         for attempt in range(self.config.max_retries):
             try:
@@ -277,7 +275,7 @@ class UrbanStemsScraper:
 
                 # Add product using function from product_processor
                 product = await add_product(
-                    tile=card,
+                    product_locator=card,
                     idx=unique_id,
                     products=self.products,
                     variation_lookup=self.variation_lookup,
@@ -286,6 +284,9 @@ class UrbanStemsScraper:
                     max_products=self.config.max_products
                 )
 
+                # Track this product regardless of success/failure to prevent reprocessing
+                self.seen_cards.add(product_id)
+                
                 if product:
                     product_name = product.get('name', 'Unknown')
                     
@@ -293,9 +294,6 @@ class UrbanStemsScraper:
                     product['categories'] = [page_slug] if page_type == 'category' else []
                     product['collections'] = [page_name] if page_type == 'collection' else []
                     product['occasions'] = [page_name] if page_type == 'occasion' else []
-                    
-                    # Track this product
-                    self.seen_cards.add(product_id)
                     
                     # Initialize tracking for cross-page appearances
                     if product_id not in self.category_mapping:

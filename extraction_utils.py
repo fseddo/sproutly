@@ -176,13 +176,14 @@ class ProductTileExtractor:
             
         name = name.strip()
         
-        # Check for "Double" variant
-        if name.lower().startswith("double "):
+        # Check for "Double" variant (name is already title-cased)
+        if name.startswith("Double "):
             base_name = name[7:]  # Remove "Double "
             return "double", base_name
         
-        # Check for other patterns...
-        # Add more variant detection logic here as needed
+        if name.startswith("Triple "):
+            base_name = name[7:]  # Remove "Triple "
+            return "triple", base_name
         
         return "single", name
 
