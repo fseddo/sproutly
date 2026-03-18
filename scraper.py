@@ -14,7 +14,7 @@ from playwright.async_api import async_playwright, Page, BrowserContext, Locator
 
 from config import ScrapingConfig
 from product_processor import add_product
-from product_types import ProductList, AttributeList, VariationMapping, ProductDict, AttributeInfo, AttributeType
+from product_types import ProductList, AttributeList, PageInfoList, PageInfo, VariationMapping, ProductDict, AttributeInfo, AttributeType
 from constants import IGNORED_COLLECTIONS, SCROLL_CHECK_INTERVAL, SCROLL_MAX_WAIT_TIME, MODAL_WAIT_TIMEOUT, VIEWPORT_TOLERANCE
 
 logger = logging.getLogger(__name__)
@@ -28,6 +28,8 @@ class UrbanStemsScraper:
         self.discovered_categories: AttributeList = []
         self.discovered_collections: AttributeList = []
         self.discovered_occasions: AttributeList = []
+        self.page_info: PageInfoList = []
+        self._carousel_images: Dict[str, str] = {}  # url -> image_src
 
     def _add_discovered_attribute(self, data_type: str, name: str, url: str) -> None:
         """Add a discovered attribute (category, collection, or occasion) to the appropriate list"""
@@ -139,13 +141,49 @@ class UrbanStemsScraper:
             if page:
                 await page.close()
 
+    async def _extract_collection_info(self, page: Page, page_url: str, page_type: str, page_name: str) -> None:
+        """Extract header metadata from a collection listing page"""
+        try:
+            doc_title = await page.title()
+
+            header_title = None
+            title_locator = page.locator(".collection-header__title h1")
+            if await title_locator.count() > 0:
+                header_title = (await title_locator.first.inner_text()).strip()
+
+            header_subtitle = None
+            subtitle_locator = page.locator(".collection-header__subtitle")
+            if await subtitle_locator.count() > 0:
+                header_subtitle = (await subtitle_locator.first.inner_text()).strip()
+
+            # Look up carousel image from discovery phase
+            image_src = self._carousel_images.get(page_url)
+
+            info: PageInfo = {
+                "name": page_name,
+                "url": page_url,
+                "type": page_type,
+                "page_title": doc_title or None,
+                "header_title": header_title,
+                "header_subtitle": header_subtitle,
+                "image_src": image_src,
+            }
+            self.page_info.append(info)
+            logger.info(f"📝 Collection info: title='{header_title}', subtitle='{header_subtitle[:60] if header_subtitle else None}'")
+
+        except Exception as e:
+            logger.warning(f"Failed to extract collection info for '{page_name}': {e}")
+
     async def _setup_page(self, page: Page, page_url: str, page_type: str, page_name: str) -> None:
         """Setup a page for scraping with unified logic"""
         logger.info(f"📄 Loading {page_type} page: {page_url}")
         await page.goto(page_url, wait_until="domcontentloaded")
-        
+
         # Wait for initial content to load
         await asyncio.sleep(self.config.initial_wait)
+
+        # Extract collection header info
+        await self._extract_collection_info(page, page_url, page_type, page_name)
         
         # Wait for product cards to be present in DOM (not necessarily visible)
         try:
@@ -405,7 +443,10 @@ class UrbanStemsScraper:
             # Handle modal on main page first
             await self._handle_modal_popup(page)
             await self._hover_shop_nav_item(page)
-        
+
+            # Extract carousel tile images from landing page
+            await self._extract_carousel_images(page)
+
         except Exception as e:
             logger.error(f"Category discovery failed: {e}")
         finally:
@@ -464,14 +505,24 @@ class UrbanStemsScraper:
                                     # No strong element, use the anchor tag's text
                                     attribute_name = (await field_card.inner_text()).strip().lower()
                                 
-                                if href and attribute_name:                                 
+                                if href and attribute_name:
                                     # Build full URL
                                     if href.startswith("/"):
                                         full_url = f"{self.config.base_url}{href}"
                                     else:
                                         full_url = href
-                                    
+
                                     self._add_discovered_attribute(data_type, attribute_name, full_url)
+
+                                    # Extract nav card image (categories have thumbnail images)
+                                    img_locator = field_card.locator("img")
+                                    if await img_locator.count() > 0:
+                                        img_src = await img_locator.first.get_attribute("src")
+                                        if img_src:
+                                            img_src = img_src.strip()
+                                            if img_src.startswith("//"):
+                                                img_src = "https:" + img_src
+                                            self._carousel_images[full_url] = img_src
                                 
                             except Exception as e:
                                 logger.warning(f"Failed to extract type info for {data_type}: {e}")
@@ -493,10 +544,52 @@ class UrbanStemsScraper:
     
 
 
+    async def _extract_carousel_images(self, page: Page) -> None:
+        """Extract collection/occasion images from the landing page carousel"""
+        try:
+            tiles = page.locator(".media-cards__items .swiper-slide a.media-card")
+            count = await tiles.count()
+            logger.debug(f"Found {count} carousel tile(s)")
+
+            for i in range(count):
+                try:
+                    tile = tiles.nth(i)
+                    href = await tile.get_attribute("href")
+                    if not href:
+                        continue
+
+                    img = tile.locator("img")
+                    if await img.count() == 0:
+                        continue
+                    src = await img.first.get_attribute("src")
+                    if not src:
+                        continue
+
+                    src = src.strip()
+                    if src.startswith("//"):
+                        src = "https:" + src
+
+                    # Build full URL to match against discovered pages
+                    if href.startswith("/"):
+                        full_url = f"{self.config.base_url}{href}"
+                    else:
+                        full_url = href
+
+                    self._carousel_images[full_url] = src
+                    logger.debug(f"Carousel image: {full_url} → {src}")
+
+                except Exception as e:
+                    logger.warning(f"Failed to extract carousel tile {i}: {e}")
+
+            logger.info(f"📸 Extracted {len(self._carousel_images)} carousel image(s)")
+
+        except Exception as e:
+            logger.warning(f"Failed to extract carousel images: {e}")
+
     async def _handle_modal_popup(self, page: Page) -> None:
         """Handle modal popups that might block content - AVOID SCROLLING"""
         logger.debug("Checking for modal popup...")
-        close_button_selector = "button.big-close"
+        close_button_selector = "button[aria-label='Close dialog']"
             
         try:
             # Wait for the modal close button to appear (with timeout)
@@ -571,8 +664,14 @@ class UrbanStemsScraper:
         output_path = Path(self.config.output_file)
         
         try:
+            output = {
+                "products": self.products,
+                "collections": [p for p in self.page_info if p["type"] == "collection"],
+                "categories": [p for p in self.page_info if p["type"] == "category"],
+                "occasions": [p for p in self.page_info if p["type"] == "occasion"],
+            }
             with open(output_path, "w", encoding='utf-8') as f:
-                json.dump(self.products, f, indent=2, ensure_ascii=False, default=self._enum_serializer)
+                json.dump(output, f, indent=2, ensure_ascii=False, default=self._enum_serializer)
             
             logger.info(f"✅ Scraped {len(self.products)} products and saved to '{output_path}'")
             logger.info(f"⏱️ Script finished in {duration:.2f} seconds.")

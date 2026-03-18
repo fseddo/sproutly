@@ -121,7 +121,7 @@ class ProductProcessor:
                 'badge_text': await ProductTileExtractor.extract_badge(tile),
                 'product_url': await ProductTileExtractor.extract_url(tile, BASE_URL),
                 'delivery_lead_time': delivery_lead_time,
-                'stock': DEFAULT_STOCK if delivery_lead_time else 0 
+                'stock': DEFAULT_STOCK if delivery_lead_time is not None else 0
             }
         except Exception as e:
             logger.warning(f"Failed to extract additional info: {e}")
@@ -156,6 +156,7 @@ def create_product_object(
         "main_image": image_info['main_image'],
         "hover_image": image_info['hover_image'],
         "badge_text": additional_info['badge_text'],
+        "badge_image_src": detail_info.get("badge_image_src") if detail_info else None,
         "delivery_lead_time": additional_info['delivery_lead_time'],
         "stock": additional_info['stock'],
         "reviews_rating": basic_info['review_rating'],
@@ -166,6 +167,8 @@ def create_product_object(
         "is_main_detail_video": detail_info.get("media_info", {}).get("is_main_detail_video") if detail_info and detail_info.get("media_info") else False,
         "detail_image_1_src": detail_info.get("media_info", {}).get("detail_image_1_src") if detail_info and detail_info.get("media_info") else None,
         "detail_image_2_src": detail_info.get("media_info", {}).get("detail_image_2_src") if detail_info and detail_info.get("media_info") else None,
+        "subtitle": detail_info.get("subtitle") if detail_info else None,
+        "reviews": detail_info.get("reviews", []) if detail_info else [],
         "collections": [collection] if collection else [],
         "occasions": [occasion] if occasion else [],
         "categories": [category] if category else [],

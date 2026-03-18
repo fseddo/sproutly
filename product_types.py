@@ -2,7 +2,7 @@
 Type definitions for Urban Stems scraper
 """
 
-from typing import TypedDict, Optional, List
+from typing import Any, Dict, TypedDict, Optional, List
 from typing_extensions import NotRequired
 from enum import Enum
 
@@ -33,6 +33,7 @@ class ProductDict(TypedDict):
     main_image: Optional[str]
     hover_image: Optional[str]
     badge_text: Optional[str]
+    badge_image_src: Optional[str]
     delivery_lead_time: Optional[int]
     stock: int
     reviews_rating: Optional[float]
@@ -43,6 +44,8 @@ class ProductDict(TypedDict):
     is_main_detail_video: bool
     detail_image_1_src: Optional[str]
     detail_image_2_src: Optional[str]
+    subtitle: Optional[str]
+    reviews: List[Dict[str, Any]]
     collections: List[str]
     occasions: List[str]
     categories: List[str]
@@ -59,7 +62,19 @@ class AttributeInfo(TypedDict):
     type: AttributeType  # What kind of attribute this is
 
 
+class PageInfo(TypedDict):
+    """Metadata extracted from a collection/category/occasion listing page"""
+    name: str
+    url: str
+    type: str
+    page_title: Optional[str]
+    header_title: Optional[str]
+    header_subtitle: Optional[str]
+    image_src: Optional[str]
+
+
 # Type aliases for common collections
 ProductList = List[ProductDict]
 AttributeList = List[AttributeInfo]
+PageInfoList = List[PageInfo]
 VariationMapping = dict[str, dict[VariantType, ProductDict]]  # base_name -> {variant_type -> ProductDict}

@@ -58,6 +58,123 @@ class ProductDetailExtractor:
         except Exception as e:
             logger.warning(f"Failed to extract image: {e}")
             return None
+        
+    async def extract_subtitle(self, page) -> Optional[str]:
+        """Extract subtitle text from the detail page"""
+        try:
+            subtitle_locator = page.locator(".pdp__subtitle")
+            if await subtitle_locator.count() > 0:
+                text = (await subtitle_locator.first.inner_text()).strip()
+                if text:
+                    logger.debug(f"Extracted subtitle: {text}")
+                    return text
+        except Exception as e:
+            logger.warning(f"Failed to extract subtitle: {e}")
+        return None
+
+    async def extract_review(self, card) -> Optional[Dict[str, Any]]:
+        """Extract a single review from a yotpo review card"""
+        try:
+            review_id = await card.get_attribute("data-id")
+
+            # Reviewer name
+            name_locator = card.locator(".yotpo-reviewer-name")
+            reviewer_name = (await name_locator.inner_text()).strip() if await name_locator.count() > 0 else None
+
+            # Verified buyer
+            verified_locator = card.locator(".yotpo-reviewer-verified-buyer-text")
+            is_verified = await verified_locator.count() > 0
+
+            # Star rating from aria-label (e.g. "5 star rating out of 5 stars")
+            rating = None
+            star_locator = card.locator(".yotpo-review-star-rating")
+            if await star_locator.count() > 0:
+                aria_label = await star_locator.get_attribute("aria-label") or ""
+                parts = aria_label.split()
+                if parts:
+                    try:
+                        rating = int(parts[0])
+                    except ValueError:
+                        pass
+
+            # Review title
+            title_locator = card.locator(".yotpo-review-title")
+            title = (await title_locator.inner_text()).strip() if await title_locator.count() > 0 else None
+
+            # Review body
+            body_locator = card.locator(".yotpo-read-more-text")
+            body = (await body_locator.inner_text()).strip() if await body_locator.count() > 0 else None
+
+            # Date
+            date_locator = card.locator(".yotpo-date-format")
+            date = (await date_locator.inner_text()).strip() if await date_locator.count() > 0 else None
+
+            if not body:
+                return None
+
+            logger.debug(f"Extracted review: {review_id} by {reviewer_name}")
+            return {
+                "id": review_id,
+                "reviewer_name": reviewer_name,
+                "is_verified_buyer": is_verified,
+                "rating": rating,
+                "title": title,
+                "body": body,
+                "date": date
+            }
+
+        except Exception as e:
+            logger.warning(f"Failed to extract review: {e}")
+            return None
+
+    async def extract_reviews(self, page: Page) -> List[Dict[str, Any]]:
+        """Extract all reviews from the yotpo reviews container"""
+        reviews = []
+        try:
+            container = page.locator("#yotpo-reviews-container")
+            if await container.count() == 0:
+                logger.debug("No reviews container found")
+                return reviews
+
+            review_cards = container.locator(".yotpo-review")
+            count = await review_cards.count()
+            logger.debug(f"Found {count} review(s)")
+
+            for i in range(count):
+                review = await self.extract_review(review_cards.nth(i))
+                if review:
+                    reviews.append(review)
+
+        except Exception as e:
+            logger.warning(f"Failed to extract reviews: {e}")
+
+        return reviews
+
+    async def extract_badge_image(self, page) -> Optional[str]:
+        """Extract badge image src from the detail page"""
+        try:
+            badge_locator = page.locator("img.pdp__badge-image")
+            if await badge_locator.count() > 0:
+                src = await badge_locator.first.get_attribute("src")
+                if src:
+                    src = src.strip()
+                    if src.startswith("//"):
+                        src = "https:" + src
+                    logger.debug(f"Extracted badge image: {src}")
+                    return src
+        except Exception as e:
+            logger.warning(f"Failed to extract badge image: {e}")
+        return None
+
+    async def dismiss_popup(self, page) -> None:
+        """Dismiss Klaviyo popup if it appears on the page"""
+        try:
+            close_btn = page.locator("button[aria-label='Close dialog']")
+            if await close_btn.count() > 0 and await close_btn.first.is_visible():
+                await close_btn.first.click(force=True)
+                logger.debug("Dismissed Klaviyo popup")
+        except Exception:
+            pass
 
     def get_extractors(self) -> List[Dict[str, Any]]:
         """Get the list of extractors for different content types"""
@@ -71,7 +188,7 @@ class ProductDetailExtractor:
                 "name": "images", 
                 "locator_selector": ".image-card",
                 "extract_func": self.extract_image
-            }
+            },
         ]
 
     async def wait_for_page_ready(self, page: Page) -> bool:
@@ -104,15 +221,27 @@ class ProductDetailExtractor:
                 None
             )
             
+            # Extract subtitle
+            subtitle = await self.extract_subtitle(page)
+
+            # Extract badge image
+            badge_image_src = await self.extract_badge_image(page)
+
             # Extract media information (lifestyle images and videos)
             media_info = await ProductDetailMediaExtractor.extract_media_info(page)
-            
+
+            # Extract reviews
+            reviews = await self.extract_reviews(page)
+
             return {
                 "description": description,
                 "care_instructions": care_instructions,
                 "accordions": accordions,
                 "images": images,
                 "media_info": media_info,
+                "reviews": reviews,
+                "badge_image_src": badge_image_src,
+                "subtitle": subtitle,
                 "total_accordions": len(accordions),
                 "total_images": len(images)
             }
@@ -160,7 +289,10 @@ class ProductDetailExtractor:
             if not await self.wait_for_page_ready(page):
                 logger.warning(f"Page not ready for '{product_name}' - skipping product due to timeout")
                 return None
-            
+
+            # Dismiss Klaviyo popup if present
+            await self.dismiss_popup(page)
+
             # Extract content
             detail_content = await self.extract_detail_content(page)
             
@@ -176,13 +308,17 @@ class ProductDetailExtractor:
                 logger.debug(f"     - Detail Images: {sum(1 for key in ['detail_image_1_src', 'detail_image_2_src'] if media_info.get(key))}")
             logger.debug(f"   - Total accordions: {detail_content.get('total_accordions', 0)}")
             logger.debug(f"   - Total images: {detail_content.get('total_images', 0)}")
-            
+            logger.debug(f"   - Reviews: {len(detail_content.get('reviews', []))}")
+
             return {
                 "description": detail_content.get("description"),
                 "care_instructions": detail_content.get("care_instructions"),
                 "media_info": media_info,
                 "extraction_time": duration,
                 "extraction_success": True,
+                "subtitle": detail_content.get("subtitle"),
+                "reviews": detail_content.get("reviews", []),
+                "badge_image_src": detail_content.get("badge_image_src"),
                 # Future expansion - uncomment when needed
                 # "detail_images": detail_content.get("images", []),
                 # "all_accordions": detail_content.get("accordions", [])
