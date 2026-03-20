@@ -309,7 +309,7 @@ class UrbanStemsScraper:
                     # If bounding box check fails, continue with visibility check
                     pass
                 
-                if await self._process_single_card(card, i, context, page_slug, page_type, page_name):
+                if await self._process_single_card(card, i, context, page_slug, page_type, page_name, page_index=i):
                     new_products_count += 1
                     
             except Exception as e:
@@ -318,7 +318,7 @@ class UrbanStemsScraper:
 
         return new_products_count
 
-    async def _process_single_card(self, card: Locator, index: int, context: BrowserContext, page_slug: str, page_type: str = "category", page_name: str = "unknown") -> bool:
+    async def _process_single_card(self, card: Locator, index: int, context: BrowserContext, page_slug: str, page_type: str = "category", page_name: str = "unknown", page_index: int = 0) -> bool:
         """Process a single product card with cross-page duplicate handling"""
         for attempt in range(self.config.max_retries):
             try:
@@ -338,7 +338,7 @@ class UrbanStemsScraper:
                 # Check if we've already processed this exact product
                 if product_id in self.seen_cards:
                     logger.debug(f"Product {product_id} already exists - adding {page_type} '{page_name}'")
-                    self._add_attribute_to_existing_product(product_id, page_type, page_name)
+                    self._add_attribute_to_existing_product(product_id, page_type, page_name, page_index)
                     return False  # Don't count as new product, but attribute was added
 
                 # Generate simple sequential ID
@@ -351,7 +351,6 @@ class UrbanStemsScraper:
                     products=self.products,
                     variation_lookup=self.variation_lookup,
                     context=context,
-                    category=page_slug,  # Keep this for backward compatibility
                     max_products=self.config.max_products
                 )
 
@@ -362,9 +361,9 @@ class UrbanStemsScraper:
                     product_name = product.get('name', 'Unknown')
                     
                     # Initialize attributes for this product based on page type
-                    product['categories'] = [page_slug] if page_type == 'category' else []
-                    product['collections'] = [page_name] if page_type == 'collection' else []
-                    product['occasions'] = [page_name] if page_type == 'occasion' else []
+                    product['categories'] = [{'name': page_slug, 'index': page_index}] if page_type == 'category' else []
+                    product['collections'] = [{'name': page_name, 'index': page_index}] if page_type == 'collection' else []
+                    product['occasions'] = [{'name': page_name, 'index': page_index}] if page_type == 'occasion' else []
                        
                     logger.info(f"✅ Added [{page_type}] {product_id} - {product_name}")
                     
@@ -385,18 +384,19 @@ class UrbanStemsScraper:
                     await asyncio.sleep(1)
         return False
 
-    def _add_list_attribute(self, product: ProductDict, attribute_name: str, value: str, emoji: str) -> None:
-        """Generic method to add a value to a list attribute"""
+    def _add_list_attribute(self, product: ProductDict, attribute_name: str, value: str, page_index: int, emoji: str) -> None:
+        """Generic method to add an attribute entry to a list attribute"""
         current_values = product.get(attribute_name, [])
-        if isinstance(current_values, str):
-            current_values = [current_values]
-        
-        if value not in current_values:
-            current_values.append(value)
-            product[attribute_name] = current_values
-            logger.info(f"{emoji} Added {attribute_name[:-1]} '{value}' to existing product: {product.get('name')} (now in: {', '.join(current_values)})")
 
-    def _add_attribute_to_existing_product(self, product_id: str, page_type: str, page_name: str) -> None:
+        # Check if this attribute name already exists (avoid duplicates)
+        existing_names = [entry['name'] for entry in current_values if isinstance(entry, dict)]
+        if value not in existing_names:
+            current_values.append({'name': value, 'index': page_index})
+            product[attribute_name] = current_values
+            display_names = [entry['name'] for entry in current_values if isinstance(entry, dict)]
+            logger.info(f"{emoji} Added {attribute_name[:-1]} '{value}' (position {page_index}) to existing product: {product.get('name')} (now in: {', '.join(display_names)})")
+
+    def _add_attribute_to_existing_product(self, product_id: str, page_type: str, page_name: str, page_index: int = 0) -> None:
         """Add a category, collection, or occasion to an existing product"""
         try:
             # Find the existing product
@@ -405,17 +405,17 @@ class UrbanStemsScraper:
                 if self._extract_product_id(product.get('url', '')) == product_id:
                     existing_product = product
                     break
-            
+
             if existing_product:
                 attribute_config = {
                     'category': ('categories', '📂'),
                     'collection': ('collections', '🏷️'),
                     'occasion': ('occasions', '🎉')
                 }
-                
+
                 if page_type in attribute_config:
                     attr_name, emoji = attribute_config[page_type]
-                    self._add_list_attribute(existing_product, attr_name, page_name, emoji)
+                    self._add_list_attribute(existing_product, attr_name, page_name, page_index, emoji)
                         
         except Exception as e:
             logger.warning(f"Failed to add {page_type} to existing product {product_id}: {e}")

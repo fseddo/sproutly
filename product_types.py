@@ -21,6 +21,12 @@ class AttributeType(Enum):
     OCCASION = "occasion"
 
 
+class AttributeEntry(TypedDict):
+    """A product's association with a page, including its position on that page"""
+    name: str
+    index: int  # 0-based position of the product on that page (lower = more relevant)
+
+
 class ProductDict(TypedDict):
     """Type definition for a scraped product"""
     id: str
@@ -46,9 +52,9 @@ class ProductDict(TypedDict):
     detail_image_2_src: Optional[str]
     subtitle: Optional[str]
     reviews: List[Dict[str, Any]]
-    collections: List[str]
-    occasions: List[str]
-    categories: List[str]
+    collections: List[AttributeEntry]
+    occasions: List[AttributeEntry]
+    categories: List[AttributeEntry]
     # Variation cross-references (optional)
     single_variation: NotRequired[Optional[str]]
     double_variation: NotRequired[Optional[str]]

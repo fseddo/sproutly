@@ -139,9 +139,6 @@ def create_product_object(
     pricing_info: Dict[str, Optional[int]],
     additional_info: Dict[str, Any],
     detail_info: Optional[Dict[str, Any]],
-    category: Optional[str] = None,
-    collection: Optional[str] = None,
-    occasion: Optional[str] = None,
 ) -> ProductDict:
     """Create a standardized product object"""
     
@@ -169,9 +166,9 @@ def create_product_object(
         "detail_image_2_src": detail_info.get("media_info", {}).get("detail_image_2_src") if detail_info and detail_info.get("media_info") else None,
         "subtitle": detail_info.get("subtitle") if detail_info else None,
         "reviews": detail_info.get("reviews", []) if detail_info else [],
-        "collections": [collection] if collection else [],
-        "occasions": [occasion] if occasion else [],
-        "categories": [category] if category else [],
+        "collections": [],
+        "occasions": [],
+        "categories": [],
     }
 
 def link_product_variations(
@@ -248,7 +245,6 @@ async def add_product(
     products: ProductList,
     variation_lookup: VariationMapping,
     context: BrowserContext,
-    category: str,
     max_products: Optional[int] = None
 ) -> Optional[ProductDict]:
     """
@@ -315,7 +311,6 @@ async def add_product(
             pricing_info=pricing_info,
             additional_info=additional_info,
             detail_info=detail_info,
-            category=category
         )
         
         # Add to products list
