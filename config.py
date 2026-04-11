@@ -41,6 +41,9 @@ class ScrapingConfig:
     # Limits (useful for testing)
     max_products: Optional[int] = None
     max_products_per_category: Optional[int] = None  # Limit per category
+
+    # Mode flags
+    nav_only: bool = False  # Only scrape navbar/landing page data, skip product pages
     
     @property
     def scroll_step(self) -> int:

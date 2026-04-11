@@ -77,6 +77,8 @@ class PageInfo(TypedDict):
     header_title: Optional[str]
     header_subtitle: Optional[str]
     image_src: Optional[str]
+    nav_img_src: Optional[str]
+    nav_description: Optional[str]
 
 
 # Type aliases for common collections

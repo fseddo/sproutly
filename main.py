@@ -137,6 +137,13 @@ def parse_arguments() -> argparse.Namespace:
         help="Logging level"
     )
     
+    # Mode flags
+    parser.add_argument(
+        "--nav-only",
+        action="store_true",
+        help="Only scrape navbar and landing page data (no product pages)"
+    )
+
     # Quick presets
     parser.add_argument(
         "--fast",
@@ -169,7 +176,8 @@ def create_config_from_args(args: argparse.Namespace) -> ScrapingConfig:
         max_products_per_category=args.max_per_category,
         max_categories=args.max_categories,
         max_collections=args.max_collections,
-        max_occasions=args.max_occasions
+        max_occasions=args.max_occasions,
+        nav_only=args.nav_only
     )
     
     return config

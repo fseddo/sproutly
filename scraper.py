@@ -18,7 +18,25 @@ from product_types import ProductList, AttributeList, PageInfoList, PageInfo, Va
 from constants import IGNORED_COLLECTIONS, SCROLL_CHECK_INTERVAL, SCROLL_MAX_WAIT_TIME, MODAL_WAIT_TIMEOUT, VIEWPORT_TOLERANCE
 
 logger = logging.getLogger(__name__)
-      
+
+
+def normalize_url(href: str, base_url: str) -> str:
+    """Build a full URL from an href, prepending base_url if relative"""
+    if href.startswith("/"):
+        return f"{base_url}{href}"
+    return href
+
+
+def normalize_img_src(src: Optional[str]) -> Optional[str]:
+    """Clean up an image src: strip whitespace and fix protocol-relative URLs"""
+    if not src:
+        return None
+    src = src.strip()
+    if src.startswith("//"):
+        src = "https:" + src
+    return src
+
+
 class UrbanStemsScraper:
     def __init__(self, config: Optional[ScrapingConfig] = None):
         self.config = config or ScrapingConfig()
@@ -30,6 +48,7 @@ class UrbanStemsScraper:
         self.discovered_occasions: AttributeList = []
         self.page_info: PageInfoList = []
         self._carousel_images: Dict[str, str] = {}  # url -> image_src
+        self._nav_data: Dict[str, Dict[str, Optional[str]]] = {}  # url -> {nav_img_src, nav_description}
 
     def _add_discovered_attribute(self, data_type: str, name: str, url: str) -> None:
         """Add a discovered attribute (category, collection, or occasion) to the appropriate list"""
@@ -66,8 +85,12 @@ class UrbanStemsScraper:
                 # Discover pages for scraping
                 await self._discover_pages(context)
 
-                # Scrape item info from each page (categories, collections, occassions)
-                await self._scrape_all_pages(context)
+                if self.config.nav_only:
+                    # Build page_info from navbar/landing data only, skip product pages
+                    self._build_page_info_from_nav()
+                else:
+                    # Scrape item info from each page (categories, collections, occassions)
+                    await self._scrape_all_pages(context)
                 
                 await browser.close()
                 
@@ -78,6 +101,34 @@ class UrbanStemsScraper:
         duration = time.time() - start_time
         await self._save_results(duration)
         return self.products
+
+    def _build_page_info_from_nav(self) -> None:
+        """Build page_info entries from navbar/landing discovery data without visiting listing pages"""
+        all_attributes = [
+            *[(info, "category") for info in self.discovered_categories],
+            *[(info, "collection") for info in self.discovered_collections],
+            *[(info, "occasion") for info in self.discovered_occasions],
+        ]
+
+        for attr, attr_type in all_attributes:
+            url = attr["url"]
+            nav_entry = self._nav_data.get(url, {})
+            image_src = self._carousel_images.get(url)
+
+            info: PageInfo = {
+                "name": attr["name"],
+                "url": url,
+                "type": attr_type,
+                "page_title": None,
+                "header_title": None,
+                "header_subtitle": None,
+                "image_src": image_src,
+                "nav_img_src": nav_entry.get("nav_img_src"),
+                "nav_description": nav_entry.get("nav_description"),
+            }
+            self.page_info.append(info)
+
+        logger.info(f"📋 Built {len(self.page_info)} page info entries from nav data")
 
     async def _scrape_all_pages(self, context: BrowserContext) -> None:
         """Scrape products from all discovered categories, collections, and occasions"""
@@ -159,6 +210,9 @@ class UrbanStemsScraper:
             # Look up carousel image from discovery phase
             image_src = self._carousel_images.get(page_url)
 
+            # Look up nav data from discovery phase
+            nav_entry = self._nav_data.get(page_url, {})
+
             info: PageInfo = {
                 "name": page_name,
                 "url": page_url,
@@ -167,6 +221,8 @@ class UrbanStemsScraper:
                 "header_title": header_title,
                 "header_subtitle": header_subtitle,
                 "image_src": image_src,
+                "nav_img_src": nav_entry.get("nav_img_src"),
+                "nav_description": nav_entry.get("nav_description"),
             }
             self.page_info.append(info)
             logger.info(f"📝 Collection info: title='{header_title}', subtitle='{header_subtitle[:60] if header_subtitle else None}'")
@@ -506,23 +562,19 @@ class UrbanStemsScraper:
                                     attribute_name = (await field_card.inner_text()).strip().lower()
                                 
                                 if href and attribute_name:
-                                    # Build full URL
-                                    if href.startswith("/"):
-                                        full_url = f"{self.config.base_url}{href}"
-                                    else:
-                                        full_url = href
-
+                                    full_url = normalize_url(href, self.config.base_url)
                                     self._add_discovered_attribute(data_type, attribute_name, full_url)
 
-                                    # Extract nav card image (categories have thumbnail images)
+                                    # Extract nav card image and alt text
                                     img_locator = field_card.locator("img")
                                     if await img_locator.count() > 0:
-                                        img_src = await img_locator.first.get_attribute("src")
-                                        if img_src:
-                                            img_src = img_src.strip()
-                                            if img_src.startswith("//"):
-                                                img_src = "https:" + img_src
-                                            self._carousel_images[full_url] = img_src
+                                        img_el = img_locator.first
+                                        nav_img_src = normalize_img_src(await img_el.get_attribute("src"))
+                                        nav_description = await img_el.get_attribute("alt")
+                                        self._nav_data[full_url] = {
+                                            "nav_img_src": nav_img_src,
+                                            "nav_description": nav_description.strip() if nav_description else None,
+                                        }
                                 
                             except Exception as e:
                                 logger.warning(f"Failed to extract type info for {data_type}: {e}")
@@ -532,7 +584,56 @@ class UrbanStemsScraper:
                         continue
 
                 logger.info(f"✅ Discovered {len(self.discovered_categories)} categories")
-                    
+
+                # Extract highlighted collection data from nav__menu-images media cards
+                try:
+                    media_cards = page.locator(".nav__menu-images .media-card")
+                    media_card_count = await media_cards.count()
+                    logger.info(f"Found {media_card_count} nav media card(s)")
+
+                    for i in range(media_card_count):
+                        try:
+                            card = media_cards.nth(i)
+
+                            # Get href from the anchor tag
+                            link = card.locator("a")
+                            if await link.count() == 0:
+                                # The card itself might be the anchor
+                                href = await card.get_attribute("href")
+                            else:
+                                href = await link.first.get_attribute("href")
+
+                            if not href:
+                                continue
+
+                            full_url = normalize_url(href, self.config.base_url)
+
+                            # Get image src
+                            nav_img_src = None
+                            img_locator = card.locator("img")
+                            if await img_locator.count() > 0:
+                                nav_img_src = normalize_img_src(await img_locator.first.get_attribute("src"))
+
+                            # Get description from .media-card__description
+                            nav_description = None
+                            desc_locator = card.locator(".media-card__description")
+                            if await desc_locator.count() > 0:
+                                nav_description = (await desc_locator.first.inner_text()).strip()
+
+                            self._nav_data[full_url] = {
+                                "nav_img_src": nav_img_src,
+                                "nav_description": nav_description,
+                            }
+                            logger.debug(f"Nav media card: {full_url} → img={nav_img_src is not None}, desc={nav_description is not None}")
+
+                        except Exception as e:
+                            logger.warning(f"Failed to extract nav media card {i}: {e}")
+
+                    logger.info(f"📸 Extracted nav data for {len(self._nav_data)} page(s)")
+
+                except Exception as e:
+                    logger.warning(f"Failed to extract nav media cards: {e}")
+
             except Exception as e:
                 logger.error(f"Failed to find category navigation: {e}")
                 return
@@ -561,20 +662,11 @@ class UrbanStemsScraper:
                     img = tile.locator("img")
                     if await img.count() == 0:
                         continue
-                    src = await img.first.get_attribute("src")
+                    src = normalize_img_src(await img.first.get_attribute("src"))
                     if not src:
                         continue
 
-                    src = src.strip()
-                    if src.startswith("//"):
-                        src = "https:" + src
-
-                    # Build full URL to match against discovered pages
-                    if href.startswith("/"):
-                        full_url = f"{self.config.base_url}{href}"
-                    else:
-                        full_url = href
-
+                    full_url = normalize_url(href, self.config.base_url)
                     self._carousel_images[full_url] = src
                     logger.debug(f"Carousel image: {full_url} → {src}")
 

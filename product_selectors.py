@@ -29,6 +29,9 @@ NAV_SHOP_MENU = 'div[data-nav-menu="shop"]'
 MENU_COL = ".menu__col"
 NAV_MENU_HEADLINE = "strong.nav__menu-headline"
 HOVER_LINK = "a.hover-u"
+NAV_MENU_IMAGES = ".nav__menu-images"
+MEDIA_CARD = ".media-card"
+MEDIA_CARD_DESCRIPTION = ".media-card__description"
 
 # Modal Selectors
 MODAL_CLOSE_BUTTON = "button.big-close"
