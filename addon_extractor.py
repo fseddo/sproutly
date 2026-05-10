@@ -38,9 +38,7 @@ ADDON_ITEMS = ".pdp__addon-items"
 ADDON_ITEM = ".pdp__addon-item"
 ADDON_ITEM_LABEL = ".pdp__addon-item-label"
 ADDON_ITEM_INFO = ".pdp__addon-item-info"
-# Skip the absolute-positioned placeholder img (always holds loading.svg)
-# and target the picture's real img sibling.
-ADDON_ITEM_MEDIA_IMG = ".pdp__addon-item-media picture img"
+ADDON_ITEM_MEDIA_IMG = ".pdp__addon-item-media img"
 
 # Addon-type menu (opens when an addon-item is clicked).
 # Like the detail views, addon menus are pre-rendered per type, so we
