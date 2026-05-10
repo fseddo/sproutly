@@ -21,6 +21,18 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_MAX_ADDON_TYPES = 2
 
+# Maps an addon-type label (case-insensitive substring) to a short slug.
+# Falls back to index-based mapping (see _slug_for_addon_type) for unknowns.
+ADDON_TYPE_KEYWORDS = {
+    "vase": "vase",
+    "gift": "gift",
+    "extra": "gift",  # "Add Something Extra"
+}
+ADDON_TYPE_FALLBACK_BY_INDEX = ["vase", "gift"]
+
+# Pattern used to recognize the lazy-load placeholder src.
+LOADING_PLACEHOLDER_RE = re.compile(r"loading\.svg", re.IGNORECASE)
+
 # Addon-type list (PDP)
 ADDON_ITEMS = ".pdp__addon-items"
 ADDON_ITEM = ".pdp__addon-item"
@@ -61,16 +73,60 @@ async def _safe_inner_text(locator: Locator) -> Optional[str]:
     return text.strip() if text else None
 
 
-async def _extract_addon_type_meta(item: Locator) -> Dict[str, Optional[str]]:
+def _slug_for_addon_type(label: Optional[str], index: int) -> str:
+    """Resolve an addon-type label to a short slug like 'vase' or 'gift'."""
+    if label:
+        lower = label.lower()
+        for keyword, slug in ADDON_TYPE_KEYWORDS.items():
+            if keyword in lower:
+                return slug
+    if index < len(ADDON_TYPE_FALLBACK_BY_INDEX):
+        return ADDON_TYPE_FALLBACK_BY_INDEX[index]
+    return f"type_{index}"
+
+
+async def _extract_real_img_src(img_loc: Locator) -> Optional[str]:
+    """
+    Extract an image src, working around lazy-load placeholders.
+
+    Many lazy-loaded images keep `loading.svg` in `src` until the image
+    scrolls into the user's viewport, with the real URL in `data-src` or
+    `srcset`. We try those alternatives before falling back to `src`.
+    """
+    if await img_loc.count() == 0:
+        return None
+    img = img_loc.first
+
+    candidates: List[Optional[str]] = []
+    candidates.append(await img.get_attribute("data-src"))
+    candidates.append(await img.get_attribute("src"))
+
+    srcset = await img.get_attribute("srcset") or await img.get_attribute("data-srcset")
+    if srcset:
+        # srcset format: "url1 1x, url2 2x" or "url1 100w, url2 200w".
+        # First entry is usually the smallest/default real URL.
+        first_entry = srcset.split(",")[0].strip()
+        if first_entry:
+            candidates.append(first_entry.split()[0])
+
+    for url in candidates:
+        if url and not LOADING_PLACEHOLDER_RE.search(url):
+            return normalize_img_src(url)
+
+    return None
+
+
+async def _extract_addon_type_meta(item: Locator, index: int) -> Dict[str, Optional[str]]:
     label = await _safe_inner_text(item.locator(ADDON_ITEM_LABEL))
     info = await _safe_inner_text(item.locator(ADDON_ITEM_INFO))
+    image = await _extract_real_img_src(item.locator(ADDON_ITEM_MEDIA_IMG))
 
-    image = None
-    img_loc = item.locator(ADDON_ITEM_MEDIA_IMG)
-    if await img_loc.count() > 0:
-        image = normalize_img_src(await img_loc.first.get_attribute("src"))
-
-    return {"label": label, "info": info, "image": image}
+    return {
+        "addon_type": _slug_for_addon_type(label, index),
+        "label": label,
+        "info": info,
+        "image": image,
+    }
 
 
 def _parse_price_to_cents(text: Optional[str]) -> Optional[int]:
@@ -85,17 +141,13 @@ def _parse_price_to_cents(text: Optional[str]) -> Optional[int]:
         return None
 
 
-async def _extract_addon_detail(page: Page, type_label: Optional[str]) -> Dict[str, Any]:
+async def _extract_addon_detail(page: Page, addon_type: str) -> Dict[str, Any]:
     detail = page.locator(DETAIL_VISIBLE).first
 
     name = await _safe_inner_text(detail.locator(DETAIL_HEADLINE))
     subtitle = await _safe_inner_text(detail.locator(DETAIL_SUBLINE))
     description = await _safe_inner_text(detail.locator(DETAIL_DESCRIPTION))
-
-    img_src = None
-    img_loc = detail.locator(DETAIL_IMAGE)
-    if await img_loc.count() > 0:
-        img_src = normalize_img_src(await img_loc.first.get_attribute("src"))
+    img_src = await _extract_real_img_src(detail.locator(DETAIL_IMAGE))
 
     button_text = await _safe_inner_text(detail.locator(DETAIL_BUTTON))
     price = _parse_price_to_cents(button_text)
@@ -106,7 +158,7 @@ async def _extract_addon_detail(page: Page, type_label: Optional[str]) -> Dict[s
         "description": description,
         "img_src": img_src,
         "price": price,
-        "type": type_label,
+        "addon_type": addon_type,
     }
 
 
@@ -172,7 +224,7 @@ async def _close_addon_menu(page: Page) -> None:
         await asyncio.sleep(TRANSITION_WAIT)
 
 
-async def _process_addon_type(page: Page, item: Locator, type_label: Optional[str]) -> List[Dict[str, Any]]:
+async def _process_addon_type(page: Page, item: Locator, addon_type: str) -> List[Dict[str, Any]]:
     results: List[Dict[str, Any]] = []
 
     await item.scroll_into_view_if_needed()
@@ -183,17 +235,17 @@ async def _process_addon_type(page: Page, item: Locator, type_label: Optional[st
             f"{ADDON_MENU_VISIBLE} {ADDON_CARD}", state="visible", timeout=SELECTOR_TIMEOUT
         )
     except Exception as e:
-        logger.error(f"Addon menu did not open for type '{type_label}': {e}")
+        logger.error(f"Addon menu did not open for type '{addon_type}': {e}")
         return results
 
     await asyncio.sleep(TRANSITION_WAIT)
 
     menu = page.locator(ADDON_MENU_VISIBLE).first
     card_count = await menu.locator(ADDON_CARD).count()
-    logger.info(f"  Found {card_count} addon card(s) under '{type_label}'")
+    logger.info(f"  Found {card_count} addon card(s) under '{addon_type}'")
 
     for i in range(card_count):
-        logger.info(f"  → Card [{i}/{card_count - 1}] in '{type_label}': start")
+        logger.info(f"  → Card [{i}/{card_count - 1}] in '{addon_type}': start")
         try:
             card = menu.locator(ADDON_CARD).nth(i)
             logger.debug(f"    locating card; scrolling into view")
@@ -209,7 +261,7 @@ async def _process_addon_type(page: Page, item: Locator, type_label: Optional[st
             logger.debug(f"    learn-more count: {lm_count}")
             if lm_count == 0:
                 logger.warning(
-                    f"  Card [{i}] in '{type_label}' has no learn-more summary; skipping"
+                    f"  Card [{i}] in '{addon_type}' has no learn-more summary; skipping"
                 )
                 continue
 
@@ -224,13 +276,13 @@ async def _process_addon_type(page: Page, item: Locator, type_label: Optional[st
                 )
             except Exception as e:
                 logger.error(
-                    f"  Detail view did not open for card [{i}] in '{type_label}': {e}"
+                    f"  Detail view did not open for card [{i}] in '{addon_type}': {e}"
                 )
                 continue
 
             await asyncio.sleep(TRANSITION_WAIT)
 
-            detail = await _extract_addon_detail(page, type_label)
+            detail = await _extract_addon_detail(page, addon_type)
             results.append(detail)
             price_str = f"${(detail['price'] or 0) / 100:.2f}" if detail.get("price") else "?"
             logger.info(f"    ✅ {detail.get('name')} ({price_str})")
@@ -239,7 +291,7 @@ async def _process_addon_type(page: Page, item: Locator, type_label: Optional[st
 
         except Exception as e:
             logger.error(
-                f"  Failed to process card [{i}] in '{type_label}': {e}", exc_info=True
+                f"  Failed to process card [{i}] in '{addon_type}': {e}", exc_info=True
             )
             # Try to recover so we can continue with the next card.
             try:
@@ -247,7 +299,7 @@ async def _process_addon_type(page: Page, item: Locator, type_label: Optional[st
             except Exception:
                 pass
 
-    logger.info(f"  All cards processed for '{type_label}'; closing menu")
+    logger.info(f"  All cards processed for '{addon_type}'; closing menu")
     await _close_addon_menu(page)
     return results
 
@@ -279,11 +331,11 @@ async def extract_addons(
     for i in range(type_count):
         item = items.nth(i)
         try:
-            meta = await _extract_addon_type_meta(item)
-            logger.info(f"📦 Addon type [{i}]: {meta.get('label')}")
+            meta = await _extract_addon_type_meta(item, i)
+            logger.info(f"📦 Addon type [{i}]: {meta.get('label')} → {meta.get('addon_type')}")
             addon_types.append(meta)
 
-            type_addons = await _process_addon_type(page, item, meta.get("label"))
+            type_addons = await _process_addon_type(page, item, meta["addon_type"])
             addons.extend(type_addons)
 
         except Exception as e:
