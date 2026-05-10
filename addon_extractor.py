@@ -38,7 +38,9 @@ ADDON_ITEMS = ".pdp__addon-items"
 ADDON_ITEM = ".pdp__addon-item"
 ADDON_ITEM_LABEL = ".pdp__addon-item-label"
 ADDON_ITEM_INFO = ".pdp__addon-item-info"
-ADDON_ITEM_MEDIA_IMG = ".pdp__addon-item-media img"
+# Skip the absolute-positioned placeholder img (always holds loading.svg)
+# and target the picture's real img sibling.
+ADDON_ITEM_MEDIA_IMG = ".pdp__addon-item-media picture img"
 
 # Addon-type menu (opens when an addon-item is clicked).
 # Like the detail views, addon menus are pre-rendered per type, so we
@@ -57,7 +59,7 @@ DETAIL_VISIBLE = '[id^="learn-more--"]:visible'
 DETAIL_HEADLINE = ".pdp__addon-menu-content .headline"
 DETAIL_SUBLINE = ".pdp__addon-menu-content .subline"
 DETAIL_DESCRIPTION = ".pdp__addon-menu-content .learn-more__description"
-DETAIL_IMAGE = "figure.learn-more__image img"
+DETAIL_IMAGE = "figure.learn-more__image picture img"
 DETAIL_BUTTON = ".learn-more__btn"
 
 TRANSITION_WAIT = 0.4
@@ -86,33 +88,28 @@ def _slug_for_addon_type(label: Optional[str], index: int) -> str:
 
 
 async def _extract_real_img_src(img_loc: Locator) -> Optional[str]:
-    """
-    Extract an image src, working around lazy-load placeholders.
-
-    Many lazy-loaded images keep `loading.svg` in `src` until the image
-    scrolls into the user's viewport, with the real URL in `data-src` or
-    `srcset`. We try those alternatives before falling back to `src`.
-    """
+    """Extract image src, preferring data-src or srcset if `src` is a placeholder."""
     if await img_loc.count() == 0:
         return None
     img = img_loc.first
 
-    candidates: List[Optional[str]] = []
-    candidates.append(await img.get_attribute("data-src"))
-    candidates.append(await img.get_attribute("src"))
+    src = await img.get_attribute("src")
+    if src and not LOADING_PLACEHOLDER_RE.search(src):
+        return normalize_img_src(src)
 
-    srcset = await img.get_attribute("srcset") or await img.get_attribute("data-srcset")
+    data_src = await img.get_attribute("data-src")
+    if data_src and not LOADING_PLACEHOLDER_RE.search(data_src):
+        return normalize_img_src(data_src)
+
+    srcset = await img.get_attribute("srcset")
     if srcset:
-        # srcset format: "url1 1x, url2 2x" or "url1 100w, url2 200w".
-        # First entry is usually the smallest/default real URL.
-        first_entry = srcset.split(",")[0].strip()
-        if first_entry:
-            candidates.append(first_entry.split()[0])
+        first = srcset.split(",")[0].strip().split()[0] if srcset.strip() else None
+        if first and not LOADING_PLACEHOLDER_RE.search(first):
+            return normalize_img_src(first)
 
-    for url in candidates:
-        if url and not LOADING_PLACEHOLDER_RE.search(url):
-            return normalize_img_src(url)
-
+    if src:
+        logger.warning(f"Image src looks like a placeholder: {src[:80]}")
+        return normalize_img_src(src)
     return None
 
 
